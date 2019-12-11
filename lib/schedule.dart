@@ -30,7 +30,24 @@ class _ScheduleState extends State<SchedulePage> {
 		body: Center(
 		child: Text('hello'),
 		),
-		drawer:  DrawerWidget(),
+		// drawer:  DrawerWidget(),
+    // bottomNavigationBar: BottomNavigationBar(
+    //     // currentIndex: 1,
+    //     items: [
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.event),
+    //         title: Text('Events'),
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.home),
+    //         title: Text('Home'),
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.map),
+    //         title: Text('Map'),
+    //       )
+    //     ],
+    //   ),
 		);
 	}
  }

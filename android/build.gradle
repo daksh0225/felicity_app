@@ -1,12 +1,15 @@
 buildscript {
-    ext.kotlin_version = '1.2.71'
+    ext.kotlin_version = '1.3.50'
+    // ext.kotlin_version = '1.2.71'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        // classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.google.gms:google-services:4.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -24,6 +27,11 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
+}
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.media:media:1.0.0'
+    }
 }
 
 task clean(type: Delete) {
