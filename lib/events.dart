@@ -83,7 +83,22 @@ class _EventsState extends State<EventsPage> {
       ],
     );
   }
-
+  Widget addEvent(DocumentSnapshot document){
+    // var arr=['daksh'];
+    List<DocumentReference> arr1 = [Firestore.instance.collection('events').document(document.documentID)];
+    List<DocumentReference> arr = [Firestore.instance.collection('users').document(email)];
+    print(document.documentID);
+    print(document.data['reg_users'].length);
+    // document.data['test'][1]='daksh';
+    // document.data['test'].add('/users/'+email);
+    Firestore.instance.collection('events').document(document.documentID).updateData({
+      "reg_users": FieldValue.arrayUnion(arr)
+    });
+    print(document.data['reg_users'].length);
+    Firestore.instance.collection('users').document(email).updateData({
+      "reg_events":FieldValue.arrayUnion(arr1)
+    });
+  }
   Widget event(){
 
     builder(int index, DocumentSnapshot document) {
@@ -125,7 +140,8 @@ class _EventsState extends State<EventsPage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 15, color: Colors.blue,)),
                             ),
-                            FloatingActionButton(onPressed: () {},
+                            FloatingActionButton(onPressed: () {addEvent(document);},
+                            heroTag: document.data['name'],
                             child: Icon(Icons.add)),
                           ],
                         ),
