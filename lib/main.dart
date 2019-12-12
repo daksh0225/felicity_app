@@ -27,18 +27,18 @@ class MyApp extends StatelessWidget {
 		return MaterialApp(
 			title: appTitle,
 			initialRoute: '/',
-		routes: {
-      '/': (context) => LoginPage(),
-			'/home': (context) => HomePage(),
-			'/schedule': (context) => SchedulePage(),
-			'/events': (context) => EventsPage(),
-			'/gallery': (context) => GalleryPage(),
-			'/about': (context) => AboutPage(),
-			'/contact': (context) => ContactPage(),
-			'/sponsor': (context) => SponsorPage(),
-			'/map': (context) => MapPage(),
-			'/quiz': (context) => QuizPage(),
-		},
+      routes: {
+        '/': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
+        '/schedule': (context) => SchedulePage(),
+        '/events': (context) => EventsPage(),
+        '/gallery': (context) => GalleryPage(),
+        '/about': (context) => AboutPage(),
+        '/contact': (context) => ContactPage(),
+        '/sponsor': (context) => SponsorPage(),
+        '/map': (context) => MapPage(),
+        '/quiz': (context) => QuizPage(),
+      },
 		);
 	}
 }

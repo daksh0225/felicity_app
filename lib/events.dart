@@ -84,13 +84,10 @@ class _EventsState extends State<EventsPage> {
     );
   }
   Widget addEvent(DocumentSnapshot document){
-    // var arr=['daksh'];
     List<DocumentReference> arr1 = [Firestore.instance.collection('events').document(document.documentID)];
     List<DocumentReference> arr = [Firestore.instance.collection('users').document(email)];
     print(document.documentID);
     print(document.data['reg_users'].length);
-    // document.data['test'][1]='daksh';
-    // document.data['test'].add('/users/'+email);
     Firestore.instance.collection('events').document(document.documentID).updateData({
       "reg_users": FieldValue.arrayUnion(arr)
     });
@@ -100,7 +97,6 @@ class _EventsState extends State<EventsPage> {
     });
   }
   Widget event(){
-
     builder(int index, DocumentSnapshot document) {
       return new AnimatedBuilder(
         animation: controller,
@@ -137,17 +133,25 @@ class _EventsState extends State<EventsPage> {
                             Container(
                               padding: EdgeInsets.all(4.0),
                               child: Text(document.data['metadata']['info'],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 15, color: Colors.blue,)),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 15, color: Colors.blue,)
+                              ),
                             ),
-                            FloatingActionButton(onPressed: () {addEvent(document);},
+                            FloatingActionButton(onPressed: () {
+                              addEvent(document);
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text("You've registered for this event"),
+                                duration: Duration(seconds: 2),
+                              ));
+                            },
                             heroTag: document.data['name'],
-                            child: Icon(Icons.add)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                            child: Icon(Icons.add)
+                            ),
+                         ],
+                       ),
+                     ),
+                   ),
+                ),
               ],
             ),
           );
@@ -165,7 +169,9 @@ class _EventsState extends State<EventsPage> {
       stream: Firestore.instance.collection('events').snapshots(),
       builder: (context, snapshot){
         if(!snapshot.hasData){
-          return Text("Loading..");
+          // return Text("Loading..");
+          return SpinKitCubeGrid(color: Colors.black,
+          size: 100.0,);
         }
         return Center(
           child: new Container(
@@ -182,17 +188,8 @@ class _EventsState extends State<EventsPage> {
         );
       }
     );
-    // Firestore.instance.collection('events').snapshots().listen((data) {
-    //   data.documents.forEach((document){
-    //     print(document.data['name']);
-    //     print(document.data['reg_users'].length);
-    //     document.data['reg_users'].forEach((docref) => (docref.snapshots().listen((d){
-    //       print(d.data['email']);
-    //       print(d.data['Name']);
-    //     })));
-    //   });
-    // });
   }
+  
  @override
 	Widget build(BuildContext context) {
 	 return Scaffold(
@@ -201,47 +198,6 @@ class _EventsState extends State<EventsPage> {
 		// child: Text('hello'),
 		// ),
 		drawer:  DrawerWidget(),
-    // body: Flex(
-      // direction: Axis.vertical,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      // mainAxisSize: MainAxisSize.max,
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      // children: <Widget>[
-        // Text('hello',
-        // ),
-        // Event(),
-        // StreamBuilder(
-        //   stream: Firestore.instance.collection('users').document(email).snapshots(),
-        //   builder: (context, snapshot){
-        //     if(!snapshot.hasData){
-        //       return Text("Loading..");
-        //     }
-        //     return Center(
-        //       child: new Container(
-        //         child: new PageView.builder(
-        //             onPageChanged: (value) {
-        //               setState(() {
-        //                 currentpage = value;
-        //               });
-        //             },
-        //             controller: controller,
-        //             itemCount: snapshot.data['reg_events'].length,
-        //             itemBuilder: (context, index) => builder(index, snapshot.data)),
-        //       ),
-        //     );
-        //   }
-        // ),
-        // StreamBuilder(
-        //   stream: Firestore.instance.collection('users').snapshots(),
-        //   builder: (context, snapshot){
-        //     // if(!snapshot.hasData){
-        //     //   return SpinKitCubeGrid(color: Colors.black,
-        //     //     size: 50.0);
-        //     // }
-        //   }
-        // )
-      // ],
-    // ),
     body: event(),
     bottomNavigationBar: BottomNavigationBar(
         currentIndex: _cIndex,
@@ -265,42 +221,4 @@ class _EventsState extends State<EventsPage> {
       ),
 		);
 	}
-
-  // builder(int index, DocumentSnapshot document) {
-  //   // Firestore.instance.collection('events').snapshots().listen((data) {
-  //   //   data.documents.forEach((document){
-  //   //     print(document.data['name']);
-  //   //     print(document.data['reg_users'].length);
-  //   //     document.data['reg_users'].forEach((docref) => (docref.snapshots().listen((d){
-  //   //       print(d.data['email']);
-  //   //       print(d.data['Name']);
-  //   //     })));
-  //   //   });
-  //   // });
-  //   return new AnimatedBuilder(
-  //     animation: controller,
-  //     builder: (context, child) {
-  //       double value = 1.0;
-  //       if (controller.position.haveDimensions) {
-  //         value = controller.page - index;
-  //         value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
-  //       }
-
-  //       return new Center(
-  //         child: new SizedBox(
-  //           height: Curves.easeOut.transform(value) * 200,
-  //           width: Curves.easeOut.transform(value) * 1000,
-  //           child: child,
-  //         ),
-  //       );
-  //     },
-  //     child: new Card(
-  //       child: Text(document.data['reg_events'][0].toString(),
-  //       textAlign: TextAlign.center,
-  //       style: TextStyle(fontSize: 15, color: Colors.white),),
-  //       margin: const EdgeInsets.all(10.0),
-  //       color: index % 2 == 0 ? Colors.blue : Colors.red,
-  //     ),
-  //   );
-  // }
  }
