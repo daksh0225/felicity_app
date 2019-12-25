@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'main.dart';
 import 'drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'sign_in.dart';
@@ -83,21 +82,34 @@ class _EventsState extends State<EventsPage> {
       ],
     );
   }
+  Widget test(Stream<QuerySnapshot> snapshot){
+    print(snapshot);
+  }
   Widget addEvent(DocumentSnapshot document){
     List<DocumentReference> arr1 = [Firestore.instance.collection('events').document(document.documentID)];
     List<DocumentReference> arr = [Firestore.instance.collection('users').document(email)];
+    // var aa = await Firestore.instance.collection('users').document(email);
+    // aa.get() => then((document) {
+    //   print(document('name'));
+    // });
     print(document.documentID);
-    print(document.data['reg_users'].length);
+    // print(document.data['reg_users'].length);
     Firestore.instance.collection('events').document(document.documentID).updateData({
       "reg_users": FieldValue.arrayUnion(arr)
     });
-    print(document.data['reg_users'].length);
+    // print(document.data['reg_users'].length);
     Firestore.instance.collection('users').document(email).updateData({
       "reg_events":FieldValue.arrayUnion(arr1)
     });
   }
   Widget event(){
     builder(int index, DocumentSnapshot document) {
+      // print('hello');
+      // print(document.data['name']);
+      // print(document.data['reg_users']);
+      // var aa = document.data['reg_users'];
+      
+      print(document.data['date'].toDate());
       return new AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
@@ -132,23 +144,30 @@ class _EventsState extends State<EventsPage> {
                           children: <Widget>[
                             Container(
                               padding: EdgeInsets.all(4.0),
+                              // margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                               child: Text(document.data['metadata']['info'],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 15, color: Colors.blue,)
                               ),
                             ),
-                            FloatingActionButton(onPressed: () {
-                              addEvent(document);
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("You've registered for this event"),
-                                duration: Duration(seconds: 2),
-                              ));
-                            },
-                            heroTag: document.data['name'],
-                            child: Icon(Icons.add)
+                            // Text('Starts in: '+document.data['date'].toDate().difference(DateTime.now()).toString()),
+                            FloatingActionButton(
+                              onPressed: () {
+                                addEvent(document);
+                                Scaffold.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("You've registered for this event"),
+                                    duration: Duration(seconds: 2),
+                                  ));
+                                },
+                              heroTag: document.data['name'],
+                              child: Icon(Icons.add),
+                              // child: Text('Register'),
+                              // color: Colors.blue[50],
                             ),
                          ],
                        ),
+                        margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                      ),
                    ),
                 ),
@@ -158,8 +177,9 @@ class _EventsState extends State<EventsPage> {
         },
         child: new Card(
           child: Text(document.data['name'],
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15, color: Colors.white),),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, color: Colors.white),
+          ),
           margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
           color: index % 2 == 0 ? Colors.blue : Colors.red,
         ),
@@ -170,8 +190,11 @@ class _EventsState extends State<EventsPage> {
       builder: (context, snapshot){
         if(!snapshot.hasData){
           // return Text("Loading..");
-          return SpinKitCubeGrid(color: Colors.black,
-          size: 100.0,);
+          return Center(
+            child:SpinKitCubeGrid(color: Colors.black,
+              size: 25.0,
+            ),
+          );
         }
         return Center(
           child: new Container(
@@ -189,36 +212,73 @@ class _EventsState extends State<EventsPage> {
       }
     );
   }
-  
- @override
+  @override
 	Widget build(BuildContext context) {
-	 return Scaffold(
-		 appBar: AppBar(title: Text('Events')),
-		// body: Center(
-		// child: Text('hello'),
-		// ),
-		drawer:  DrawerWidget(),
-    body: event(),
-    bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _cIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            title: Text('Events'),
+	 return DefaultTabController(
+     length: 3,
+     child: Scaffold(
+      // appBar: AppBar(title: Text('Events')),
+      // body: Center(
+      // child: Text('hello'),
+      // ),
+      drawer:  DrawerWidget(),
+      // body: event(),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text("Events"),
+            pinned: true,
+            floating: true,
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  text: 'Day 1',
+                ),
+                Tab(
+                  text: 'Day 2',
+                ),
+                Tab(
+                  text: 'Day 3',
+                ),
+              ],
+            )
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            title: Text('Map'),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 600.0,
+              child: TabBarView(
+                children: <Widget>[
+                  event(),
+                  // Center(child: Text('Day 2'),),
+                  Center(child: Text('Day 2'),),
+                  Center(child: Text('Day 3'),),
+                ],
+              ),
+            ),
           )
-        ],
-        onTap: (index){
-            _incrementTab(index);
-        },
+        ]
       ),
-		);
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _cIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.event),
+              title: Text('Events'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              title: Text('Map'),
+            )
+          ],
+          onTap: (index){
+              _incrementTab(index);
+          },
+        ),
+      ),
+   );
 	}
  }

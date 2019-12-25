@@ -30,7 +30,9 @@ dependencies:
   permission_handler: ^3.0.1
   cloud_firestore: ^0.12.11
   flutter_spinkit: ^2.1.0
-  
+  firebase_messaging: ^5.1.2
+  intl: ^0.15.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter  

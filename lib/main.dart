@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +18,7 @@ import 'first_screen.dart';
 import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import'package:firebase_messaging/firebase_messaging.dart';
 
 var x = null;
 
@@ -63,6 +67,55 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final List<Notification> notifications = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> notification) async {
+        setState(() {
+          notifications.add(
+            Notification(
+              title: notification["notification"]["title"],
+              body: notification["notification"]["body"],
+              color: Colors.red,
+            ),
+          );
+        });
+      },
+      onLaunch: (Map<String, dynamic> notification) async {
+        setState(() {
+          notifications.add(
+            Notification(
+              title: notification["notification"]["title"],
+              body: notification["notification"]["body"],
+              color: Colors.green,
+            ),
+          );
+        });
+      },
+      onResume: (Map<String, dynamic> notification) async {
+        setState(() {
+          notifications.add(
+            Notification(
+              title: notification["notification"]["title"],
+              body: notification["notification"]["body"],
+              color: Colors.blue,
+            ),
+          );
+        });
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions();
+    // _firebaseMessaging.getToken().then((token) {
+    //   print(token);
+    // }).catchError((e) {
+    //   print(e);
+    // });
+  }
+
   int _cIndex = 1;
 
   void _incrementTab(index) {
@@ -83,8 +136,27 @@ class _HomeState extends State<HomePage> {
 	Widget build(BuildContext context) {
 		Size size = MediaQuery.of(context).size*0.85;
 		return Scaffold(
-			appBar: AppBar(title: Text('Felicity App')),
-			body: Center(child: Text('My Page!')),
+			appBar: AppBar(
+        // title: Text('Felicity App')
+        // title: Image(
+        //   image: AssetImage("assets/felicity_logo.png"),
+        //   // fit: BoxFit.contain,
+        //   height: 100,
+        // ),
+        title: Text('Felicity App'),
+        // flexibleSpace: Image(
+        //   image: AssetImage("assets/felicity_logo.png"),
+        //   height: 500.0,
+        // ),
+        // backgroundColor: Colors.white,
+      ),
+      // appBar: SliverAppBar(
+      //   title: Text('hello'),
+      // ),
+			// body: Center(child: Text('My Page!')),
+      body: ListView(
+        children: notifications.map(buildNotification).toList(),
+      ),
 			drawer: SizedBox(
 				width: size.width,				
 				child: DrawerWidget(),
@@ -111,5 +183,28 @@ class _HomeState extends State<HomePage> {
       ),
 		);
 	}
+
+  Widget buildNotification(Notification notification) {
+    return ListTile(
+      title: Text(
+        notification.title,
+        style: TextStyle(
+          color: notification.color,
+        ),
+      ),
+      subtitle: Text(notification.body),
+    );
+  }
+
 }
+
+class Notification {
+  final String title;
+  final String body;
+  final Color color;
+  const Notification(
+      {@required this.title, @required this.body, @required this.color});
+}
+
+
 

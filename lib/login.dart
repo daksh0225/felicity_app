@@ -1,4 +1,3 @@
-
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'sign_in.dart';
@@ -41,16 +40,17 @@ class _LoginPageState extends State<LoginPage> {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
-        x = signInWithGoogle().whenComplete(() {
+        signInWithGoogle(context).whenComplete(() {
+          print('daksh');
           print(x);
           if(x!=null){
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return FirstScreen();
-                },
-              ),
-            );
+            MaterialPageRoute(
+              builder: (context) {
+                return FirstScreen();
+              },
+            ),
+          );
           }
         });
       },
