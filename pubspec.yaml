@@ -41,7 +41,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon" 
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/icon/New\ Project.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -70,10 +70,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Samarkan
+      fonts:
+        - asset: fonts/SAMAN___.TTF
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

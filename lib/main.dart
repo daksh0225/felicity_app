@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'schedule.dart';
 import 'events.dart';
 import 'gallery.dart';
@@ -18,11 +19,16 @@ import 'first_screen.dart';
 import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import'package:firebase_messaging/firebase_messaging.dart';
 
 var x = null;
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+    .then((_) {
+      runApp(new MyApp());
+    });
+}
 class MyApp extends StatelessWidget {
 	final appTitle = 'Drawer Demo';
 
@@ -137,18 +143,15 @@ class _HomeState extends State<HomePage> {
 		Size size = MediaQuery.of(context).size*0.85;
 		return Scaffold(
 			appBar: AppBar(
-        // title: Text('Felicity App')
-        // title: Image(
-        //   image: AssetImage("assets/felicity_logo.png"),
-        //   // fit: BoxFit.contain,
-        //   height: 100,
-        // ),
-        title: Text('Felicity App'),
-        // flexibleSpace: Image(
-        //   image: AssetImage("assets/felicity_logo.png"),
-        //   height: 500.0,
-        // ),
-        // backgroundColor: Colors.white,
+        title: Text('Felicity App',
+        style: TextStyle(
+            color: Colors.black,
+          ),
+        ),        
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.yellow[700],
       ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),

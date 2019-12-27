@@ -27,7 +27,7 @@ class _SponsorState extends State<SponsorPage> {
  @override
 	Widget build(BuildContext context) {
 	 return Scaffold(
-		 appBar: AppBar(title: Text('Our Sponsors')),
+		 appBar: AppBar(title: Text('Our Sponsors'),),
 		body: Center(
 		  child: Text('We will release our sponsors soon!!!'),
 		),

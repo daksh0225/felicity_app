@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'drawer.dart';
@@ -29,6 +30,28 @@ class _EventsState extends State<EventsPage> {
   int _cIndex = 0;
   PageController controller;
   int currentpage = 0;
+  final TextEditingController _filter = new TextEditingController();
+  String _searchText = "";
+  Widget _appBarTitle = Text("Events",
+    style: TextStyle(fontFamily: 'Samarkan',
+      fontSize: 50,
+      color: Colors.black,
+      ),
+  );
+  Icon _searchIcon = Icon(Icons.search);
+  _EventsState() {
+    _filter.addListener(() {
+      if (_filter.text.isEmpty) {
+        setState(() {
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _searchText = _filter.text;
+        });
+      }
+    });
+  }
 
   @override
   initState() {
@@ -39,7 +62,6 @@ class _EventsState extends State<EventsPage> {
       viewportFraction: 0.8,
     );
   }
-
   @override
   dispose() {
     controller.dispose();
@@ -50,66 +72,30 @@ class _EventsState extends State<EventsPage> {
     setState(() {
       _cIndex = index;
     });
-    if(_cIndex==1)
-    {
+    if(_cIndex==1){
       Navigator.of(context).pushNamed('/home');
     }
-    else if(_cIndex==2)
-    {
+    else if(_cIndex==2){
       Navigator.of(context).pushNamed('/map');
     }
   }
 
-  Widget _buildList(BuildContext context, DocumentSnapshot document) {
-    return Flex(
-      direction: Axis.vertical,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(document['name'],
-        style: TextStyle(
-        fontSize: 15,
-        color: Colors.black,
-        fontWeight: FontWeight.w500),
-        textAlign: TextAlign.left,
-        ),
-        SizedBox(height: 20,),
-        RaisedButton(
-          onPressed: () {},
-          child: Text('Register'),
-        )
-      ],
-    );
-  }
-  Widget test(Stream<QuerySnapshot> snapshot){
-    print(snapshot);
-  }
-  Widget addEvent(DocumentSnapshot document){
+  void addEvent(DocumentSnapshot document){
     List<DocumentReference> arr1 = [Firestore.instance.collection('events').document(document.documentID)];
     List<DocumentReference> arr = [Firestore.instance.collection('users').document(email)];
-    // var aa = await Firestore.instance.collection('users').document(email);
-    // aa.get() => then((document) {
-    //   print(document('name'));
-    // });
     print(document.documentID);
-    // print(document.data['reg_users'].length);
+    // print(document['reg_users'].length);
     Firestore.instance.collection('events').document(document.documentID).updateData({
       "reg_users": FieldValue.arrayUnion(arr)
     });
-    // print(document.data['reg_users'].length);
+    // print(document['reg_users'].length);
     Firestore.instance.collection('users').document(email).updateData({
       "reg_events":FieldValue.arrayUnion(arr1)
     });
   }
   Widget event(){
-    builder(int index, DocumentSnapshot document) {
-      // print('hello');
-      // print(document.data['name']);
-      // print(document.data['reg_users']);
-      // var aa = document.data['reg_users'];
-      
-      print(document.data['date'].toDate());
+    builder(int index, DocumentSnapshot document) {      
+      print(document['date'].toDate());
       return new AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
@@ -145,12 +131,12 @@ class _EventsState extends State<EventsPage> {
                             Container(
                               padding: EdgeInsets.all(4.0),
                               // margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
-                              child: Text(document.data['metadata']['info'],
+                              child: Text(document['metadata']['info'],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 15, color: Colors.blue,)
                               ),
                             ),
-                            // Text('Starts in: '+document.data['date'].toDate().difference(DateTime.now()).toString()),
+                            // Text('Starts in: '+document['date'].toDate().difference(DateTime.now()).toString()),
                             FloatingActionButton(
                               onPressed: () {
                                 addEvent(document);
@@ -160,7 +146,7 @@ class _EventsState extends State<EventsPage> {
                                     duration: Duration(seconds: 2),
                                   ));
                                 },
-                              heroTag: document.data['name'],
+                              heroTag: document['name'],
                               child: Icon(Icons.add),
                               // child: Text('Register'),
                               // color: Colors.blue[50],
@@ -176,7 +162,7 @@ class _EventsState extends State<EventsPage> {
           );
         },
         child: new Card(
-          child: Text(document.data['name'],
+          child: Text(document['name'],
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 15, color: Colors.white),
           ),
@@ -196,40 +182,68 @@ class _EventsState extends State<EventsPage> {
             ),
           );
         }
-        return Center(
-          child: new Container(
-            child: new PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    currentpage = value;
-                  });
-                },
-                controller: controller,
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) => builder(index, snapshot.data.documents[index])),
-          ),
-        );
-      }
-    );
-  }
-  @override
+        if(!(_searchText.isEmpty)){
+          List templist = new List();
+          for(int i=0; i< snapshot.data.documents.length; i++){
+            if(snapshot.data.documents[i]['name'].toLowerCase().contains(_searchText.toLowerCase())){
+              templist.add(snapshot.data.documents[i]);
+            }
+          }
+          return Center(
+            child: new Container(
+              child: new PageView.builder(
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentpage = value;
+                    });
+                  },
+                  controller: controller,
+                  itemCount: templist.length,
+                  itemBuilder: (context, index) => builder(index, templist[index])),
+            ),
+          ); 
+        }
+        else{
+          return Center(
+            child: new Container(
+              child: new PageView.builder(
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentpage = value;
+                    });
+                  },
+                  controller: controller,
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (context, index) => builder(index, snapshot.data.documents[index])),
+            ),
+          );
+        }
+    }
+  );
+}
+@override
 	Widget build(BuildContext context) {
+    // print(filteredNames[1]['name']);
 	 return DefaultTabController(
      length: 3,
      child: Scaffold(
-      // appBar: AppBar(title: Text('Events')),
-      // body: Center(
-      // child: Text('hello'),
-      // ),
       drawer:  DrawerWidget(),
-      // body: event(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text("Events"),
+            title: _appBarTitle,
             pinned: true,
             floating: true,
+            expandedHeight: 120,
+            backgroundColor: Colors.yellow[700],
+            actions: <Widget>[
+              IconButton(
+                icon: _searchIcon,
+                onPressed: _searchPressed,
+              ),
+            ],
             bottom: TabBar(
+              indicatorSize: TabBarIndicatorSize.label,
               tabs: <Widget>[
                 Tab(
                   text: 'Day 1',
@@ -245,11 +259,10 @@ class _EventsState extends State<EventsPage> {
           ),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 600.0,
+              height: 550.0,
               child: TabBarView(
                 children: <Widget>[
                   event(),
-                  // Center(child: Text('Day 2'),),
                   Center(child: Text('Day 2'),),
                   Center(child: Text('Day 3'),),
                 ],
@@ -281,4 +294,28 @@ class _EventsState extends State<EventsPage> {
       ),
    );
 	}
+
+  void _searchPressed() {
+    setState(() {
+      if (this._searchIcon.icon == Icons.search) {
+        this._searchIcon = new Icon(Icons.close);
+        this._appBarTitle = new TextField(
+          controller: _filter,
+          decoration: new InputDecoration(
+            prefixIcon: new Icon(Icons.search),
+            hintText: 'Search...'
+          ),
+        );
+      } else {
+        this._searchIcon = new Icon(Icons.search);
+        this._appBarTitle = Text("Events",
+          style: TextStyle(fontFamily: 'Samarkan',
+            fontSize: 50,
+            color: Colors.black,
+            ),
+        );
+        _filter.clear();
+      }
+    });
+  }
  }
