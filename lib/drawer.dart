@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'main.dart';
@@ -18,130 +19,197 @@ class DrawerWidget extends StatelessWidget{
 			child: ListView(
 				padding: EdgeInsets.zero,
 				children: <Widget>[
-					DrawerHeader(
-						// child: Text('\nFelicity',
-						// textAlign: TextAlign.center,
-						// style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
-						// ),
-						decoration: BoxDecoration(
-							color: Colors.blueAccent,
-						),
-            child: Flex(
-              direction: Axis.vertical,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+					SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
               children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    imageUrl,
-                  ),
-                  radius: 32,
-                  backgroundColor: Colors.transparent,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  name,
-                  // 'daksh',
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.left,
-                ),
-                // Text(
-                //   phnumber,
-                //   // 'daksh',
-                //   style: TextStyle(
-                //       fontSize: 15,
-                //       color: Colors.black,
-                //       fontWeight: FontWeight.w500),
-                //   textAlign: TextAlign.left,
+                // Image(
+                //   image: AssetImage('assets/drawer.jpg',),
+                //   height: MediaQuery.of(context).size.height,
+                //   fit: BoxFit.fill,
                 // ),
-                Text(
-                  email,
-                  // 'daksh0225@gmail.com',
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal),
-                ),
+                Container(
+              child: Flex(
+                direction: Axis.vertical,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      // color: Color.fromARGB(255, 30, 100, 111),
+                    ),
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          child:CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              imageUrl,
+                            ),
+                            radius: 40,
+                            backgroundColor: Colors.transparent,
+                          ),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 20.0,
+                                spreadRadius: 5.0,
+                                offset: Offset(0, 0),
+                                color: Colors.white,
+                              ),
+                            ],
+                            shape: BoxShape.circle,
+                            // borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Flexible(
+                          child: Text(
+                            name,
+                            style: TextStyle(
+                                fontSize: 27,
+                                color: Colors.white,
+                                fontFamily: 'Samarkan',
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        // Text(
+                        //   name,
+                        //   // 'daksh0225@gmail.com',
+                        //   style: TextStyle(
+                        //       fontSize: 15,
+                        //       color: Colors.white,
+                        //       fontWeight: FontWeight.normal),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.clock,
+                    color: Colors.white,),
+                    title: Text('Schedule',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontFamily: 'Samarkan'),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(new SchedulePageRoute());
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.image,
+                      color: Colors.white,
+                    ),
+                    title: Text('Gallery',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontFamily: 'Samarkan'),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(new GalleryPageRoute());
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.info,
+                    color: Colors.white,),
+                    title: Text('About Us',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontFamily: 'Samarkan'),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(new AboutPageRoute());
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.people,
+                    color: Colors.white,),
+                    title: Text('Our Team',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontFamily: 'Samarkan'),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(new ContactPageRoute());
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.homeOutline,
+                    color: Colors.white,),
+                    title: Text('Sponsors',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontFamily: 'Samarkan'),
+                      ),
+                    onTap: () {
+                      Navigator.of(context).push(new SponsorPageRoute());
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(EvaIcons.text,
+                    color: Colors.white,),
+                    title: Text('Quiz',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontFamily: 'Samarkan'),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(new QuizPageRoute());
+                    },
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.bottomLeft,
+                      child: ListTile(
+                        leading: Icon(Icons.exit_to_app,
+                        color: Colors.white,),
+                        title: Text('Logout',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontFamily: 'Samarkan'),
+                        ),
+                        onTap: () {
+                          signOutGoogle();
+                          Navigator.of(context).pushNamed('/');
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              // color: Colors.black,
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment(-0.65, -0.68),
+                  colors: [
+                    Colors.white,
+                    // Colors.cyan,
+                    Colors.black,
+                  ],
+                  radius: 1.5,
+                  // focalRadius: 0.5,
+                  stops: [0.0, 0.4]
+                )
+
+              ),
+            ),
               ],
             ),
-					),
-          // ListTile(
-          //   leading: Icon(Icons.home),
-          //   title: Text('Home'),
-            // onTap: () {
-            //   Navigator.of(context).pushNamed('/home');
-            // },
-          // ),
-          ListTile(
-              leading: Icon(Icons.schedule),
-              title: Text('Schedule'),
-              onTap: () {
-                Navigator.of(context).push(new SchedulePageRoute());
-              },
-            ),
-          // ListTile(
-          //   leading: Icon(Icons.event),
-          //   title: Text('Events'),
-          //   onTap: () {
-          //     Navigator.of(context).push(new EventsPageRoute());
-          //   },
-          // ),
-          ListTile(
-            leading: Icon(Icons.photo_album),
-            title: Text('Gallery'),
-            onTap: () {
-              Navigator.of(context).push(new GalleryPageRoute());
-            },
           ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text('About'),
-            onTap: () {
-              Navigator.of(context).push(new AboutPageRoute());
-            },
-          ),
-          ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('Contact'),
-              onTap: () {
-                Navigator.of(context).push(new ContactPageRoute());
-              },
-            ),
-            ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Sponsors'),
-            onTap: () {
-              Navigator.of(context).push(new SponsorPageRoute());
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.question_answer),
-            title: Text('Quiz'),
-            onTap: () {
-              Navigator.of(context).push(new QuizPageRoute());
-            },
-          ),
-          // ListTile(
-          //   leading: Icon(Icons.map),
-          //   title: Text('Map'),
-          //   onTap: () {
-          //     Navigator.of(context).push(new MapPageRoute());
-          //   },
-          // ),
-         ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
-              onTap: () {
-                signOutGoogle();
-                Navigator.of(context).pushNamed('/');
-              },
-            ),
-				],
-			),
-		);
+        ],
+      ),
+    );
 	}
 }

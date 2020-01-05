@@ -1,9 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'sign_in.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class EventsPageRoute extends CupertinoPageRoute {
@@ -33,10 +34,11 @@ class _EventsState extends State<EventsPage> {
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
   Widget _appBarTitle = Text("Events",
-    style: TextStyle(fontFamily: 'Samarkan',
-      fontSize: 50,
-      color: Colors.black,
-      ),
+    style: TextStyle(
+      fontFamily: 'Samarkan',
+      fontSize: 25,
+      color: Colors.white,
+    ),
   );
   Icon _searchIcon = Icon(Icons.search);
   _EventsState() {
@@ -80,48 +82,55 @@ class _EventsState extends State<EventsPage> {
     }
   }
 
-  void addEvent(DocumentSnapshot document){
-    List<DocumentReference> arr1 = [Firestore.instance.collection('events').document(document.documentID)];
+  void addEvent(DocumentSnapshot document, var day){
+    List<DocumentReference> arr1 = [Firestore.instance.collection('events-d'+day).document(document.documentID)];
     List<DocumentReference> arr = [Firestore.instance.collection('users').document(email)];
     print(document.documentID);
-    // print(document['reg_users'].length);
-    Firestore.instance.collection('events').document(document.documentID).updateData({
+    Firestore.instance.collection('events-d'+day).document(document.documentID).updateData({
       "reg_users": FieldValue.arrayUnion(arr)
     });
-    // print(document['reg_users'].length);
     Firestore.instance.collection('users').document(email).updateData({
       "reg_events":FieldValue.arrayUnion(arr1)
     });
   }
-  Widget event(){
+  Widget event(var day){
     builder(int index, DocumentSnapshot document) {      
       print(document['date'].toDate());
       return new AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
           double value = 1.0;
-          if (controller.position.haveDimensions) {
-            value = controller.page - index;
-            value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
-          }
-
+          // if (controller.positions.elementAt(currentpage).haveDimensions) {
+          //   value = controller.page - index;
+          //   value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          // }
+          // controller.positions.forEach((f) {
+          //   if(f.haveDimensions){
+          //     print('hello1;');
+          //     value= controller.page - index;
+          //     value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          //   }
+          // });
           return new Center(
             child:Flex(
               direction: Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Center(
-                  child: SizedBox(
-                    height: Curves.easeOut.transform(value) * 150,
-                    width: Curves.easeOut.transform(value) * 1000,
-                    child: child,
-                  ),
-                ),
+                // Center(
+                //   child: SizedBox(
+                //     // height: Curves.easeOut.transform(value) * 150,
+                //     height: MediaQuery.of(context).size.height * .25,
+                //     width: Curves.easeOut.transform(value) * 1000,
+                //     child: child,
+                //   ),
+                // ),
                 Center(
                   child: new SizedBox(
-                    height: Curves.easeOut.transform(value) * 300,
+                    // height: Curves.easeOut.transform(value) * 500,
+                    height: MediaQuery.of(context).size.height *.7,
+                    // width: MediaQuery.of(context).size.width * .9,
                     width: Curves.easeOut.transform(value) * 1000,
                     child:Card(
                         child: Flex(
@@ -129,28 +138,107 @@ class _EventsState extends State<EventsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.all(4.0),
+                              padding: EdgeInsets.all(10.0),
                               // margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
-                              child: Text(document['metadata']['info'],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 15, color: Colors.blue,)
+                              child:Flex(
+                                direction: Axis.vertical,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage('assets/felicity_logo.png'),
+                                  ),
+                                  Text(document['name'],
+                                    style: TextStyle(
+                                      fontFamily: 'Samarkan',
+                                      fontSize: 30
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Flex(
+                                    direction: Axis.horizontal,
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      // Icon(Icons.calendar_today),
+                                      // SizedBox(
+                                      //   width: 10,
+                                      // ),
+                                      // Text(DateFormat("dd-MM-yyyy").format(document['date'].toDate()).toString()),
+                                      // SizedBox(
+                                      //   width: 30,
+                                      // ),
+                                      Icon(Icons.schedule),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(DateFormat("HH:mm:ss").format(document['date'].toDate()).toString()),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Icon(EvaIcons.pin,
+                                      color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(document['Venue'])    
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(document['metadata']['info'],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black,
+                                      fontFamily: 'Sacramento')
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  // OutlineButton(
+                                  //   onPressed: () => {},
+                                  //   child: Text('+'),
+                                  // ),
+                                  FloatingActionButton(
+                                    backgroundColor: Colors.black,
+                                    heroTag: document['name'],
+                                    // shape: ShapeBorder(),
+                                    child: Icon(EvaIcons.plus),
+                                    onPressed: () {
+                                      addEvent(document, day);
+                                      Scaffold.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text("You've registered for this event"),
+                                          duration: Duration(seconds: 2),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                ],
                               ),
                             ),
                             // Text('Starts in: '+document['date'].toDate().difference(DateTime.now()).toString()),
-                            FloatingActionButton(
-                              onPressed: () {
-                                addEvent(document);
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("You've registered for this event"),
-                                    duration: Duration(seconds: 2),
-                                  ));
-                                },
-                              heroTag: document['name'],
-                              child: Icon(Icons.add),
-                              // child: Text('Register'),
-                              // color: Colors.blue[50],
-                            ),
+                            // FloatingActionButton(
+                            //   onPressed: () {
+                            //     addEvent(document, day);
+                            //     Scaffold.of(context).showSnackBar(
+                            //       SnackBar(
+                            //         content: Text("You've registered for this event"),
+                            //         duration: Duration(seconds: 2),
+                            //       ));
+                            //     },
+                            //   heroTag: document['name'],
+                            //   child: Icon(Icons.add),
+                            //   // child: Text('Register'),
+                            //   // color: Colors.blue[50],
+                            // ),
                          ],
                        ),
                         margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
@@ -162,9 +250,19 @@ class _EventsState extends State<EventsPage> {
           );
         },
         child: new Card(
-          child: Text(document['name'],
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15, color: Colors.white),
+          child: Stack(
+            children: <Widget>[
+              Image(
+                image: AssetImage('assets/futsal.jpg'),
+                fit: BoxFit.fill,
+              ),
+              Center(
+                child: Text(document['name'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
+            ],
           ),
           margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
           color: index % 2 == 0 ? Colors.blue : Colors.red,
@@ -172,7 +270,7 @@ class _EventsState extends State<EventsPage> {
       );
     }
     return StreamBuilder(
-      stream: Firestore.instance.collection('events').snapshots(),
+      stream: Firestore.instance.collection('events-d'+day).snapshots(),
       builder: (context, snapshot){
         if(!snapshot.hasData){
           // return Text("Loading..");
@@ -188,6 +286,11 @@ class _EventsState extends State<EventsPage> {
             if(snapshot.data.documents[i]['name'].toLowerCase().contains(_searchText.toLowerCase())){
               templist.add(snapshot.data.documents[i]);
             }
+          }
+          if(templist.length == 0){
+            return Center(
+              child: Text('Nothing here :('),
+            );
           }
           return Center(
             child: new Container(
@@ -227,15 +330,20 @@ class _EventsState extends State<EventsPage> {
 	 return DefaultTabController(
      length: 3,
      child: Scaffold(
-      drawer:  DrawerWidget(),
+      drawer:  SizedBox(
+        child: DrawerWidget(),
+        width: MediaQuery.of(context).size.width *0.85,
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             title: _appBarTitle,
+            // title: Text('Events',
+            // style: TextStyle(color: Colors.white, fontFamily: 'Samarkan', fontSize: 25),),
             pinned: true,
             floating: true,
             expandedHeight: 120,
-            backgroundColor: Colors.yellow[700],
+            backgroundColor: Colors.black,
             actions: <Widget>[
               IconButton(
                 icon: _searchIcon,
@@ -262,9 +370,11 @@ class _EventsState extends State<EventsPage> {
               height: 550.0,
               child: TabBarView(
                 children: <Widget>[
-                  event(),
-                  Center(child: Text('Day 2'),),
-                  Center(child: Text('Day 3'),),
+                  event('1'),
+                  event('2'),
+                  event('3'),
+                  // Center(child: Text('Day 2'),),
+                  // Center(child: Text('Day 3'),),
                 ],
               ),
             ),
@@ -301,17 +411,32 @@ class _EventsState extends State<EventsPage> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           controller: _filter,
-          decoration: new InputDecoration(
-            prefixIcon: new Icon(Icons.search),
-            hintText: 'Search...'
+          autofocus: true,
+          style: TextStyle(
+            color: Colors.white,
           ),
+          cursorRadius: Radius.circular(2),
+          cursorWidth: 2,
+          cursorColor: Colors.white,
+          textInputAction: TextInputAction.search,
+          keyboardType: TextInputType.text,
+          decoration: new InputDecoration(
+            icon: new Icon(Icons.search),
+            hintText: 'Search...',
+            fillColor: Colors.white,
+            focusColor: Colors.white,
+            hintStyle: TextStyle(
+              color: Colors.white54
+            ),
+          ),
+          
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle = Text("Events",
           style: TextStyle(fontFamily: 'Samarkan',
-            fontSize: 50,
-            color: Colors.black,
+            fontSize: 25,
+            color: Colors.white,
             ),
         );
         _filter.clear();
