@@ -50,22 +50,11 @@ Future<String> signInWithGoogle(BuildContext context) async {
   assert(await user.getIdToken() != null);
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
-  if (name.contains(" ")) 
-  {   
-    name = name.substring(0, name.indexOf(" "));
-  }
-  // Navigator.of(context).push(
-  //   MaterialPageRoute(
-  //     builder: (context) {
-  //       return FirstScreen();
-  //     },
-  //   ),
-  // );
   return 'signInWithGoogle succeeded: $user';
 }
 
 Future<String> signUpWithGoogle() async {
-  signOutGoogle();
+  // signOutGoogle();
 
   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
@@ -75,11 +64,6 @@ Future<String> signUpWithGoogle() async {
     accessToken: googleSignInAuthentication.accessToken,
     idToken: googleSignInAuthentication.idToken,
   );
-  // final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-  // print("signed in " + user.displayName);
-  // final AuthResult authResult = await _auth.signInWithCredential(credential);
-  // final FirebaseUser user = authResult.user;
-
   FirebaseUser user = 
   await _auth.signInWithCredential(credential);
   
@@ -103,10 +87,6 @@ Future<String> signUpWithGoogle() async {
   assert(await user.getIdToken() != null);
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
-  if (name.contains(" ")) 
-  {   
-    name = name.substring(0, name.indexOf(" "));
-  }
   return 'signInWithGoogle succeeded: $user';
 }
 

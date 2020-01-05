@@ -2,12 +2,46 @@ import 'main.dart';
 import 'package:flutter/material.dart';
 import 'sign_in.dart';
 import 'first_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'sign_in.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+bool loading = false;
+
+bool isLoggedIn = false;
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  @override 
+  void initState() {
+    super.initState();
+    isSignedIn();
+    }
+
+    void isSignedIn() async {
+    setState(() {
+      loading = true;
+    });
+
+    isLoggedIn = await googleSignIn.isSignedIn();
+
+    if (isLoggedIn) {
+      signInWithGoogle(context);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
+
+    setState(() {
+      loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
           print('daksh');
           print(x);
           if(x!=null){
-            Navigator.of(context).push(
+            Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) {
                 return FirstScreen();
@@ -86,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
         x = signUpWithGoogle().whenComplete(() {
           // print(x);
           if(x!=null){
-            Navigator.of(context).push(
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) {
                   return FirstScreen();

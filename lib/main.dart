@@ -79,6 +79,7 @@ class _HomeState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _firebaseMessaging.subscribeToTopic('event-notifs');
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> notification) async {
         setState(() {
