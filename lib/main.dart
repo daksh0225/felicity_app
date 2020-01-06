@@ -24,6 +24,9 @@ var x = null;
 
 // void main() => runApp(MyApp());
 void main() {
+  // https://github.com/flutter/flutter/issues/38056
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
       runApp(new MyApp());
