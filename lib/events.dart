@@ -202,10 +202,6 @@ class _EventsState extends State<EventsPage> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  // OutlineButton(
-                                  //   onPressed: () => {},
-                                  //   child: Text('+'),
-                                  // ),
                                   FloatingActionButton(
                                     backgroundColor: Colors.black,
                                     heroTag: document['name'],
@@ -224,21 +220,6 @@ class _EventsState extends State<EventsPage> {
                                 ],
                               ),
                             ),
-                            // Text('Starts in: '+document['date'].toDate().difference(DateTime.now()).toString()),
-                            // FloatingActionButton(
-                            //   onPressed: () {
-                            //     addEvent(document, day);
-                            //     Scaffold.of(context).showSnackBar(
-                            //       SnackBar(
-                            //         content: Text("You've registered for this event"),
-                            //         duration: Duration(seconds: 2),
-                            //       ));
-                            //     },
-                            //   heroTag: document['name'],
-                            //   child: Icon(Icons.add),
-                            //   // child: Text('Register'),
-                            //   // color: Colors.blue[50],
-                            // ),
                          ],
                        ),
                         margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),

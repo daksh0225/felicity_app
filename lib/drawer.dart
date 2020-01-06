@@ -2,7 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'main.dart';
-import 'schedule.dart';
+import 'my_events.dart';
 import 'events.dart';
 import 'gallery.dart';
 import 'about.dart';
@@ -92,7 +92,7 @@ class DrawerWidget extends StatelessWidget{
                   ListTile(
                     leading: Icon(EvaIcons.clock,
                     color: Colors.white,),
-                    title: Text('Schedule',
+                    title: Text('My Events',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 19,

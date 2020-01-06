@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'schedule.dart';
+import 'my_events.dart';
 import 'events.dart';
 import 'gallery.dart';
 import 'about.dart';
@@ -21,7 +21,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
 var x = null;
-
 // void main() => runApp(MyApp());
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
