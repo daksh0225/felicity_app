@@ -5,6 +5,7 @@ import 'drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'sign_in.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class EventsPageRoute extends CupertinoPageRoute {
@@ -118,14 +119,6 @@ class _EventsState extends State<EventsPage> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                // Center(
-                //   child: SizedBox(
-                //     // height: Curves.easeOut.transform(value) * 150,
-                //     height: MediaQuery.of(context).size.height * .25,
-                //     width: Curves.easeOut.transform(value) * 1000,
-                //     child: child,
-                //   ),
-                // ),
                 Center(
                   child: new SizedBox(
                     // height: Curves.easeOut.transform(value) * 500,

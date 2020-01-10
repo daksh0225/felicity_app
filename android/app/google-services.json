@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "727229792921-vfvf48klpr11d01jcfamtfkpocgfeav8.apps.googleusercontent.com",
+          "client_id": "727229792921-j6f1de59c4qnejm5kmv813tcujfofls4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.felicity_app",
             "certificate_hash": "266a63fefb92a02635034684d269203dba31dc4d"
+          }
+        },
+        {
+          "client_id": "727229792921-d5ujb9df5df3lrm58sig5hbq5nrmqbmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "6f8c249dc18a5b9a5024037450b116335f4dcbe1"
+          }
+        },
+        {
+          "client_id": "727229792921-j3c950r4vu2jpdm7rud65476dmu8c6ul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "1035097a72f250e15dd8e33e64af21d7d18db3e3"
           }
         },
         {
