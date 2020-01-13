@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "727229792921-6olm31jvqcl72k22dpkd0rjgpvbeb1kq.apps.googleusercontent.com",
+          "client_id": "727229792921-fcvvhj4ei6doo0cthqc5ad8opbn6bhe7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.felicity_app",
-            "certificate_hash": "266a63fefb92a02635034684d269203dba31dc4d"
+            "certificate_hash": "b0e1e1d2add4e64be0c1e131b3751a52e4713992"
           }
         },
         {
