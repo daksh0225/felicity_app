@@ -59,7 +59,7 @@ class _AboutState extends State<AboutPage> {
                   "Felicity is IIIT's annual culture and tech fest. Held every year at the beginning of the spring semester it is the highlight of an IIITians year and is an event that everybody looks forward to. Felicity encompasses and embraces the varied and diverse interests of IIIT with everyone playing a role. From nights of music and comedy to code craft and quizzes everybody can explore and engage in their interests. Felicity provides the perfect platform to showcase your talents in an otherwise packed academic schedule. The three days of Felicity are packed with fun, merriment, joy and self-discovery.",
                   style: TextStyle(
                     fontSize: 17,
-                    fontFamily: 'Samarkan',
+                    // fontFamily: 'Samarkan',
                     fontWeight: FontWeight.w100,
                     // color: Color.fromARGB(255, 153, 255, 230)
                     color: Colors.white

@@ -58,11 +58,9 @@ class _ScheduleState extends State<SchedulePage> {
       var data;
       await document.get().then((d) {
         if(d.exists){
-          // print(d.data);
           data = d.data;
         }
       });
-      // print(data);
       return data;
     }
     builder(int index, DocumentReference document) {
@@ -72,9 +70,10 @@ class _ScheduleState extends State<SchedulePage> {
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.waiting){
                
-               return Center(
-                 child: Text("Loading..."),
-               );
+              //  return Center(
+              //    child: Text("Loading..."),
+              //  );
+              return Container();
               }
               else{
               print(snapshot);
@@ -85,12 +84,14 @@ class _ScheduleState extends State<SchedulePage> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Center(
+                Container(
+                  color: Colors.black,
+                  child:Center(
                   child: new SizedBox(
                     // height: Curves.easeOut.transform(value) * 500,
-                    height: MediaQuery.of(context).size.height *.7,
-                    // width: MediaQuery.of(context).size.width * .9,
-                    width: Curves.easeOut.transform(value) * 800,
+                    height: MediaQuery.of(context).size.height *.5,
+                    width: MediaQuery.of(context).size.width * .9,
+                    // width: Curves.easeOut.transform(value) * 800,
                     child:Card(
                         child: Flex(
                           direction: Axis.vertical,
@@ -138,13 +139,13 @@ class _ScheduleState extends State<SchedulePage> {
                                       SizedBox(
                                         width: 30,
                                       ),
-                                      Icon(EvaIcons.pin,
-                                      color: Colors.red,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(snapshot.data['Venue'])    
+                                      // Icon(EvaIcons.pin,
+                                      // color: Colors.red,
+                                      // ),
+                                      // SizedBox(
+                                      //   width: 5,
+                                      // ),
+                                      // Text(snapshot.data['Venue'])    
                                     ],
                                   ),
                                   SizedBox(
@@ -165,6 +166,7 @@ class _ScheduleState extends State<SchedulePage> {
                         margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
                      ),
                    ),
+                ),
                 ),
               ],
             ),
@@ -205,14 +207,14 @@ class _ScheduleState extends State<SchedulePage> {
         return Center(
           child: new Container(
             child: new ListView.builder(
-                // onPageChanged: (value) {
-                //   setState(() {
-                //     currentpage = value;
-                //   });
-                // },
-                // controller: controller,
-                itemCount: regEvent.length,
-                itemBuilder: (context, index) => builder(index, regEvent[index])),
+              // onPageChanged: (value) {
+              //   setState(() {
+              //     currentpage = value;
+              //   });
+              // },
+              // controller: controller,
+              itemCount: regEvent.length,
+              itemBuilder: (context, index) => builder(index, regEvent[index])),
           ),
         ); 
       }
@@ -221,53 +223,64 @@ class _ScheduleState extends State<SchedulePage> {
 
   @override
 	Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: _appBarTitle,
-            pinned: true,
-            floating: true,
-            // expandedHeight: 120,
-            backgroundColor: Colors.black,
-            actions: <Widget>[
-              IconButton(
-                icon: _searchIcon,
-                onPressed: _searchPressed,
-              ),
-            ],
-            // bottom: TabBar(
-            //   indicatorSize: TabBarIndicatorSize.label,
-            //   tabs: <Widget>[
-            //     Tab(
-            //       text: 'Day 1',
-            //     ),
-            //     Tab(
-            //       text: 'Day 2',
-            //     ),
-            //     Tab(
-            //       text: 'Day 3',
-            //     ),
-            //   ],
-            // )
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 550.0,
-              // child: TabBarView(
-              //   children: <Widget>[
-              child: event('1'),
-                //   event('2'),
-                //   event('3'),
-                // ],
-              // ),
-            ),
-          )
-        ]
+    return Scaffold(
+      appBar: AppBar(
+        title: _appBarTitle,
+              // pinned: true,
+              // floating: true,
+              // expandedHeight: 120,
+              backgroundColor: Colors.black,
+              actions: <Widget>[
+                IconButton(
+                  icon: _searchIcon,
+                  onPressed: _searchPressed,
+                ),
+              ],
       ),
-      ),
+        // body: CustomScrollView(
+          // slivers: [
+          //   SliverAppBar(
+          //     title: _appBarTitle,
+          //     pinned: true,
+          //     floating: true,
+          //     // expandedHeight: 120,
+          //     backgroundColor: Colors.black,
+          //     actions: <Widget>[
+          //       IconButton(
+          //         icon: _searchIcon,
+          //         onPressed: _searchPressed,
+          //       ),
+          //     ],
+              // bottom: TabBar(
+              //   indicatorSize: TabBarIndicatorSize.label,
+              //   tabs: <Widget>[
+              //     Tab(
+              //       text: 'Day 1',
+              //     ),
+              //     Tab(
+              //       text: 'Day 2',
+              //     ),
+              //     Tab(
+              //       text: 'Day 3',
+              //     ),
+              //   ],
+              // )
+            // ),
+            // SliverToBoxAdapter(
+        //       child: SizedBox(
+        //         height: 550.0,
+        //         // child: TabBarView(
+        //         //   children: <Widget>[
+        //         child: event('1'),
+        //           //   event('2'),
+        //           //   event('3'),
+        //           // ],
+        //         // ),
+        //       ),
+        //     )
+        //   ]
+        // ),
+        body: Center(child: event('1'),),
     );
 	}
 

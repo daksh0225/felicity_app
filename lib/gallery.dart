@@ -29,26 +29,8 @@ class _GalleryState extends State<GalleryPage> {
 	 return Scaffold(
 		 appBar: AppBar(title: Text('Gallery')),
 		body: Center(
-		child: Text('hello'),
-		),
-		// drawer:  DrawerWidget(),
-    // bottomNavigationBar: BottomNavigationBar(
-    //     // currentIndex: 1,
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.event),
-    //         title: Text('Events'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.home),
-    //         title: Text('Home'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.map),
-    //         title: Text('Map'),
-    //       )
-    //     ],
-    //   ),
+      child: Text('hello'),
+      ),
 		);
 	}
  }

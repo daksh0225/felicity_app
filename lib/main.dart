@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         '/contact': (context) => ContactPage(),
         '/sponsor': (context) => SponsorPage(),
         '/map': (context) => MapPage(),
-        '/quiz': (context) => QuizPage(),
+        // '/quiz': (context) => QuizPage(),
       },
 		);
 	}
