@@ -79,8 +79,9 @@ class _HomeState extends State<HomePage> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final List<Notification> notifications = [];
 
-  int _cIndex = 1;
+  int _cIndex = 0;
   final List<Widget> _children = [HomeView(), EventsPage(), MapPage()];
+  final List<String> _appBarTitle = ["Felicity", "Events", "Map"];
 
   @override
   void initState() {
@@ -147,7 +148,7 @@ class _HomeState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Felicity App',
+          _appBarTitle[_cIndex],
           style: TextStyle(
             color: Colors.black,
           ),
