@@ -1,7 +1,10 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'main.dart';
 import 'drawer.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'imageholder.dart';
 
 class SponsorPageRoute extends CupertinoPageRoute {
 	SponsorPageRoute()
@@ -16,39 +19,82 @@ class SponsorPageRoute extends CupertinoPageRoute {
 	}
 }
 
-class SponsorPage extends StatefulWidget {
- @override
- _SponsorState createState() {
-	 return _SponsorState();
- }
+class SponsorPage extends StatelessWidget {
+
+  Widget makeSponsorsList(){
+    return ListView.builder(
+    itemCount: 11,
+    itemBuilder: (context, index) {
+      return SponsorItem(index+1);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sponsors'),
+      ),
+      body: Container(
+        child: makeSponsorsList(),
+      ),
+    );
+  }
 }
 
-class _SponsorState extends State<SponsorPage> {
- @override
-	Widget build(BuildContext context) {
-	 return Scaffold(
-		 appBar: AppBar(title: Text('Our Sponsors'),),
-		body: Center(
-		  child: Text('We will release our sponsors soon!!!'),
-		),
-		// drawer:  DrawerWidget(),
-    // bottomNavigationBar: BottomNavigationBar(
-    //     // currentIndex: 1,
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.event),
-    //         title: Text('Events'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.home),
-    //         title: Text('Home'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.map),
-    //         title: Text('Map'),
-    //       )
-    //     ],
-    //   ),
-		);
-	}
- }
+
+class SponsorItem extends StatefulWidget {
+  int _index;
+  SponsorItem(int index){
+    this._index = index;
+  }
+
+  @override
+  _SponsorItemState createState() => _SponsorItemState();
+}
+
+class _SponsorItemState extends State<SponsorItem> {
+
+  Uint8List imageFile;
+  StorageReference photosReference = FirebaseStorage.instance.ref().child("sponsors");
+
+  getImage(){
+    if(!requestedSponsors.contains(widget._index)){
+      int MAX_SIZE = 7*1024*1024;
+      photosReference.child("image_${widget._index}.png").getData(MAX_SIZE).then((data){
+        this.setState((){
+          imageFile = data;
+        });
+        sponsorImage.putIfAbsent(widget._index, (){
+          return data;
+        });
+      }).catchError((error){
+        debugPrint(error.toString());
+      });
+      requestedSponsors.add(widget._index);
+    }
+  }
+  Widget decideGridFileWidget(){
+    if(imageFile==null){
+      return Center(child: CircularProgressIndicator());
+    } else {
+      return Image.memory(imageFile,fit: BoxFit.cover);
+    }
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    if(!imageData.containsKey(widget._index)){
+      getImage();
+    } else {
+      this.setState((){
+        imageFile = imageData[widget._index];
+      });
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return GridTile(child: decideGridFileWidget());
+  }
+}

@@ -23,54 +23,6 @@ class GalleryPageRoute extends CupertinoPageRoute {
 	}
 }
 
-// class GalleryPage extends StatefulWidget {
-//   _ThumbnailTapState createState() => _ThumbnailTapState();
-// }
-
-// class _ThumbnailTapState extends State<GalleryPage> {
-//   bool _isImageShown = false;
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     return Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: Text('Thumbnail Tap Image Example'),
-//       ),
-//       body: Stack(
-//         children: <Widget>[
-//           !_isImageShown
-//               ? Center(
-//                   child: GestureDetector(
-//                     onTap: () => setState(() => _isImageShown = !_isImageShown),
-//                     child: new Image.asset(
-//                       'assets/profile.jpg',
-//                       width: 150,
-//                       height: 150,
-//                       fit: BoxFit.cover,
-//                     ),
-//                   ),
-//                 )
-//               : SizedBox(),
-//           _isImageShown
-//               ? Center(
-//                   child: GestureDetector(
-//                   onTap: () => setState(() => _isImageShown = !_isImageShown),
-//                   child: new Image.asset(
-//                     'assets/profile.jpg',
-//                     width: size.width,
-//                     height: size.height,
-//                     fit: BoxFit.fitWidth,
-//                   ),
-//                   ),
-//                 )
-//               : SizedBox(),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class GalleryPage extends StatelessWidget {
 
   Widget makeImagesGrid(){
@@ -155,7 +107,7 @@ class _ImageGridItemState extends State<ImageGridItem> {
   }
   Widget decideGridFileWidget(){
     if(imageFile==null){
-      return Center(child: Text("No Data"));
+      return Center(child: CircularProgressIndicator());
     } else {
       // Size size = MediaQuery.of(context).size;
       return Center(
