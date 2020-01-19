@@ -79,9 +79,9 @@ class _HomeState extends State<HomePage> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final List<Notification> notifications = [];
 
-  int _cIndex = 0;
-  final List<Widget> _children = [HomeView(), EventsPage(), MapPage()];
-  final List<String> _appBarTitle = ["Felicity", "Events", "Map"];
+  int _cIndex = 1;
+  final List<Widget> _children = [EventsPage(), HomeView(), MapPage()];
+  final List<String> _appBarTitle = ["Events", "Felicity", "Map"];
 
   @override
   void initState() {
@@ -146,7 +146,7 @@ class _HomeState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size * 0.85;
     return Scaffold(
-      appBar: _cIndex == 1
+      appBar: _cIndex == 0
           ? null
           : AppBar(
               title: Text(
@@ -186,12 +186,12 @@ class _HomeState extends State<HomePage> {
         currentIndex: _cIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.event),
             title: Text('Events'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
