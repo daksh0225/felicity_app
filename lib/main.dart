@@ -146,18 +146,20 @@ class _HomeState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size * 0.85;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _appBarTitle[_cIndex],
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.yellow[700],
-      ),
+      appBar: _cIndex == 1
+          ? null
+          : AppBar(
+              title: Text(
+                _appBarTitle[_cIndex],
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
+              backgroundColor: Colors.yellow[700],
+            ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),
       // ),
