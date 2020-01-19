@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'my_events.dart';
 import 'events.dart';
 import 'gallery.dart';
@@ -16,6 +17,7 @@ import 'quiz.dart';
 import 'drawer.dart';
 import 'sign_in.dart';
 import 'first_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
@@ -23,6 +25,7 @@ import 'dart:async';
 var x = null;
 // void main() => runApp(MyApp());
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
       runApp(new MyApp());
@@ -138,6 +141,71 @@ class _HomeState extends State<HomePage> {
     }
   }
 
+
+  Widget upcoming(int day){
+    var date;
+    builder(int index, DocumentSnapshot document){
+      print(index);
+      print(document.data['date']);
+      if(index == 0){
+        date = document.data['date'];
+      }
+      // print(document.data['date'].toDate().toString()+'hello');
+      if(document.data['date'] == date){
+        // print('hello'+ document['name']);
+        // date = document.data['date'];
+        return Container(
+          margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
+          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(document.data['name'],
+              style: TextStyle(
+                fontSize: 25,
+              ),),
+            ],
+          ),
+        );
+      }
+      // else{
+      //   return Container(
+      //     child: Text('nothing to show'),
+      //   );
+      // }
+    }
+    // print(DateTime.now().day);
+
+    return StreamBuilder(
+      stream: Firestore.instance.collection('events-d'+(day-6).toString()).orderBy('date').snapshots(),
+      builder: (context, snapshot){
+        if(!snapshot.hasData){
+          return Center(
+            child: SpinKitCubeGrid(
+              color: Colors.black,
+              size: 25.0,
+            ),
+          );
+        }
+        // print('hello');
+        print(snapshot.data.documents.length);
+        return Center(
+          child: new ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemBuilder:(context, index) => builder(index, snapshot.data.documents[index]) ,
+          ),
+        );
+      }
+    );
+  }
+
 	@override
 	Widget build(BuildContext context) {
 		Size size = MediaQuery.of(context).size*0.85;
@@ -156,10 +224,21 @@ class _HomeState extends State<HomePage> {
       // appBar: SliverAppBar(
       //   title: Text('hello'),
       // ),
-			// body: Center(child: Text('My Page!')),
-      body: ListView(
-        children: notifications.map(buildNotification).toList(),
-      ),
+			// body: Container(
+      //   child: Center(
+      //     child: Text('hello'),
+      //   ),
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage('assets/QuizActivity.png'),
+      //       fit: BoxFit.cover
+      //     )
+      //   ),
+      // ),
+      // body: ListView(
+      //   children: notifications.map(buildNotification).toList(),
+      // ),
+      body: upcoming(7),
 			drawer: SizedBox(
 				width: size.width,				
 				child: DrawerWidget(),

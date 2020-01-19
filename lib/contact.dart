@@ -27,28 +27,54 @@ class _ContactState extends State<ContactPage> {
  @override
 	Widget build(BuildContext context) {
 	 return Scaffold(
-		 appBar: AppBar(title: Text('Contact')),
-		body: Center(
-		child: Text('hello'),
-		),
-		// drawer:  DrawerWidget(),
-    // bottomNavigationBar: BottomNavigationBar(
-    //     // currentIndex: 1,
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.event),
-    //         title: Text('Events'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.home),
-    //         title: Text('Home'),
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.map),
-    //         title: Text('Map'),
-    //       )
-    //     ],
-    //   ),
+    appBar: AppBar(title: Text('Contact')),
+		body: Container(
+      alignment: Alignment.center,
+      // child: Flex(
+      //   direction: Axis.vertical,
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   mainAxisSize: MainAxisSize.max,
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   children: <Widget>[
+      //     Text('Our Co-ordinators'),
+      //     ListView.builder(
+      //       itemCount: 4,
+      //       // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      //       itemBuilder: (context, image){
+      //         return CircleAvatar(
+      //           backgroundImage: AssetImage('assets/person.jpg'),
+      //           radius: 45,
+      //         );
+      //       },
+      //     )
+      //   ],
+      // ),
+      child: ListView(
+        // direction: Axis.vertical,
+        shrinkWrap: true,
+        children: <Widget>[
+          Text('Our Co-ordinators',
+          textAlign: TextAlign.center,),
+          GridView.builder(
+          itemCount: 4,
+          shrinkWrap: true,
+          physics: ScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (context, index){
+            return Image(
+              image: AssetImage('assets/person.jpg',),
+              // radius: 2,
+              // backgroundColor: Colors.transparent,
+            );
+            // return Image(
+            //   image: AssetImage('assets/person.jpg'),
+            //   fit: BoxFit.cover,
+            // );
+          },
+        ),
+      ],
+    ),
+    ),
 		);
 	}
- }
+}

@@ -230,12 +230,12 @@ class _ScheduleState extends State<SchedulePage> {
               // floating: true,
               // expandedHeight: 120,
               backgroundColor: Colors.black,
-              actions: <Widget>[
-                IconButton(
-                  icon: _searchIcon,
-                  onPressed: _searchPressed,
-                ),
-              ],
+              // actions: <Widget>[
+              //   IconButton(
+              //     icon: _searchIcon,
+              //     onPressed: _searchPressed,
+              //   ),
+              // ],
       ),
         // body: CustomScrollView(
           // slivers: [
