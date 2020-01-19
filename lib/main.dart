@@ -21,24 +21,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'home_view.dart';
 
 var x = null;
 // void main() => runApp(MyApp());
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-    .then((_) {
-      runApp(new MyApp());
-    });
+      .then((_) {
+    runApp(new MyApp());
+  });
 }
-class MyApp extends StatelessWidget {
-	final appTitle = 'Drawer Demo';
 
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			title: appTitle,
-			initialRoute: '/',
+class MyApp extends StatelessWidget {
+  final appTitle = 'Drawer Demo';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: appTitle,
+      initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
         '/home': (context) => HomePage(),
@@ -51,32 +53,34 @@ class MyApp extends StatelessWidget {
         '/map': (context) => MapPage(),
         // '/quiz': (context) => QuizPage(),
       },
-		);
-	}
+    );
+  }
 }
 
 class HomePageRoute extends CupertinoPageRoute {
-	HomePageRoute()
-		: super(builder: (BuildContext context) => new HomePage());
+  HomePageRoute() : super(builder: (BuildContext context) => new HomePage());
 
-
-	// OPTIONAL IF YOU WISH TO HAVE SOME EXTRA ANIMATION WHILE ROUTING
-	@override
-	Widget buildPage(BuildContext context, Animation<double> animation,
-		Animation<double> secondaryAnimation) {
-	return new FadeTransition(opacity: animation, child: new HomePage());
-	}
+  // OPTIONAL IF YOU WISH TO HAVE SOME EXTRA ANIMATION WHILE ROUTING
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    return new FadeTransition(opacity: animation, child: new HomePage());
+  }
 }
+
 class HomePage extends StatefulWidget {
- @override
- _HomeState createState() {
-	 return _HomeState();
- }
+  @override
+  _HomeState createState() {
+    return _HomeState();
+  }
 }
 
 class _HomeState extends State<HomePage> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final List<Notification> notifications = [];
+
+  int _cIndex = 1;
+  final List<Widget> _children = [HomeView(), EventsPage(), MapPage()];
 
   @override
   void initState() {
@@ -125,97 +129,29 @@ class _HomeState extends State<HomePage> {
     // });
   }
 
-  int _cIndex = 1;
-
   void _incrementTab(index) {
     setState(() {
       _cIndex = index;
     });
-    if(_cIndex==0)
-    {
-      Navigator.of(context).pushNamed('/events');
-    }
-    else if(_cIndex==2)
-    {
-      Navigator.of(context).pushNamed('/map');
-    }
+
+    // if (_cIndex == 0) {
+    //   Navigator.of(context).pushNamed('/events');
+    // } else if (_cIndex == 2) {
+    //   Navigator.of(context).pushNamed('/map');
+    // }
   }
 
-
-  Widget upcoming(int day){
-    var date;
-    builder(int index, DocumentSnapshot document){
-      print(index);
-      print(document.data['date']);
-      if(index == 0){
-        date = document.data['date'];
-      }
-      // print(document.data['date'].toDate().toString()+'hello');
-      if(document.data['date'] == date){
-        // print('hello'+ document['name']);
-        // date = document.data['date'];
-        return Container(
-          margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
-          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Flex(
-            direction: Axis.vertical,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(document.data['name'],
-              style: TextStyle(
-                fontSize: 25,
-              ),),
-            ],
-          ),
-        );
-      }
-      // else{
-      //   return Container(
-      //     child: Text('nothing to show'),
-      //   );
-      // }
-    }
-    // print(DateTime.now().day);
-
-    return StreamBuilder(
-      stream: Firestore.instance.collection('events-d'+(day-6).toString()).orderBy('date').snapshots(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData){
-          return Center(
-            child: SpinKitCubeGrid(
-              color: Colors.black,
-              size: 25.0,
-            ),
-          );
-        }
-        // print('hello');
-        print(snapshot.data.documents.length);
-        return Center(
-          child: new ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            itemBuilder:(context, index) => builder(index, snapshot.data.documents[index]) ,
-          ),
-        );
-      }
-    );
-  }
-
-	@override
-	Widget build(BuildContext context) {
-		Size size = MediaQuery.of(context).size*0.85;
-		return Scaffold(
-			appBar: AppBar(
-        title: Text('Felicity App',
-        style: TextStyle(
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size * 0.85;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Felicity App',
+          style: TextStyle(
             color: Colors.black,
           ),
-        ),        
+        ),
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
@@ -224,7 +160,7 @@ class _HomeState extends State<HomePage> {
       // appBar: SliverAppBar(
       //   title: Text('hello'),
       // ),
-			// body: Container(
+      // body: Container(
       //   child: Center(
       //     child: Text('hello'),
       //   ),
@@ -238,33 +174,33 @@ class _HomeState extends State<HomePage> {
       // body: ListView(
       //   children: notifications.map(buildNotification).toList(),
       // ),
-      body: upcoming(7),
-			drawer: SizedBox(
-				width: size.width,				
-				child: DrawerWidget(),
-			),
+      body: _children[_cIndex],
+      drawer: SizedBox(
+        width: size.width,
+        child: DrawerWidget(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _cIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            title: Text('Events'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            title: Text('Events'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
             title: Text('Map'),
           )
         ],
-        onTap: (index){
-            _incrementTab(index);
+        onTap: (index) {
+          _incrementTab(index);
         },
       ),
-		);
-	}
+    );
+  }
 
   Widget buildNotification(Notification notification) {
     return ListTile(
@@ -277,7 +213,6 @@ class _HomeState extends State<HomePage> {
       subtitle: Text(notification.body),
     );
   }
-
 }
 
 class Notification {
@@ -287,6 +222,3 @@ class Notification {
   const Notification(
       {@required this.title, @required this.body, @required this.color});
 }
-
-
-
