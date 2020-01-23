@@ -27,6 +27,12 @@ var x = null;
 // void main() => runApp(MyApp());
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: Colors.white,
+  //   // systemNavigationBarColor: Colors.black,
+  //   statusBarIconBrightness: Brightness.dark, // status bar icons' color
+  //   systemNavigationBarIconBrightness: Brightness.dark,
+  // ));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
