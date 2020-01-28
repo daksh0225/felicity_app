@@ -201,10 +201,10 @@ class DrawerWidget extends StatelessWidget{
                   center: Alignment(-0.65, -0.68),
                   colors: [
                     Colors.white,
+                    Color.fromARGB(255, 54, 1, 33),
                     // Colors.cyan,
-                    Colors.black,
                   ],
-                  radius: 1.5,
+                  radius: 0.5,
                   // focalRadius: 0.5,
                   stops: [0.0, 0.4]
                 )

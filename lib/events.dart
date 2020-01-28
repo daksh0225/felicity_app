@@ -36,9 +36,9 @@ class _EventsState extends State<EventsPage> {
   Widget _appBarTitle = Text(
     "Events",
     style: TextStyle(
-      fontFamily: 'Samarkan',
+      // fontFamily: 'Samarkan',
       fontSize: 25,
-      color: Colors.white,
+      color: Colors.black,
     ),
   );
   Icon _searchIcon = Icon(Icons.search);
@@ -135,12 +135,13 @@ class _EventsState extends State<EventsPage> {
                     // width: MediaQuery.of(context).size.width * .9,
                     width: Curves.easeOut.transform(value) * 1000,
                     child: Card(
+                      color: Colors.white,
                       child: Flex(
                         direction: Axis.vertical,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(10.0),
+                            // padding: EdgeInsets.all(10.0),
                             // margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                             child: Flex(
                               direction: Axis.vertical,
@@ -149,7 +150,13 @@ class _EventsState extends State<EventsPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Image(
-                                  image: AssetImage('assets/felicity_logo.png'),
+                                  height: 150,
+                                  width: MediaQuery.of(context).size.width,
+                                  image: document['name'] == 'DJ Night' ? AssetImage('assets/tlt.jpg') : AssetImage('assets/standup.jpg'),
+                                  fit: document['name'] == 'DJ Night' ? BoxFit.fill: BoxFit.fill
+                                ),
+                                SizedBox(
+                                  height: 30,
                                 ),
                                 Text(
                                   document['name'],
@@ -291,9 +298,11 @@ class _EventsState extends State<EventsPage> {
             return Center(
               child: new Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/QuizActivity.png'),
-                        fit: BoxFit.cover)),
+                  color: Colors.purple  
+                    // image: DecorationImage(
+                    //     image: AssetImage('assets/QuizActivity.png'),
+                    //     fit: BoxFit.cover)
+                ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -310,9 +319,11 @@ class _EventsState extends State<EventsPage> {
             return Center(
               child: new Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/QuizActivity.png'),
-                        fit: BoxFit.cover)),
+                  color: Color.fromARGB(255, 200, 50, 100)
+                    // image: DecorationImage(
+                    //     image: AssetImage('assets/QuizActivity.png'),
+                    //     fit: BoxFit.cover)
+                ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -349,14 +360,18 @@ class _EventsState extends State<EventsPage> {
             pinned: true,
             floating: true,
             expandedHeight: 120,
-            backgroundColor: Colors.black,
+            backgroundColor: Color.fromARGB(255, 242, 205, 203),
             actions: <Widget>[
               IconButton(
                 icon: _searchIcon,
                 onPressed: _searchPressed,
               ),
             ],
+            iconTheme: IconThemeData(
+              color: Colors.black
+            ),
             bottom: TabBar(
+              labelColor: Colors.black,
               indicatorSize: TabBarIndicatorSize.label,
               tabs: <Widget>[
                 Tab(
@@ -438,9 +453,9 @@ class _EventsState extends State<EventsPage> {
         this._appBarTitle = Text(
           "Events",
           style: TextStyle(
-            fontFamily: 'Samarkan',
+            // fontFamily: 'Samarkan',
             fontSize: 25,
-            color: Colors.white,
+            color: Colors.black,
           ),
         );
         _filter.clear();

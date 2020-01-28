@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +24,7 @@ import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'home_view.dart';
+import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
 
 var x = null;
 // void main() => runApp(MyApp());
@@ -85,9 +88,9 @@ class _HomeState extends State<HomePage> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final List<Notification> notifications = [];
 
-  int _cIndex = 1;
-  final List<Widget> _children = [EventsPage(), HomeView(), MapPage()];
-  final List<String> _appBarTitle = ["Events", "Felicity", "Map"];
+  int _cIndex = 0;
+  final List<Widget> _children = [HomeView(), EventsPage(), MapPage()];
+  final List<String> _appBarTitle = ["hey", "Events", "wow"];
 
   @override
   void initState() {
@@ -151,8 +154,10 @@ class _HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size * 0.85;
+    print(_cIndex);
     return Scaffold(
-      appBar: _cIndex == 0
+      backgroundColor: Color.fromARGB(255, 200, 50, 100),
+      appBar: _cIndex == 1
           ? null
           : AppBar(
               title: Text(
@@ -164,7 +169,7 @@ class _HomeState extends State<HomePage> {
               iconTheme: IconThemeData(
                 color: Colors.black,
               ),
-              backgroundColor: Colors.yellow[700],
+              backgroundColor: Color.fromARGB(255, 242, 205, 203),
             ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),
@@ -192,12 +197,12 @@ class _HomeState extends State<HomePage> {
         currentIndex: _cIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            title: Text('Events'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            title: Text('Events'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
@@ -207,7 +212,29 @@ class _HomeState extends State<HomePage> {
         onTap: (index) {
           _incrementTab(index);
         },
+        backgroundColor: Color.fromARGB(255, 242, 205, 203),
+        selectedIconTheme: IconThemeData(
+          color: Color.fromARGB(255, 79, 0, 36)
+        ),
+        unselectedIconTheme: IconThemeData(
+          color: Color.fromARGB(255, 168, 0, 65)
+        ),
+        selectedItemColor: Color.fromARGB(255, 79, 0, 36),
+        unselectedItemColor: Color.fromARGB(255, 168, 0, 65),
       ),
+      // bottomNavigationBar: FancyBottomNavigation(
+      //   tabs: [
+      //       TabData(iconData: Icons.home, title: "Home"),
+      //       TabData(iconData: EvaIcons.calendar, title: "Events"),
+      //       TabData(iconData: Icons.map, title: "Map")
+      //   ],
+      //   // context: context,
+      //   onTabChangedListener: (index) {
+      //     print(index);
+      //     _incrementTab(index);
+      //   }
+      // )
+
     );
   }
 
