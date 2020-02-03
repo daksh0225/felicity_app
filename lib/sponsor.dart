@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'imageholder.dart';
 
 class SponsorPageRoute extends CupertinoPageRoute {
@@ -22,11 +23,31 @@ class SponsorPageRoute extends CupertinoPageRoute {
 class SponsorPage extends StatelessWidget {
 
   Widget makeSponsorsList(){
-    return ListView.builder(
-    itemCount: 11,
-    itemBuilder: (context, index) {
-      return SponsorItem(index+1);
-    });
+
+    Future getCount(DocumentReference doc) async{
+      var data;
+      await doc.get().then((d){
+        data = d.data;
+      });
+      print(data);
+      return data;
+    }
+    return FutureBuilder(
+      future: getCount(Firestore.instance.collection('count').document('sponsor')),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting){
+               return Center(
+                 child: Text("Loading..."),
+               );
+              }
+        else{
+        return ListView.builder(
+          itemCount: snapshot.data['count'],
+          itemBuilder: (context, index) {
+          return Card(child: SponsorItem(index+1));
+        });
+      }}
+    );
   }
 
   @override
@@ -85,11 +106,11 @@ class _SponsorItemState extends State<SponsorItem> {
   @override
   void initState(){
     super.initState();
-    if(!imageData.containsKey(widget._index)){
+    if(!sponsorImage.containsKey(widget._index)){
       getImage();
     } else {
       this.setState((){
-        imageFile = imageData[widget._index];
+        imageFile = sponsorImage[widget._index];
       });
     }
   }
