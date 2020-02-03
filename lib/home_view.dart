@@ -88,6 +88,7 @@ class _HomeView extends State<HomeView> {
                   ),
                   SizedBox(width: 30,),
                   Icon(EvaIcons.clockOutline,
+                    // color: Color(0xff50B1FB),
                     color: Color.fromARGB(255, 255, 99, 144),
                   ),
                   Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
@@ -173,6 +174,7 @@ class _HomeView extends State<HomeView> {
             ],
           ),
           decoration: BoxDecoration(
+            // color: Color(0xff50B1FB), 
             color: Color.fromARGB(255, 150, 7, 69),
             // color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10))
