@@ -1,11 +1,11 @@
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'imageholder.dart';
 
 class SponsorPageRoute extends CupertinoPageRoute {
@@ -22,50 +22,33 @@ class SponsorPageRoute extends CupertinoPageRoute {
 }
 
 class SponsorPage extends StatelessWidget {
-  builder(int index, DocumentSnapshot document){
-    return Card(
-      child: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(document.data['Title']),
-            SponsorItem(document.data['Index'])
-          ],
-        ),
-      ),
-    );
-  }
-  Widget makeSponsorsList(){
-    return StreamBuilder(
-      stream: Firestore.instance.collection('sponsors').orderBy('Index').snapshots(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData){
-          return Center(
-            child: SpinKitCubeGrid(color: Colors.black,
-            size: 25.0,),
-          );
-        }
-        return ListView.builder(
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => builder(index, snapshot.data.documents[index]),
-              // Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.max,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // children: <Widget>[
 
-              // ],
-        );
-      },
+  Widget makeSponsorsList(){
+
+    Future getCount(DocumentReference doc) async{
+      var data;
+      await doc.get().then((d){
+        data = d.data;
+      });
+      print(data);
+      return data;
+    }
+    return FutureBuilder(
+      future: getCount(Firestore.instance.collection('count').document('sponsor')),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting){
+               return Center(
+                 child: Text("Loading..."),
+               );
+              }
+        else{
+        return ListView.builder(
+          itemCount: snapshot.data['count'],
+          itemBuilder: (context, index) {
+          return Card(child: SponsorItem(index+1));
+        });
+      }}
     );
-    // return ListView.builder(
-    // itemCount: 11,
-    // itemBuilder: (context, index) {
-    //   return SponsorItem(index+1);
-    // });
   }
 
   @override

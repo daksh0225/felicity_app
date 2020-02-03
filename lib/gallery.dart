@@ -3,9 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:photo_view/photo_view.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'imageholder.dart';
@@ -21,17 +19,37 @@ class GalleryPageRoute extends CupertinoPageRoute {
 		Animation<double> secondaryAnimation) {
 	return new FadeTransition(opacity: animation, child: new GalleryPage());
 	}
-}
+} 
 
 class GalleryPage extends StatelessWidget {
 
   Widget makeImagesGrid(){
-    return GridView.builder(
-    itemCount: 12,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-    itemBuilder: (context, index) {
-      return ImageGridItem(index+1);
-    });
+    Future getCount(DocumentReference doc) async{
+      var data;
+      await doc.get().then((d){
+        data = d.data;
+      });
+      print(data);
+      return data;
+    }
+    return FutureBuilder(
+      future: getCount(Firestore.instance.collection('count').document('gallery')),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting){
+               
+               return Center(
+                 child: Text("Loading..."),
+               );
+              }
+        else{
+        return GridView.builder(
+        itemCount: snapshot.data['count'],
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+        return ImageGridItem(index+1);
+      });
+      }}
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -109,7 +127,6 @@ class _ImageGridItemState extends State<ImageGridItem> {
     if(imageFile==null){
       return Center(child: CircularProgressIndicator());
     } else {
-      // Size size = MediaQuery.of(context).size;
       return Center(
                     child: GestureDetector(
                       onTap: () {
@@ -124,8 +141,6 @@ class _ImageGridItemState extends State<ImageGridItem> {
                       ),
                     ),
                   );
-
-      // return Image.memory(imageFile,fit: BoxFit.cover);
     }
   }
 
