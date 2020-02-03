@@ -46,16 +46,23 @@ class _HomeView extends State<HomeView> {
       if (document.data['date'] == date) {
         // print('hello'+ document['name']);
         // date = document.data['date'];
-        return Container(
-          margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
-          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+        return SizedBox(
+          height: 300,
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: Container(
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
+            // color: Colors.blue,
+            image: DecorationImage(
+              image: AssetImage('assets/tlt.jpg'),
+              fit: BoxFit.cover
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           child: Flex(
             direction: Axis.vertical,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -63,9 +70,35 @@ class _HomeView extends State<HomeView> {
                 document.data['name'],
                 style: TextStyle(
                   fontSize: 25,
+                  color: Colors.white
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(EvaIcons.pin,
+                    color: Colors.red,
+                  ),
+                  Text('FG',
+                    style: TextStyle(
+                      color: Colors.white
+                    ),
+                  ),
+                  SizedBox(width: 30,),
+                  Icon(EvaIcons.clockOutline,
+                    color: Color.fromARGB(255, 255, 99, 144),
+                  ),
+                  Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
+                    style: TextStyle(
+                      color: Colors.white
+                    ),
+                  ),
+                ],
+              )
             ],
+          ),
           ),
         );
       }
@@ -77,7 +110,26 @@ class _HomeView extends State<HomeView> {
     }
     // print(DateTime.now().day);
 
-    return StreamBuilder(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+      // scrollDirection: Axis.vertical,
+      children: <Widget>[
+        // SizedBox(
+        //   height: 20,
+        // ),
+        Container(
+          margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+          child: Text('Upcoming Events',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 20
+            ),
+          ),
+        ),
+        StreamBuilder(
         stream: Firestore.instance
             .collection('events-d' + (day - 6).toString())
             .orderBy('date')
@@ -93,13 +145,42 @@ class _HomeView extends State<HomeView> {
           }
           // print('hello');
           print(snapshot.data.documents.length);
-          return Center(
-            child: new ListView.builder(
+          return Container(
+              height: 200,
+              margin: EdgeInsets.all(20),
+              child: new ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) =>
                   builder(index, snapshot.data.documents[index]),
             ),
           );
-        });
+        }),
+        Container(
+          height: 400,
+          width: MediaQuery.of(context).size.width * 0.85,
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: Column(
+            children: <Widget>[
+              Text('Embracing the Curry Culture',
+              textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.black,
+                  fontFamily: 'Samarkan'
+                ),
+              )
+            ],
+          ),
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 150, 7, 69),
+            // color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10))
+          ),
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 20),
+        ),
+      ],
+      ),
+    );
   }
 }
