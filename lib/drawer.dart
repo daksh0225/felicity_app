@@ -96,7 +96,8 @@ class DrawerWidget extends StatelessWidget{
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 19,
-                      fontFamily: 'Samarkan'),
+                      // fontFamily: 'Samarkan'
+                      ),
                     ),
                     onTap: () {
                       Navigator.of(context).push(new SchedulePageRoute());
@@ -110,7 +111,8 @@ class DrawerWidget extends StatelessWidget{
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 19,
-                      fontFamily: 'Samarkan'),
+                      // fontFamily: 'Samarkan'
+                      ),
                     ),
                     onTap: () {
                       Navigator.of(context).push(new GalleryPageRoute());
@@ -123,7 +125,8 @@ class DrawerWidget extends StatelessWidget{
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 19,
-                      fontFamily: 'Samarkan'),
+                      // fontFamily: 'Samarkan'
+                      ),
                     ),
                     onTap: () {
                       Navigator.of(context).push(new AboutPageRoute());
@@ -136,7 +139,8 @@ class DrawerWidget extends StatelessWidget{
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 19,
-                      fontFamily: 'Samarkan'),
+                      // fontFamily: 'Samarkan'
+                      ),
                     ),
                     onTap: () {
                       Navigator.of(context).push(new ContactPageRoute());
@@ -149,25 +153,26 @@ class DrawerWidget extends StatelessWidget{
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 19,
-                        fontFamily: 'Samarkan'),
+                        // fontFamily: 'Samarkan'
+                        ),
                       ),
                     onTap: () {
                       Navigator.of(context).push(new SponsorPageRoute());
                     },
                   ),
-                  ListTile(
-                    leading: Icon(EvaIcons.text,
-                    color: Colors.white,),
-                    title: Text('Quiz',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 19,
-                      fontFamily: 'Samarkan'),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(new QuizPageRoute());
-                    },
-                  ),
+                  // ListTile(
+                  //   leading: Icon(EvaIcons.text,
+                  //   color: Colors.white,),
+                  //   title: Text('Quiz',
+                  //   style: TextStyle(
+                  //     color: Colors.white,
+                  //     fontSize: 19,
+                  //     fontFamily: 'Samarkan'),
+                  //   ),
+                  //   onTap: () {
+                  //     Navigator.of(context).push(new QuizPageRoute());
+                  //   },
+                  // ),
                   Expanded(
                     child: Align(
                       alignment: FractionalOffset.bottomLeft,
@@ -178,7 +183,8 @@ class DrawerWidget extends StatelessWidget{
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 19,
-                          fontFamily: 'Samarkan'),
+                          // fontFamily: 'Samarkan'
+                          ),
                         ),
                         onTap: () {
                           signOutGoogle();
@@ -195,10 +201,10 @@ class DrawerWidget extends StatelessWidget{
                   center: Alignment(-0.65, -0.68),
                   colors: [
                     Colors.white,
+                    Color.fromARGB(255, 54, 1, 33),
                     // Colors.cyan,
-                    Colors.black,
                   ],
-                  radius: 1.5,
+                  radius: 0.5,
                   // focalRadius: 0.5,
                   stops: [0.0, 0.4]
                 )

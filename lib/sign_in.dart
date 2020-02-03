@@ -11,7 +11,6 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
   String name;
   String email;
   String imageUrl;
-  String phnumber;
 Future<String> signInWithGoogle(BuildContext context) async {
   // signOutGoogle();
   GoogleSignInAuthentication googleSignInAuthentication;
@@ -70,10 +69,6 @@ Future<String> signUpWithGoogle() async {
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
-  // phnumber = user.phoneNumber;
-  print(name);
-  print('hello');
-  print(user.phoneNumber);
   Firestore.instance.collection('users').document(email).setData({
     "Name": name,
     "email": email,
@@ -82,8 +77,6 @@ Future<String> signUpWithGoogle() async {
   assert(user.email != null);
   assert(user.displayName != null);
   assert(user.photoUrl != null);
-  assert(user.phoneNumber != null);
-  assert(!user.isAnonymous);
   assert(await user.getIdToken() != null);
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);

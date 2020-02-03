@@ -46,7 +46,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/char minar 1.png'),
+            fit: BoxFit.fitHeight
+          )
+        ),
+        // color: Colors.white,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -81,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) {
-                return FirstScreen();
+                return HomePage();
               },
             ),
           );
@@ -123,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return HomePage();
                 },
               ),
             );
