@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -54,13 +55,92 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Gallery'),
-      ),
-      body: Container(
-        child: makeImagesGrid(),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
+              ),
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: true,
+              leading: IconButton(
+                icon: Icon(EvaIcons.arrowIosBack),
+                onPressed: () => Navigator.pop(context),
+              ),
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Gallery",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      )),
+                  // background: Image.network(
+                  //   "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                  //   fit: BoxFit.cover,
+                  // )
+                ),
+            ),
+          ];
+        },
+        body: Container(
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: makeImagesGrid(),
+        ),
       ),
     );
+    // return Scaffold(
+      
+    //   // appBar: PreferredSize(
+    //   //   preferredSize: Size(double.infinity, 150), // 44 is the height
+    //   //   child: AppBar(
+    //   //     // title: Text('Image Gallery',
+    //   //     //   // textAlign: TextAlign.end,
+    //   //     // ),
+    //   //     flexibleSpace: Text('hello',
+    //   //     textAlign: TextAlign.center,),
+    //   //   // bottom: Text('Image Gallery'),
+    //   //     leading: IconButton(
+    //   //       icon: Icon(EvaIcons.arrowIosBack),
+    //   //       onPressed: () => Navigator.pop(context),
+    //   //     ),
+    //   //     shape: RoundedRectangleBorder(
+    //   //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))
+    //   //     )
+    //   //   ),
+    //   // ),
+    //   body: CustomScrollView(
+    //     slivers: [
+    //       SliverAppBar(
+    //         // leading: IconButton(
+    //         //   icon: Icon(EvaIcons.arrowIosBack),
+    //         //   onPressed: () => Navigator.pop(context),
+    //         // ),
+    //         pinned: true,
+    //         expandedHeight: 200,
+    //         flexibleSpace: FlexibleSpaceBar(
+    //           titlePadding: EdgeInsets.zero,
+    //           centerTitle: true,
+    //           title: SizedBox(
+    //             height: 130,
+    //             child: Column(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: <Widget>[
+    //                 Text("Should be centered", textAlign: TextAlign.center),
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+          // Container(
+          //     padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+          //     child: makeImagesGrid(),
+          //   ),
+    //       ],
+    //     ),
+    //   // body: Text('hello')
+    // );
   }
 }
 
@@ -74,11 +154,17 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         child: Center(
-          child: Hero(
-            tag: 'imageHero',
-            child: Image.memory(
-                    imageFile,
-                    fit: BoxFit.cover,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              color: Colors.grey
+            ),
+            child: Hero(
+              tag: 'imageHero',
+              child: Image.memory(
+                      imageFile,
+                      fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -128,19 +214,29 @@ class _ImageGridItemState extends State<ImageGridItem> {
       return Center(child: CircularProgressIndicator());
     } else {
       return Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return DetailScreen(imageFile: imageFile);
-                        }));
-                      },
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(imageFile: imageFile);
+            }));
+          },
 
-                      child: Image.memory(
-                        imageFile,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
+          child: Container(
+            // padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              color: Colors.grey
+            ),
+            child: ClipRRect(
+              borderRadius: new BorderRadius.circular(10.0),
+              child: Image.memory(
+                imageFile,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      );
     }
   }
 

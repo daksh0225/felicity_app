@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+// import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +24,7 @@ import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'home_view.dart';
-import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
+// import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
 
 var x = null;
 // void main() => runApp(MyApp());

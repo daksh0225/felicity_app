@@ -339,12 +339,246 @@ class _EventsState extends State<EventsPage> {
           }
         });
   }
+  Widget test() {
+    builder(int index, DocumentSnapshot document) {
+      // print(document['date'].toDate());
+      return new AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          double value = 1.0;
+          // if (controller.positions.elementAt(currentpage).haveDimensions) {
+          //   value = controller.page - index;
+          //   value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          // }
+          // controller.positions.forEach((f) {
+          //   if(f.haveDimensions){
+          //     print('hello1;');
+          //     value= controller.page - index;
+          //     value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          //   }
+          // });
+          return new Center(
+            child: Flex(
+              direction: Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: new SizedBox(
+                    // height: Curves.easeOut.transform(value) * 500,
+                    height: MediaQuery.of(context).size.height * .7,
+                    // width: MediaQuery.of(context).size.width * .9,
+                    width: Curves.easeOut.transform(value) * 1000,
+                    child: Card(
+                      color: Colors.white,
+                      child: Flex(
+                        direction: Axis.vertical,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            // padding: EdgeInsets.all(10.0),
+                            // margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                            child: Flex(
+                              direction: Axis.vertical,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Image(
+                                  height: 150,
+                                  width: MediaQuery.of(context).size.width,
+                                  image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/standup.jpg'),
+                                  fit: document['Name'] == 'asda' ? BoxFit.fill: BoxFit.fill
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  document['Name'],
+                                  style: TextStyle(
+                                      fontFamily: 'Samarkan', fontSize: 30),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Flex(
+                                  direction: Axis.horizontal,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    // Icon(Icons.calendar_today),
+                                    // SizedBox(
+                                    //   width: 10,
+                                    // ),
+                                    // Text(DateFormat("dd-MM-yyyy").format(document['date'].toDate()).toString()),
+                                    // SizedBox(
+                                    //   width: 30,
+                                    // ),
+                                    Icon(Icons.schedule),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(document['Date'].toString()),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Icon(
+                                      EvaIcons.pin,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(document['Venue'])
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(document['Description'],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        fontFamily: 'Sacramento')),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                FloatingActionButton(
+                                  backgroundColor: Colors.black,
+                                  heroTag: document['Name'],
+                                  // shape: ShapeBorder(),
+                                  child: Icon(EvaIcons.plus),
+                                  onPressed: () {
+                                    // addEvent(document, day);
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "You've registered for this event"),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        // child: new Card(
+        //   child: Stack(
+        //     children: <Widget>[
+        //       Image(
+        //         image: AssetImage('assets/futsal.jpg'),
+        //         fit: BoxFit.fill,
+        //       ),
+        //       Center(
+        //         child: Text(
+        //           document['name'],
+        //           textAlign: TextAlign.center,
+        //           style: TextStyle(fontSize: 15, color: Colors.white),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        //   margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+        //   color: index % 2 == 0 ? Colors.blue : Colors.red,
+        // ),
+      );
+    }
+
+    return StreamBuilder(
+        stream: Firestore.instance.collection('test').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            // return Text("Loading..");
+            return Center(
+              child: SpinKitCubeGrid(
+                color: Colors.black,
+                size: 25.0,
+              ),
+            );
+          }
+          if (!(_searchText.isEmpty)) {
+            List templist = new List();
+            for (int i = 0; i < snapshot.data.documents.length; i++) {
+              if (snapshot.data.documents[i]['Name']
+                  .toLowerCase()
+                  .contains(_searchText.toLowerCase())) {
+                templist.add(snapshot.data.documents[i]);
+              }
+            }
+            if (templist.length == 0) {
+              return Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/QuizActivity.png'),
+                        fit: BoxFit.cover)),
+                child: Center(
+                  child: Text('Nothing here :('),
+                ),
+              );
+            }
+            return Center(
+              child: new Container(
+                decoration: BoxDecoration(
+                  color: Colors.purple  
+                    // image: DecorationImage(
+                    //     image: AssetImage('assets/QuizActivity.png'),
+                    //     fit: BoxFit.cover)
+                ),
+                child: new PageView.builder(
+                    onPageChanged: (value) {
+                      setState(() {
+                        currentpage = value;
+                      });
+                    },
+                    controller: controller,
+                    itemCount: templist.length,
+                    itemBuilder: (context, index) =>
+                        builder(index, templist[index])),
+              ),
+            );
+          } else {
+            return Center(
+              child: new Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 200, 50, 100)
+                    // image: DecorationImage(
+                    //     image: AssetImage('assets/QuizActivity.png'),
+                    //     fit: BoxFit.cover)
+                ),
+                child: new PageView.builder(
+                    onPageChanged: (value) {
+                      setState(() {
+                        currentpage = value;
+                      });
+                    },
+                    controller: controller,
+                    itemCount: snapshot.data.documents.length,
+                    itemBuilder: (context, index) =>
+                        builder(index, snapshot.data.documents[index])),
+              ),
+            );
+          }
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     // print(filteredNames[1]['name']);
     return DefaultTabController(
-      length: 3,
+      length: 1,
       // child: Scaffold(
       //   drawer: SizedBox(
       //     child: DrawerWidget(),
@@ -377,12 +611,12 @@ class _EventsState extends State<EventsPage> {
                 Tab(
                   text: 'Day 1',
                 ),
-                Tab(
-                  text: 'Day 2',
-                ),
-                Tab(
-                  text: 'Day 3',
-                ),
+                // Tab(
+                //   text: 'Day 2',
+                // ),
+                // Tab(
+                //   text: 'Day 3',
+                // ),
               ],
             )),
         SliverToBoxAdapter(
@@ -390,9 +624,10 @@ class _EventsState extends State<EventsPage> {
             height: 550.0,
             child: TabBarView(
               children: <Widget>[
-                event('1'),
-                event('2'),
-                event('3'),
+                test(),
+                // event('1'),
+                // event('2'),
+                // event('3'),
                 // Center(child: Text('Day 2'),),
                 // Center(child: Text('Day 3'),),
               ],

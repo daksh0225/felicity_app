@@ -33,21 +33,68 @@ class SponsorPage extends StatelessWidget {
       print(data);
       return data;
     }
-    return FutureBuilder(
-      future: getCount(Firestore.instance.collection('count').document('sponsor')),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting){
-               return Center(
-                 child: Text("Loading..."),
-               );
-              }
-        else{
+    builder(int index, DocumentSnapshot doc){
+        return FutureBuilder(
+        future: getCount(Firestore.instance.collection('count').document('sponsor')),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+                return Center(
+                  child: Text("Loading..."),
+                );
+                }
+          else{
+            return Card(
+              elevation: 0,
+              child: Container(
+                height: 150,
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                // width: MediaQuery.of(context).size.width * 0.7,
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(doc.data['Title']),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      SponsorItem(index+1)
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+        }
+      );
+    }
+    return StreamBuilder(
+      stream: Firestore.instance.collection('sponsors').orderBy('Index').snapshots(),
+      builder: (context, snapshot){
+        if(!snapshot.hasData){
+          return Center(
+            child: SpinKitCubeGrid(color: Colors.black,
+            size: 25.0,),
+          );
+        }
         return ListView.builder(
-          itemCount: snapshot.data['count'],
-          itemBuilder: (context, index) {
-          return Card(child: SponsorItem(index+1));
-        });
-      }}
+          itemCount: snapshot.data.documents.length,
+          itemBuilder: (context, index) => builder(index, snapshot.data.documents[index]),
+          // Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.max,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // children: <Widget>[
+
+          // ],
+        );
+      },
     );
   }
 
