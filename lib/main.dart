@@ -163,8 +163,8 @@ class _HomeState extends State<HomePage> {
     Size size = MediaQuery.of(context).size * 0.85;
     print(_cIndex);
     return Scaffold(
-      backgroundColor:
-          Color(colors["background"]), //.fromARGB(255, 200, 50, 100),
+      backgroundColor: Color(0xffEEF2FA),
+      // backgroundColor: Color.fromARGB(255, 200, 50, 100),
       appBar: _cIndex == 1
           ? null
           : AppBar(
@@ -180,7 +180,8 @@ class _HomeState extends State<HomePage> {
               iconTheme: IconThemeData(
                 color: Color(colors["appbarText"]),
               ),
-              backgroundColor: Color(colors["appbar"]),
+              backgroundColor: Color(0xff55B0F0),
+              // backgroundColor: Color.fromARGB(255, 242, 205, 203),
             ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),

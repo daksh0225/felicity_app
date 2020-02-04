@@ -77,9 +77,15 @@ class _HomeView extends State<HomeView> {
                       EvaIcons.pin,
                       color: Colors.red,
                     ),
-                    Text(
-                      'FG',
-                      style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(width: 30,),
+                  Icon(EvaIcons.clockOutline,
+                    // color: Color(0xff50B1FB),
+                    color: Color.fromARGB(255, 255, 99, 144),
+                  ),
+                  Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
+                    style: TextStyle(
+                      color: Colors.white
                     ),
                     SizedBox(
                       width: 30,
@@ -130,6 +136,14 @@ class _HomeView extends State<HomeView> {
               ),
             ),
           ),
+          decoration: BoxDecoration(
+            // color: Color(0xff50B1FB), 
+            color: Color.fromARGB(255, 150, 7, 69),
+            // color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10))
+          ),
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 20),
+        ),
           StreamBuilder(
               stream: Firestore.instance
                   .collection('events-d' + (day - 6).toString())
