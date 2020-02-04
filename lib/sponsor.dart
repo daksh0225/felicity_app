@@ -24,6 +24,12 @@ class SponsorPageRoute extends CupertinoPageRoute {
 }
 
 class SponsorPage extends StatelessWidget {
+  var colors = {
+      "background": 0xff181a1b,
+      "backgroundLite": 0xff575757,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
 
   Widget makeSponsorsList(){
 
@@ -45,13 +51,16 @@ class SponsorPage extends StatelessWidget {
                 );
                 }
           else{
-            return Card(
-              elevation: 0,
-              child: Container(
-                height: 150,
+            return Container(
+              // elevation: 0,
+                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+
+              child: Container(                
+                height: MediaQuery.of(context).size.height*0.35,
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+              color: Color(colors['backgroundLite']),
+                  // color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
                 // width: MediaQuery.of(context).size.width * 0.7,
@@ -62,7 +71,14 @@ class SponsorPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(doc.data['Title']),
+                      Text(
+                        doc.data['Title'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Qanelas'
+                        )
+                        ),
                       // SizedBox(
                       //   height: 20,
                       // ),
@@ -102,12 +118,6 @@ class SponsorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colors = {
-      "background": 0xff181a1b,
-      "backgroundLite": 0xff575757,
-      "appbar": 0xff000000,
-      "appbarText": 0xffd4d4d4
-    };
     return Scaffold(
       backgroundColor: Color(colors['background']),
       body: NestedScrollView(
