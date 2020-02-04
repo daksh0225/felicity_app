@@ -37,13 +37,13 @@ class _EventsState extends State<EventsPage> {
   Widget _appBarTitle = Text(
     "Events",
     style: TextStyle(
-      fontFamily: 'Qanelas',
+        fontFamily: 'Qanelas',
         // fontSize: 25,
         fontWeight: FontWeight.bold,
         color: Color(colors["appbarText"])
         // color: Colors.white
-      ),
-    );
+        ),
+  );
   Icon _searchIcon = Icon(Icons.search);
   _EventsState() {
     _filter.addListener(() {
@@ -88,9 +88,7 @@ class _EventsState extends State<EventsPage> {
 
   void addEvent(DocumentSnapshot document, var day) {
     List<DocumentReference> arr1 = [
-      Firestore.instance
-          .collection('test')
-          .document(document.documentID)
+      Firestore.instance.collection('test').document(document.documentID)
     ];
     List<DocumentReference> arr = [
       Firestore.instance.collection('users').document(email)
@@ -105,7 +103,7 @@ class _EventsState extends State<EventsPage> {
         .document(email)
         .updateData({"reg_events": FieldValue.arrayUnion(arr1)});
   }
-  
+
   Widget test(int day) {
     builder(int index, DocumentSnapshot document) {
       print(document['Date'].toDate().day);
@@ -155,11 +153,15 @@ class _EventsState extends State<EventsPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Image(
-                                  height: 150,
-                                  width: MediaQuery.of(context).size.width,
-                                  image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/standup.jpg'),
-                                  fit: document['Name'] == 'asda' ? BoxFit.fill: BoxFit.fill
-                                ),
+                                    height: 150,
+                                    width: MediaQuery.of(context).size.width,
+                                    image: document['Name'] == 'asda'
+                                        ? NetworkImage(
+                                            document['Image Poster Link'])
+                                        : AssetImage('assets/standup.jpg'),
+                                    fit: document['Name'] == 'asda'
+                                        ? BoxFit.fill
+                                        : BoxFit.fill),
                                 SizedBox(
                                   height: 30,
                                 ),
@@ -248,10 +250,15 @@ class _EventsState extends State<EventsPage> {
       );
       // }
     }
-    var date1 = DateTime.parse("2020-02-0"+day.toString()+" 23:59:59");
-    var date2 = DateTime.parse("2020-02-0"+(day).toString()+" 00:00:01");
+
+    var date1 = DateTime.parse("2020-02-0" + day.toString() + " 23:59:59");
+    var date2 = DateTime.parse("2020-02-0" + (day).toString() + " 00:00:01");
     return StreamBuilder(
-        stream: Firestore.instance.collection('test').where('Date', isLessThan: date1).where('Date', isGreaterThan: date2).snapshots(),
+        stream: Firestore.instance
+            .collection('test')
+            .where('Date', isLessThan: date1)
+            .where('Date', isGreaterThan: date2)
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             // return Text("Loading..");
@@ -284,12 +291,11 @@ class _EventsState extends State<EventsPage> {
             }
             return Center(
               child: new Container(
-                decoration: BoxDecoration(
-                  color: Colors.purple  
+                decoration: BoxDecoration(color: Colors.purple
                     // image: DecorationImage(
                     //     image: AssetImage('assets/QuizActivity.png'),
                     //     fit: BoxFit.cover)
-                ),
+                    ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -299,22 +305,21 @@ class _EventsState extends State<EventsPage> {
                     controller: controller,
                     itemCount: templist.length,
                     itemBuilder: (context, index) {
-                      if(templist[index].data['Date'].toDate().day == day){
+                      if (templist[index].data['Date'].toDate().day == day) {
                         return builder(index, templist[index]);
                       }
-                    }
-                  ),
+                    }),
               ),
             );
           } else {
             return Center(
               child: new Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 200, 50, 100)
-                    // image: DecorationImage(
-                    //     image: AssetImage('assets/QuizActivity.png'),
-                    //     fit: BoxFit.cover)
-                ),
+                decoration:
+                    BoxDecoration(color: Color.fromARGB(255, 200, 50, 100)
+                        // image: DecorationImage(
+                        //     image: AssetImage('assets/QuizActivity.png'),
+                        //     fit: BoxFit.cover)
+                        ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -325,10 +330,9 @@ class _EventsState extends State<EventsPage> {
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (context, index) {
                       // if(snapshot.data.documents[index].data['Date'].toDate().day == day){
-                        return builder(index, snapshot.data.documents[index]);
+                      return builder(index, snapshot.data.documents[index]);
                       // }
-                    }
-                  ),
+                    }),
               ),
             );
           }
@@ -367,29 +371,14 @@ class _EventsState extends State<EventsPage> {
               indicatorSize: TabBarIndicatorSize.label,
               tabs: <Widget>[
                 Tab(
-                  child: Text(
-                    'Day 1',
-                    style: TextStyle(
-                      color: Color(colors['appbarText'])
-                    )
-                  )
-                ),
+                    child: Text('Day 1',
+                        style: TextStyle(color: Color(colors['appbarText'])))),
                 Tab(
-                  child: Text(
-                    'Day 2',
-                    style: TextStyle(
-                      color: Color(colors['appbarText'])
-                    )
-                  )
-                ),
+                    child: Text('Day 2',
+                        style: TextStyle(color: Color(colors['appbarText'])))),
                 Tab(
-                  child: Text(
-                    'Day 3',
-                    style: TextStyle(
-                      color: Color(colors['appbarText'])
-                    )
-                  )
-                ),
+                    child: Text('Day 3',
+                        style: TextStyle(color: Color(colors['appbarText'])))),
               ],
             )),
         SliverToBoxAdapter(
@@ -458,15 +447,14 @@ class _EventsState extends State<EventsPage> {
         this._appBarTitle = Text(
           "Events",
           style: TextStyle(
-              fontFamily: 'Qanelas',
-              // fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Color(colors["appbarText"]),
-            ),
+            fontFamily: 'Qanelas',
+            // fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Color(colors["appbarText"]),
+          ),
         );
         _filter.clear();
       }
     });
   }
 }
-
