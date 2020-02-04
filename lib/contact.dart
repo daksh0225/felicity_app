@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'my_flutter_app_icons.dart';
 
 class ContactPageRoute extends CupertinoPageRoute {
 	ContactPageRoute()
@@ -49,25 +50,6 @@ class _ContactState extends State<ContactPage> {
       child: Container(
       color: Color.fromARGB(100, 213, 223, 240),
       alignment: Alignment.center,
-      // child: Flex(
-      //   direction: Axis.vertical,
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   mainAxisSize: MainAxisSize.max,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: <Widget>[
-      //     Text('Our Co-ordinators'),
-      //     ListView.builder(
-      //       itemCount: 4,
-      //       // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      //       itemBuilder: (context, image){
-      //         return CircleAvatar(
-      //           backgroundImage: AssetImage('assets/person.jpg'),
-      //           radius: 45,
-      //         );
-      //       },
-      //     )
-      //   ],
-      // ),
       child: Column(
         // direction: Axis.vertical,
         // shrinkWrap: true,
@@ -351,199 +333,136 @@ class _ContactState extends State<ContactPage> {
               ),
             ],
           ),
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //   ),
-          //   color: Colors.grey,
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          //     child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     mainAxisSize: MainAxisSize.max,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: <Widget>[
-          //       CircleAvatar(
-          //         backgroundImage: AssetImage('assets/person.jpg'),
-          //         radius: 50,
-          //       ),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: <Widget>[
-          //           Text('Parth Goyal',
-          //           style: TextStyle(
-          //             fontSize: 25,
-          //             fontWeight: FontWeight.bold
-          //           ),),
-          //           Text("+91-7615023179",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //           Text("parth.goyal@research.iiit.ac.in",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          //   ),
-          // ),
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //   ),
-          //   color: Colors.grey,
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          //     child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     mainAxisSize: MainAxisSize.max,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: <Widget>[
-          //       CircleAvatar(
-          //         backgroundImage: AssetImage('assets/person.jpg'),
-          //         radius: 50,
-          //       ),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: <Widget>[
-          //           Text('Gayatri Purgilla',
-          //           style: TextStyle(
-          //             fontSize: 25,
-          //             fontWeight: FontWeight.bold
-          //           ),),
-          //           Text("+91-9700467692",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //           Text("gayatri.purigilla@research.iiit.ac.in",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          //   ),
-          // ),
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //   ),
-          //   color: Colors.grey,
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          //     child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     mainAxisSize: MainAxisSize.max,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: <Widget>[
-          //       CircleAvatar(
-          //         backgroundImage: AssetImage('assets/person.jpg'),
-          //         radius: 50,
-          //       ),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: <Widget>[
-          //           Text('Akanksha Agarwal',
-          //           style: TextStyle(
-          //             fontSize: 25,
-          //             fontWeight: FontWeight.bold
-          //           ),),
-          //           Text("+91-9560291750",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //           Text("akanksha.agarwal@students.iiit.ac.in",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          //   ),
-          // ),
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //   ),
-          //   color: Colors.grey,
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          //     child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     mainAxisSize: MainAxisSize.max,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: <Widget>[
-          //       CircleAvatar(
-          //         backgroundImage: AssetImage('assets/person.jpg'),
-          //         radius: 50,
-          //       ),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: <Widget>[
-          //           Text('Shashank Gadila',
-          //           style: TextStyle(
-          //             fontSize: 25,
-          //             fontWeight: FontWeight.bold
-          //           ),),
-          //           Text("+91-9121446782",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //           Text("shanshank.reddy@research.iiit.ac.in",
-          //           style: TextStyle(
-          //             fontSize: 12
-          //           ),),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          //   ),
-          // ),
+          SizedBox(
+                height: 20,
+              ),
+
+          SizedBox(
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width * 0.9,
+
+                child: Stack( children: <Widget>[
+                  Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+
+                        children: <Widget>[
+                          Text('App Developers',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Lobster'
+                          ),),
+                          Text("Daksh Rawat\nYoogotam Khandelwal\nMayank Musaddi",
+                          style: TextStyle(
+                            fontSize: 12
+                          ),),
+                        ],
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    image: DecorationImage(
+                    image: AssetImage("assets/teamphoto.jpeg"),
+                    fit: BoxFit.cover,
+                  ),
+                  boxShadow: [
+                        BoxShadow(
+                        color: Color.fromARGB(255, 213, 223, 240),
+                        blurRadius: 10,
+                        spreadRadius: 2
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.0),
+                        // Colors.grey.withOpacity(0.0),
+                        Colors.purpleAccent.withOpacity(0.5)
+                      ],
+                      stops: [0.0, 1],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter
+                    ),
+                  ),
+                ),
+                ])
+              ),
+          Row(children: <Widget>[
+            RaisedButton(
+            child: Icon(MyFlutterApp.facebook),
+            onPressed: _launchFacebookURL,
+          ),
           RaisedButton(
-            child: Icon(EvaIcons.facebook),
-            onPressed: _launchURL,
-          )
-        //   GridView.builder(
-        //   itemCount: 4,
-        //   shrinkWrap: true,
-        //   physics: ScrollPhysics(),
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        //   itemBuilder: (context, index){
-        //     return Image(
-        //       image: AssetImage('assets/person.jpg',),
-        //       // radius: 2,
-        //       // backgroundColor: Colors.transparent,
-        //     );
-        //     // return Image(
-        //     //   image: AssetImage('assets/person.jpg'),
-        //     //   fit: BoxFit.cover,
-        //     // );
-        //   },
-        // ),
+            child: Icon(MyFlutterApp.instagram),
+            onPressed: _launchInstagramURL,
+          ),
+          RaisedButton(
+            child: Icon(MyFlutterApp.twitter),
+            onPressed: _launchTwitterURL,
+          ),
+          RaisedButton(
+            child: Icon(MyFlutterApp.youtube_play),
+            onPressed: _launchYoutubeURL,
+          ),
+          ],)
       ],
     ),
     ),
 		),
    );
 	}
-  _launchURL() async {
+
+  _launchFacebookURL() async {
   const url = 'https://www.facebook.com/felicity.iiith/';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
     throw 'Could not launch $url';
   }
-}
+  }
+
+  _launchInstagramURL() async {
+  const url = 'https://www.facebook.com/felicity.iiith/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+  }
+
+  _launchTwitterURL() async {
+  const url = 'https://www.facebook.com/felicity.iiith/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+  }
+
+  _launchYoutubeURL() async {
+  const url = 'https://www.facebook.com/felicity.iiith/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+  }
+
 }

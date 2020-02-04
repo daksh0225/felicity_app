@@ -95,6 +95,9 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/LobsterTwo-Regular.ttf
+    - family:  MyFlutterApp
+      fonts:
+       - asset: fonts/MyFlutterApp.ttf
     - family: Qanelas
       fonts:
         - asset: fonts/Qanelas-Bold.ttf
