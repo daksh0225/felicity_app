@@ -198,7 +198,7 @@ class _HomeView extends State<HomeView> {
                 if (!snapshot.hasData) {
                   return Center(
                     child: SpinKitCubeGrid(
-                      color: Colors.black,
+                      color: Colors.white,
                       size: 25.0,
                     ),
                   );

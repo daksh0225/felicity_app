@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'imageholder.dart';
@@ -39,7 +40,7 @@ class GalleryPage extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.waiting){
                
                return Center(
-                 child: Text("Loading..."),
+                 child: SpinKitCubeGrid(color: Colors.white, size: 25),
                );
               }
         else{
