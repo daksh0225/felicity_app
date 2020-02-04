@@ -38,25 +38,39 @@ class _HomeView extends State<HomeView> {
 
     builder(int index, DocumentSnapshot document) {
       print(index);
-      print(document.data['date']);
-      if (index == 0) {
-        date = document.data['date'];
-      }
+      print(document.data['Date']);
+      if (index == 0 || index == 1) {
       // print(document.data['date'].toDate().toString()+'hello');
-      if (document.data['date'] == date) {
+      // if (document.data['date'] == date) {
         // print('hello'+ document['name']);
         // date = document.data['date'];
-        return SizedBox(
-          height: 300,
-          width: MediaQuery.of(context).size.width * 0.7,
+        return Container(
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          child: Stack(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20))
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: Image(
+                  width: MediaQuery.of(context).size.width*0.7,
+                  height: MediaQuery.of(context).size.height*0.3,
+                  image: NetworkImage(document.data['Image Poster Link'])
+                )
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.7,
           child: Container(
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            // margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.6),
+              borderRadius: BorderRadius.all(Radius.circular(20))
               // color: Colors.blue,
-              image: DecorationImage(
-                  image: AssetImage('assets/tlt.jpg'), fit: BoxFit.cover),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             child: Flex(
               direction: Axis.vertical,
@@ -65,52 +79,76 @@ class _HomeView extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  document.data['name'],
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  document.data['Name'],
+                  style: TextStyle(
+                    fontSize: 25, 
+                    color: Colors.white,
+                    fontFamily: 'Qanelas'
+                  ),
                 ),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                Icon(
+                  EvaIcons.pin,
+                  color: Colors.red,
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  document.data['Venue'],
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
+                  ],
+                ),
+                SizedBox(height: 10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Icon(
-                      EvaIcons.pin,
-                      color: Colors.red,
+                      EvaIcons.calendar,
+                      color: Colors.amber,
                     ),
-                  // SizedBox(width: 30,),
-                  // Icon(EvaIcons.clockOutline,
-                  //   // color: Color(0xff50B1FB),
-                  //   color: Color.fromARGB(255, 255, 99, 144),
-                  // ),
-                  // Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
-                  //   style: TextStyle(
-                  //     color: Colors.white
-                  //   ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Icon(
-                      EvaIcons.clockOutline,
-                      color: Color.fromARGB(255, 255, 99, 144),
-                    ),
+                    SizedBox(width: 5,),
                     Text(
-                      DateFormat("HH:mm")
-                          .format(document.data['date'].toDate())
+                      DateFormat("dd/MM/yyyy")
+                          .format(document.data['Date'].toDate())
                           .toString(),
                       style: TextStyle(color: Colors.white),
                     ),
+                    SizedBox(width: 20,),
+                    Icon(
+                      EvaIcons.clockOutline,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(width: 5,),
+                    Text(
+                      DateFormat("HH:mm")
+                          .format(document.data['Date'].toDate())
+                          .toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),                  
                   ],
                 )
               ],
             ),
           ),
+        ),
+          ],
+          ),
         );
-      }
+      // }
       // else{
       //   return Container(
       //     child: Text('nothing to show'),
       //   );
-      // }
+      }
     }
     // print(DateTime.now().day);
 
@@ -118,34 +156,43 @@ class _HomeView extends State<HomeView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         // scrollDirection: Axis.vertical,
         children: <Widget>[
           // SizedBox(
           //   height: 20,
           // ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
-            child: Text(
-              'Upcoming Events',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xffff0000),
-              ),
+            margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Upcoming Events',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontFamily: 'Qanelas'
+                    // color: Color(0xffff0000),
+                  ),
+                ),
+                Icon(EvaIcons.arrowIosForward,
+                  color: Colors.white
+                )
+              ],
             ),
-          decoration: BoxDecoration(
-            // color: Color(0xff50B1FB), 
-            color: Color.fromARGB(255, 150, 7, 69),
-            // color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
+          // decoration: BoxDecoration(
+          //   // color: Color(0xff50B1FB), 
+          //   color: Color.fromARGB(255, 150, 7, 69),
+          //   // color: Colors.white,
+          //   borderRadius: BorderRadius.all(Radius.circular(10))
+          // ),
           // margin: EdgeInsets.fromLTRB(5, 5, 5, 20),
         ),
           StreamBuilder(
               stream: Firestore.instance
-                  .collection('events-d' + (day - 6).toString())
-                  .orderBy('date')
+                  .collection('test')
+                  .orderBy('Date')
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -161,11 +208,13 @@ class _HomeView extends State<HomeView> {
                 return Container(
                   height: 200,
                   margin: EdgeInsets.all(20),
-                  child: new ListView.builder(
+                  child: new Center(
+                    child:ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (context, index) =>
                         builder(index, snapshot.data.documents[index]),
+                  ),
                   ),
                 );
               }),
