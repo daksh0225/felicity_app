@@ -274,14 +274,36 @@ class _ContactState extends State<ContactPage> {
           SizedBox(
                 height: 20,
               ),
-              Text('App Developers',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 25,
-              fontFamily: 'Qanelas',
-              color: Color(colors['appbarText'])
-            ),
-          ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget> [
+                  Text('App Devel',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Qanelas',
+                    color: Color(colors['appbarText'])
+                  ),),
+                  IconButton(
+                    icon: Icon(EvaIcons.closeCircleOutline),
+                    color: Colors.white,
+                    iconSize: 15,
+                    padding: EdgeInsets.all(1),
+                    onPressed: _launchInstagramURL,
+                  ),
+                  Text('pers',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Qanelas',
+                    color: Color(colors['appbarText'])
+                  ),),
+                  ]
+              ),
+              
+
+
           SizedBox(
                 height: 20,
               ),

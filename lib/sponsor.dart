@@ -71,7 +71,14 @@ class SponsorPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(doc.data['Title']),
+                      Text(
+                        doc.data['Title'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Qanelas'
+                        )
+                        ),
                       // SizedBox(
                       //   height: 20,
                       // ),
