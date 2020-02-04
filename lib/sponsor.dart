@@ -7,6 +7,8 @@ import 'drawer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'imageholder.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+
 
 class SponsorPageRoute extends CupertinoPageRoute {
 	SponsorPageRoute()
@@ -100,12 +102,45 @@ class SponsorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = {
+      "background": 0xff181a1b,
+      "backgroundLite": 0xff575757,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sponsors'),
-      ),
-      body: Container(
-        child: makeSponsorsList(),
+      backgroundColor: Color(colors['background']),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              backgroundColor: Color(colors['appbar']),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
+              ),
+              expandedHeight: 125.0,
+              floating: false,
+              pinned: true,
+              leading: IconButton(
+                icon: Icon(EvaIcons.arrowIosBack),
+                onPressed: () => Navigator.pop(context),
+              ),
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Sponsors",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Qanelas',
+                        fontSize: 25.0,
+                      )),
+                ),
+            ),
+          ];
+        },
+
+        body: Container(
+          child: makeSponsorsList(),
+        ),
       ),
     );
   }
