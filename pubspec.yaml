@@ -38,6 +38,7 @@ dependencies:
   googleapis:
   googleapis_auth:
   carousel_slider: ^1.3.0
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
@@ -96,9 +97,9 @@ flutter:
         - asset: fonts/LobsterTwo-Regular.ttf
     - family: Qanelas
       fonts:
-        - asset: fonts/Qanelas-Heavy.ttf
-        - asset: fonts/Qanelas-ExtraBold.ttf
         - asset: fonts/Qanelas-Bold.ttf
+        - asset: fonts/Qanelas-ExtraBold.ttf
+        - asset: fonts/Qanelas-Heavy.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
