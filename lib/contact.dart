@@ -107,7 +107,7 @@ class _ContactState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/person.jpg'),
+                        backgroundImage: AssetImage('assets/parth.jpg'),
                         radius: 50,
                       ),
                       Column(
@@ -149,7 +149,15 @@ class _ContactState extends State<ContactPage> {
                   ),
                 ),
               ),
+                ],
+              ),
               SizedBox(
+                height: 20,
+              ),Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
                 // height: 200,
                 // width: 100,
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -162,7 +170,7 @@ class _ContactState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/person.jpg'),
+                        backgroundImage: AssetImage('assets/gayatri.jpg'),
                         radius: 50,
                       ),
                       Column(
@@ -205,14 +213,6 @@ class _ContactState extends State<ContactPage> {
                   ),
                 ),
               ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
               SizedBox(
                 // height: 200,
                 // width: 100,
@@ -226,62 +226,7 @@ class _ContactState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/person.jpg'),
-                        radius: 50,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Text('Akanksha Agarwal',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Qanelas'
-                          ),),
-                          Text("+91-9560291750",
-                          style: TextStyle(
-                            fontSize: 12
-                          ),),
-                          Text("akanksha.agarwal@students.iiit.ac.in",
-                          style: TextStyle(
-                            fontSize: 12
-                          ),),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // color: Colors.white,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    // color: Colors.white,
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(colors['backgroundLite']),
-                        Colors.blueGrey
-                      ],
-                      stops: [0.5, 1],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                // height: 200,
-                // width: 100,
-                height: MediaQuery.of(context).size.height * 0.4,
-                width: MediaQuery.of(context).size.width * 0.42,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/person.jpg'),
+                        backgroundImage: AssetImage('assets/shashank.jpg'),
                         radius: 50,
                       ),
                       Column(
@@ -329,6 +274,17 @@ class _ContactState extends State<ContactPage> {
           SizedBox(
                 height: 20,
               ),
+              Text('App Developers',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 25,
+              fontFamily: 'Qanelas',
+              color: Color(colors['appbarText'])
+            ),
+          ),
+          SizedBox(
+                height: 20,
+              ),
 
           SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -350,15 +306,16 @@ class _ContactState extends State<ContactPage> {
                         mainAxisSize: MainAxisSize.max,
 
                         children: <Widget>[
-                          Text('App Developers',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Qanelas'
-                          ),),
+                          // Text('App Developers',
+                          // style: TextStyle(
+                          //   fontSize: 20,
+                          //   fontWeight: FontWeight.bold,
+                          //   fontFamily: 'Qanelas'
+                          // ),),
                           Text("Daksh Rawat\nYoogottam Khandelwal\nMayank Musaddi",
                           style: TextStyle(
-                            fontSize: 12
+                            fontSize: 12,
+                            // fontWeight: FontWeight.bold,
                           ),),
                         ],
                       ),
@@ -440,7 +397,7 @@ class _ContactState extends State<ContactPage> {
   }
 
   _launchInstagramURL() async {
-  const url = 'https://www.facebook.com/felicity.iiith/';
+  const url = 'https://www.instagram.com/felicity.iiith/';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -449,7 +406,7 @@ class _ContactState extends State<ContactPage> {
   }
 
   _launchTwitterURL() async {
-  const url = 'https://www.facebook.com/felicity.iiith/';
+  const url = 'https://mobile.twitter.com/felicity_iiith';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -458,7 +415,7 @@ class _ContactState extends State<ContactPage> {
   }
 
   _launchYoutubeURL() async {
-  const url = 'https://www.facebook.com/felicity.iiith/';
+  const url = 'https://www.youtube.com/channel/UC_1vMv4Al_96QgYzkFjh99w?app=desktop';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
