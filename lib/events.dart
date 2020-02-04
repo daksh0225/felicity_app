@@ -29,11 +29,6 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsState extends State<EventsPage> {
-  static var colors = {
-    "background": 0xff181a1b,
-    "appbar": 0xff000000,
-    "appbarText": 0xffd4d4d4
-  };
   int _cIndex = 0;
   PageController controller;
   int currentpage = 0;
@@ -41,16 +36,14 @@ class _EventsState extends State<EventsPage> {
   String _searchText = "";
   Widget _appBarTitle = Text(
     "Events",
-    style: GoogleFonts.lato(
-      textStyle: TextStyle(
-      // fontFamily: 'Samarkan',
+    style: TextStyle(
+      fontFamily: 'Qanelas',
         // fontSize: 25,
         fontWeight: FontWeight.bold,
         color: Color(colors["appbarText"])
         // color: Colors.white
       ),
-    ),
-  );
+    );
   Icon _searchIcon = Icon(Icons.search);
   _EventsState() {
     _filter.addListener(() {
@@ -96,7 +89,7 @@ class _EventsState extends State<EventsPage> {
   void addEvent(DocumentSnapshot document, var day) {
     List<DocumentReference> arr1 = [
       Firestore.instance
-          .collection('events-d' + day)
+          .collection('test')
           .document(document.documentID)
     ];
     List<DocumentReference> arr = [
@@ -104,7 +97,7 @@ class _EventsState extends State<EventsPage> {
     ];
     print(document.documentID);
     Firestore.instance
-        .collection('events-d' + day)
+        .collection('test')
         .document(document.documentID)
         .updateData({"reg_users": FieldValue.arrayUnion(arr)});
     Firestore.instance
@@ -229,7 +222,7 @@ class _EventsState extends State<EventsPage> {
                                   // shape: ShapeBorder(),
                                   child: Icon(EvaIcons.plus),
                                   onPressed: () {
-                                    // addEvent(document, day);
+                                    addEvent(document, day);
                                     Scaffold.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -374,13 +367,28 @@ class _EventsState extends State<EventsPage> {
               indicatorSize: TabBarIndicatorSize.label,
               tabs: <Widget>[
                 Tab(
-                  text: 'Day 1',
+                  child: Text(
+                    'Day 1',
+                    style: TextStyle(
+                      color: Color(colors['appbarText'])
+                    )
+                  )
                 ),
                 Tab(
-                  text: 'Day 2',
+                  child: Text(
+                    'Day 2',
+                    style: TextStyle(
+                      color: Color(colors['appbarText'])
+                    )
+                  )
                 ),
                 Tab(
-                  text: 'Day 3',
+                  child: Text(
+                    'Day 3',
+                    style: TextStyle(
+                      color: Color(colors['appbarText'])
+                    )
+                  )
                 ),
               ],
             )),
@@ -449,14 +457,12 @@ class _EventsState extends State<EventsPage> {
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle = Text(
           "Events",
-          style: GoogleFonts.lato(
-            textStyle: TextStyle(
-              // fontFamily: 'Samarkan',
+          style: TextStyle(
+              fontFamily: 'Qanelas',
               // fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Color(colors["appbarText"]),
             ),
-          ),
         );
         _filter.clear();
       }

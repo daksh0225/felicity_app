@@ -24,9 +24,14 @@ import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'home_view.dart';
-// import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
 
+var colors = {
+  "background": 0xff181a1b,
+  "appbar": 0xff000000,
+  "appbarText": 0xffd4d4d4
+};
 var x = null;
 // void main() => runApp(MyApp());
 void main() {
@@ -154,11 +159,6 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var colors = {
-      "background": 0xff181a1b,
-      "appbar": 0xff000000,
-      "appbarText": 0xffd4d4d4
-    };
 
     Size size = MediaQuery.of(context).size * 0.85;
     print(_cIndex);
@@ -171,12 +171,11 @@ class _HomeState extends State<HomePage> {
           : AppBar(
               title: Text(
                 _appBarTitle[_cIndex],
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                style: TextStyle(
                     color: Color(colors["appbarText"]),
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Qanelas'
                   ),
-                ),
               ),
               iconTheme: IconThemeData(
                 color: Color(colors["appbarText"]),

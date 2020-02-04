@@ -55,10 +55,12 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(colors["background"]),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              backgroundColor: Color(colors["appbar"]),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
               ),
@@ -66,16 +68,18 @@ class GalleryPage extends StatelessWidget {
               floating: false,
               pinned: true,
               leading: IconButton(
-                icon: Icon(EvaIcons.arrowIosBack),
+                icon: Icon(EvaIcons.arrowIosBack,
+                  color: Color(colors["appbarText"]),
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text("Gallery",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color(colors["appbarText"]),
                         fontFamily: 'Qanelas',
-                        fontSize: 25.0,
+                        fontSize: 30.0,
                       )),
                   // background: Image.network(
                   //   "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
