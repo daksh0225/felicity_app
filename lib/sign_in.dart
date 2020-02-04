@@ -38,10 +38,10 @@ Future<String> signInWithGoogle(BuildContext context) async {
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
-  // Firestore.instance.collection('users').document(email).setData({
-  //     "Name": name,
-  //     "email": email,
-  //   });
+  Firestore.instance.collection('users').document(email).setData({
+      "Name": name,
+      "email": email,
+    });
   assert(user.email != null);
   assert(user.displayName != null);
   assert(user.photoUrl != null);
@@ -52,36 +52,36 @@ Future<String> signInWithGoogle(BuildContext context) async {
   return 'signInWithGoogle succeeded: $user';
 }
 
-Future<String> signUpWithGoogle() async {
-  // signOutGoogle();
+// Future<String> signUpWithGoogle() async {
+//   // signOutGoogle();
 
-  GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+//   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+//   final GoogleSignInAuthentication googleSignInAuthentication =
+//       await googleSignInAccount.authentication;
 
-  final AuthCredential credential = GoogleAuthProvider.getCredential(
-    accessToken: googleSignInAuthentication.accessToken,
-    idToken: googleSignInAuthentication.idToken,
-  );
-  FirebaseUser user = 
-  await _auth.signInWithCredential(credential);
+//   final AuthCredential credential = GoogleAuthProvider.getCredential(
+//     accessToken: googleSignInAuthentication.accessToken,
+//     idToken: googleSignInAuthentication.idToken,
+//   );
+//   FirebaseUser user = 
+//   await _auth.signInWithCredential(credential);
   
-  name = user.displayName;
-  email = user.email;
-  imageUrl = user.photoUrl;
-  Firestore.instance.collection('users').document(email).setData({
-    "Name": name,
-    "email": email,
-    }
-  );
-  assert(user.email != null);
-  assert(user.displayName != null);
-  assert(user.photoUrl != null);
-  assert(await user.getIdToken() != null);
-  final FirebaseUser currentUser = await _auth.currentUser();
-  assert(user.uid == currentUser.uid);
-  return 'signInWithGoogle succeeded: $user';
-}
+//   name = user.displayName;
+//   email = user.email;
+//   imageUrl = user.photoUrl;
+//   Firestore.instance.collection('users').document(email).setData({
+//     "Name": name,
+//     "email": email,
+//     }
+//   );
+//   assert(user.email != null);
+//   assert(user.displayName != null);
+//   assert(user.photoUrl != null);
+//   assert(await user.getIdToken() != null);
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   assert(user.uid == currentUser.uid);
+//   return 'signInWithGoogle succeeded: $user';
+// }
 
 void signOutGoogle() async{
   await googleSignIn.signOut();

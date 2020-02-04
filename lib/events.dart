@@ -109,6 +109,7 @@ class _EventsState extends State<EventsPage> {
       print(document['Date'].toDate().day);
       // if(document['Date'].toDate().day == day){
       //   print('hello');
+      print(document['POCs'][0]['Phone']);
       return new AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
@@ -137,8 +138,8 @@ class _EventsState extends State<EventsPage> {
                     height: MediaQuery.of(context).size.height * .7,
                     // width: MediaQuery.of(context).size.width * .9,
                     width: Curves.easeOut.transform(value) * 1000,
-                    child: Card(
-                      color: Colors.white,
+                    child: Container(
+                      // color: Colors.white,
                       child: Flex(
                         direction: Axis.vertical,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -152,23 +153,22 @@ class _EventsState extends State<EventsPage> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Image(
+                                ClipRRect(
+                                child: Image(
                                     height: 150,
                                     width: MediaQuery.of(context).size.width,
-                                    image: document['Name'] == 'asda'
-                                        ? NetworkImage(
-                                            document['Image Poster Link'])
-                                        : AssetImage('assets/standup.jpg'),
-                                    fit: document['Name'] == 'asda'
-                                        ? BoxFit.fill
-                                        : BoxFit.fill),
+                                    image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/standup.jpg'),
+                                    fit: document['Name'] == 'asda' ? BoxFit.fill: BoxFit.fill
+                                  ),
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                ),
                                 SizedBox(
                                   height: 30,
                                 ),
                                 Text(
                                   document['Name'],
                                   style: TextStyle(
-                                      fontFamily: 'Samarkan', fontSize: 30),
+                                      fontFamily: 'Qanelas', fontSize: 30),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -192,7 +192,7 @@ class _EventsState extends State<EventsPage> {
                                       width: 5,
                                     ),
                                     // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
-                                    Text(document['Date'].toDate().toString()),
+                                    Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
                                     SizedBox(
                                       width: 30,
                                     ),
@@ -205,6 +205,9 @@ class _EventsState extends State<EventsPage> {
                                     ),
                                     Text(document['Venue'])
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -233,13 +236,43 @@ class _EventsState extends State<EventsPage> {
                                       ),
                                     );
                                   },
-                                )
+                                ),
+                                SizedBox(height: 30,),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(width: 20,),
+                                    Text('POC: ',
+                                    ),
+                                    Text(document['POCs'][0]['Name'],
+                                    ),
+                                    SizedBox(width: 20,),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(width: 20,),
+                                    Text('Ph: ',
+                                    ),
+                                    // SizedBox(width: 20,),
+                                    Text(document['POCs'][0]['Phone'].toString()),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
                       margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Colors.grey
+                      ),
                     ),
                   ),
                 ),
@@ -291,8 +324,7 @@ class _EventsState extends State<EventsPage> {
             }
             return Center(
               child: new Container(
-                decoration: BoxDecoration(color: Colors.purple
-                    // image: DecorationImage(
+                decoration: BoxDecoration(color: Colors.purple  // image: DecorationImage(
                     //     image: AssetImage('assets/QuizActivity.png'),
                     //     fit: BoxFit.cover)
                     ),
@@ -348,7 +380,7 @@ class _EventsState extends State<EventsPage> {
         SliverAppBar(
             title: _appBarTitle,
             // title: Text('Events',
-            // style: TextStyle(color: Colors.white, fontFamily: 'Samarkan', fontSize: 25),),
+            // style: TextStyle(color: Colors.white, fontFamily: 'Qanelas', fontSize: 25),),
             pinned: true,
             floating: true,
             expandedHeight: 120,
