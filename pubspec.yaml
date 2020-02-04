@@ -94,6 +94,10 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/LobsterTwo-Regular.ttf
+
+    - family:  MyFlutterApp
+      fonts:
+       - asset: fonts/MyFlutterApp.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
