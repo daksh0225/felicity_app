@@ -77,16 +77,15 @@ class _HomeView extends State<HomeView> {
                       EvaIcons.pin,
                       color: Colors.red,
                     ),
-                  ),
-                  SizedBox(width: 30,),
-                  Icon(EvaIcons.clockOutline,
-                    // color: Color(0xff50B1FB),
-                    color: Color.fromARGB(255, 255, 99, 144),
-                  ),
-                  Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
-                    style: TextStyle(
-                      color: Colors.white
-                    ),
+                  // SizedBox(width: 30,),
+                  // Icon(EvaIcons.clockOutline,
+                  //   // color: Color(0xff50B1FB),
+                  //   color: Color.fromARGB(255, 255, 99, 144),
+                  // ),
+                  // Text(DateFormat("HH:mm").format(document.data['date'].toDate()).toString(),
+                  //   style: TextStyle(
+                  //     color: Colors.white
+                  //   ),
                     SizedBox(
                       width: 30,
                     ),
@@ -132,17 +131,16 @@ class _HomeView extends State<HomeView> {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
-                color: Color(0xffd4d4d4),
+                color: Color(0xffff0000),
               ),
             ),
-          ),
           decoration: BoxDecoration(
             // color: Color(0xff50B1FB), 
             color: Color.fromARGB(255, 150, 7, 69),
             // color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10))
           ),
-          margin: EdgeInsets.fromLTRB(5, 5, 5, 20),
+          // margin: EdgeInsets.fromLTRB(5, 5, 5, 20),
         ),
           StreamBuilder(
               stream: Firestore.instance

@@ -42,12 +42,8 @@ class _AboutState extends State<AboutPage> {
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Color.fromARGB(255, 242, 205, 203),
       ),
-     iconTheme: IconThemeData(
-       color: Colors.black
-     ),
      backgroundColor: Color.fromARGB(255, 0, 205, 203),
     //  backgroundColor: Color.fromARGB(255, 242, 205, 203),
-    ),
     resizeToAvoidBottomPadding: false,
     resizeToAvoidBottomInset: false,
 		  body: Container(
@@ -119,7 +115,6 @@ class _AboutState extends State<AboutPage> {
             //   stops: [0.2, 0.7]
             // )
             ),
-      ),
     );
   }
 }
