@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MapPageRoute extends CupertinoPageRoute {
   MapPageRoute() : super(builder: (BuildContext context) => new MapPage());
@@ -30,6 +31,7 @@ class _MapState extends State<MapPage> {
   static const LatLng _center = const LatLng(17.445109, 78.349782);
 
   void _onMapCreated(GoogleMapController controller) {
+    controller.setMapStyle(_mapStyle);
     _controller.complete(controller);
   }
 
@@ -58,6 +60,18 @@ class _MapState extends State<MapPage> {
       ),
     )
   };
+
+  String _mapStyle;
+
+  @override
+  void initState() {
+    super.initState();
+
+    rootBundle.loadString("config/googlemap-config.txt").then((string) {
+      _mapStyle = string;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //return Scaffold(
