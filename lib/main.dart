@@ -154,10 +154,17 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var colors = {
+      "background": 0xff181a1b,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
+
     Size size = MediaQuery.of(context).size * 0.85;
     print(_cIndex);
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 200, 50, 100),
+      backgroundColor:
+          Color(colors["background"]), //.fromARGB(255, 200, 50, 100),
       appBar: _cIndex == 1
           ? null
           : AppBar(
@@ -165,15 +172,15 @@ class _HomeState extends State<HomePage> {
                 _appBarTitle[_cIndex],
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
-                    color: Colors.black,
+                    color: Color(colors["appbarText"]),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               iconTheme: IconThemeData(
-                color: Colors.black,
+                color: Color(colors["appbarText"]),
               ),
-              backgroundColor: Color(0xff393e46),
+              backgroundColor: Color(colors["appbar"]),
             ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),
@@ -216,12 +223,15 @@ class _HomeState extends State<HomePage> {
         onTap: (index) {
           _incrementTab(index);
         },
-        backgroundColor: Color.fromARGB(255, 242, 205, 203),
-        selectedIconTheme: IconThemeData(color: Color.fromARGB(255, 79, 0, 36)),
-        unselectedIconTheme:
-            IconThemeData(color: Color.fromARGB(255, 168, 0, 65)),
-        selectedItemColor: Color.fromARGB(255, 79, 0, 36),
-        unselectedItemColor: Color.fromARGB(255, 168, 0, 65),
+        backgroundColor: Color(0xff000000), //.fromARGB(255, 242, 205, 203),
+        selectedIconTheme: IconThemeData(
+          color: Color.fromARGB(255, 168, 0, 65),
+        ),
+        unselectedIconTheme: IconThemeData(
+          color: Color.fromARGB(255, 127, 127, 127),
+        ),
+        selectedItemColor: Color.fromARGB(255, 255, 0, 0),
+        unselectedItemColor: Color.fromARGB(255, 127, 127, 127),
       ),
       // bottomNavigationBar: FancyBottomNavigation(
       //   tabs: [
