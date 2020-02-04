@@ -29,26 +29,46 @@ class ContactPage extends StatefulWidget {
 class _ContactState extends State<ContactPage> {
  @override
 	Widget build(BuildContext context) {
+    var colors = {
+      "background": 0xff181a1b,
+      "backgroundLite": 0xff575757,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
 	 return Scaffold(
-    appBar: AppBar(
-      title: Text('Contact',
-        style: TextStyle(
-          color: Colors.black,
-          fontFamily: 'Lobster',
-          // fontWeight: FontWeight.bold,
-          fontSize: 25
-        ),
-      ),
-      iconTheme: IconThemeData(
-        color: Colors.black
-      ),
-      backgroundColor: Colors.white,
-      brightness: Brightness.light,
-    ),
-    resizeToAvoidBottomPadding: false,
-		body: SingleChildScrollView(
+    backgroundColor: Color(colors['background']),
+    // resizeToAvoidBottomPadding: false,
+    body : NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              backgroundColor: Color(colors['appbar']),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
+              ),
+              expandedHeight: 125.0,
+              floating: false,
+              pinned: true,
+              leading: IconButton(
+                icon: Icon(EvaIcons.arrowIosBack),
+                onPressed: () => Navigator.pop(context),
+              ),
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Our Team",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Qanelas',
+                        fontSize: 25.0,
+                      )),
+                ),
+            ),
+          ];
+        },
+
+      body:  SingleChildScrollView(
+        
       child: Container(
-      color: Color.fromARGB(100, 213, 223, 240),
       alignment: Alignment.center,
       child: Column(
         // direction: Axis.vertical,
@@ -63,7 +83,8 @@ class _ContactState extends State<ContactPage> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 25,
-              fontFamily: 'Lobster'
+              fontFamily: 'Qanelas',
+              color: Color(colors['appbarText'])
             ),
           ),
           SizedBox(
@@ -98,7 +119,7 @@ class _ContactState extends State<ContactPage> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Lobster'
+                            fontFamily: 'Qanelas'
                           ),),
                           Text("+91-7615023179",
                           style: TextStyle(
@@ -118,20 +139,13 @@ class _ContactState extends State<ContactPage> {
                     // color: Colors.white,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white,
-                        Colors.greenAccent
+                        Color(colors['backgroundLite']),
+                        Colors.blueGrey
                       ],
                       stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter
                     ),
-                    boxShadow: [
-                        BoxShadow(
-                        color: Color.fromARGB(255, 213, 223, 240),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -160,7 +174,7 @@ class _ContactState extends State<ContactPage> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Lobster'
+                              fontFamily: 'Qanelas'
                             ),
                           ),
                           Text("+91-9700467692",
@@ -181,20 +195,13 @@ class _ContactState extends State<ContactPage> {
                     // color: Colors.green,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white,
-                        Colors.cyanAccent
+                        Color(colors['backgroundLite']),
+                        Colors.blueGrey
                       ],
                       stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter
                     ),
-                    boxShadow: [
-                        BoxShadow(
-                        color: Color.fromARGB(255, 213, 223, 240),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -231,7 +238,7 @@ class _ContactState extends State<ContactPage> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Lobster'
+                            fontFamily: 'Qanelas'
                           ),),
                           Text("+91-9560291750",
                           style: TextStyle(
@@ -251,20 +258,13 @@ class _ContactState extends State<ContactPage> {
                     // color: Colors.white,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white,
-                        Colors.purpleAccent
+                        Color(colors['backgroundLite']),
+                        Colors.blueGrey
                       ],
                       stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter
                     ),
-                    boxShadow: [
-                        BoxShadow(
-                        color: Color.fromARGB(255, 213, 223, 240),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -293,7 +293,7 @@ class _ContactState extends State<ContactPage> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Lobster'
+                              fontFamily: 'Qanelas'
                             ),
                           ),
                           Text("+91-9121446782",
@@ -314,20 +314,13 @@ class _ContactState extends State<ContactPage> {
                     // color: Colors.green,
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white,
-                        Colors.redAccent
+                        Color(colors['backgroundLite']),
+                        Colors.blueGrey
                       ],
                       stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter
                     ),
-                    boxShadow: [
-                        BoxShadow(
-                        color: Color.fromARGB(255, 213, 223, 240),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -361,9 +354,9 @@ class _ContactState extends State<ContactPage> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Lobster'
+                            fontFamily: 'Qanelas'
                           ),),
-                          Text("Daksh Rawat\nYoogotam Khandelwal\nMayank Musaddi",
+                          Text("Daksh Rawat\nYoogottam Khandelwal\nMayank Musaddi",
                           style: TextStyle(
                             fontSize: 12
                           ),),
@@ -377,13 +370,6 @@ class _ContactState extends State<ContactPage> {
                     image: AssetImage("assets/teamphoto.jpeg"),
                     fit: BoxFit.cover,
                   ),
-                  boxShadow: [
-                        BoxShadow(
-                        color: Color.fromARGB(255, 213, 223, 240),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
                   ),
                 ),
                 Container(
@@ -392,9 +378,9 @@ class _ContactState extends State<ContactPage> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white.withOpacity(0.0),
+                        Color(colors['backgroundLite']).withOpacity(0.0),
                         // Colors.grey.withOpacity(0.0),
-                        Colors.purpleAccent.withOpacity(0.5)
+                        Colors.deepPurple.withOpacity(0.5)
                       ],
                       stops: [0.0, 1],
                       begin: Alignment.topCenter,
@@ -404,28 +390,43 @@ class _ContactState extends State<ContactPage> {
                 ),
                 ])
               ),
-          Row(children: <Widget>[
-            RaisedButton(
+              SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+            FloatingActionButton(
+              heroTag: 1,
+            backgroundColor: Color(0xff3b5998),
             child: Icon(MyFlutterApp.facebook),
             onPressed: _launchFacebookURL,
           ),
-          RaisedButton(
+          FloatingActionButton(
+            heroTag: 2,
+            backgroundColor: Color(0xffdd2a7b),
             child: Icon(MyFlutterApp.instagram),
             onPressed: _launchInstagramURL,
           ),
-          RaisedButton(
+          FloatingActionButton(
+            heroTag: 3,
             child: Icon(MyFlutterApp.twitter),
             onPressed: _launchTwitterURL,
           ),
-          RaisedButton(
+          FloatingActionButton(
+            heroTag: 4,
+            backgroundColor: Colors.red,
             child: Icon(MyFlutterApp.youtube_play),
             onPressed: _launchYoutubeURL,
           ),
-          ],)
+          ],),
+          SizedBox(
+            height: 20,
+          ),
       ],
     ),
     ),
-		),
+		),)
    );
 	}
 

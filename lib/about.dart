@@ -25,28 +25,26 @@ class AboutPage extends StatefulWidget {
 class _AboutState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
+    var colors = {
+      "background": 0xff181a1b,
+      "backgroundLite": 0xff575757,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
     return Scaffold(
-      //  resizeToAvoidBottomPadding: false,
-      //  resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'About',
-          style: GoogleFonts.robotoSlab(
-            textStyle: TextStyle(
-              color: Colors.black,
-              // fontFamily: 'Samarkan',
+          style:  TextStyle(
+              color: Color(colors['appbarText']),
+              fontFamily: 'Qanelas',
               fontSize: 25,
-            ),
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Color.fromARGB(255, 242, 205, 203),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(colors['appbar']),
       ),
-     backgroundColor: Color.fromARGB(255, 0, 205, 203),
-    //  backgroundColor: Color.fromARGB(255, 242, 205, 203),
-    resizeToAvoidBottomPadding: false,
-    resizeToAvoidBottomInset: false,
-		  body: Container(
+      body: Container(
         child: SizedBox(
           // height: MediaQuery.of(context).size.height *2,
           width: MediaQuery.of(context).size.width,
@@ -58,8 +56,8 @@ class _AboutState extends State<AboutPage> {
             children: <Widget>[
               // Text('hello'),
               Image(
-                image: AssetImage('assets/felicity_logo.png'),
-                height: 120,
+                image: AssetImage('assets/felicity_logo_white.png'),
+                height: 100,
               ),
               // SizedBox(height: 20,),
               Container(
@@ -68,15 +66,13 @@ class _AboutState extends State<AboutPage> {
                     "Felicity is IIIT's annual culture and tech fest. Felicity encompasses and embraces the varied and diverse interests of IIIT with everyone playing a role. \n\n\tFrom nights of music and comedy to code craft and quizzes everybody can explore and engage in their interests.",
                     style: TextStyle(
                       fontSize: 20,
-                      // fontFamily: 'Samarkan',
-                      // fontWeight: FontWeight.w100,
-                      // color: Color.fromARGB(255, 153, 255, 230)
                       color: Colors.white,
+                      fontFamily: 'Qanelas'
                     ),
                     textAlign: TextAlign.left,
                 ),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 0, 205, 203),
+                  color: Color(colors['appbar']),
                   borderRadius: BorderRadius.all(Radius.circular(30))
                 ),
               ),
@@ -84,37 +80,15 @@ class _AboutState extends State<AboutPage> {
           ),
         ),
         padding: EdgeInsets.all(20),
-        // color: Colors.black,
-        // decoration: BoxDecoration(
-        // ),
         decoration: BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
-      colors: [const Color(0xFFFFFFEE), const Color(0xFF0e8781)], // whitish to gray
-      tileMode: TileMode.repeated, // repeats the gradient over the canvas
+        gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
+        colors: [Color(colors['background']), Color(colors['backgroundLite'])], // whitish to gray
+        tileMode: TileMode.repeated, // repeats the gradient over the canvas
+      ),
     ),
-  ),
-            // gradient: LinearGradient(
-            //   end: Alignment.topCenter,
-            //   begin: Alignment.bottomCenter,
-            //   colors: [
-            //     Colors.white,
-            //     Colors.black,
-            //   ],
-            //   stops: [0.02, 0.7]
-            // )
-            // gradient: RadialGradient(
-            //   center: Alignment(-0.5, -0.5),
-            //   colors: [
-            //     Colors.white,
-            //     Colors.black
-            //   ],
-            //   radius: 0.2,
-            //   focalRadius: 1.0,
-            //   stops: [0.2, 0.7]
-            // )
-            ),
+    ),
     );
   }
 }
