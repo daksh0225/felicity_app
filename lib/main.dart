@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+// import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +24,8 @@ import 'login.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'home_view.dart';
-import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
+// import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var x = null;
 // void main() => runApp(MyApp());
@@ -90,7 +91,7 @@ class _HomeState extends State<HomePage> {
 
   int _cIndex = 0;
   final List<Widget> _children = [HomeView(), EventsPage(), MapPage()];
-  final List<String> _appBarTitle = ["hey", "Events", "wow"];
+  final List<String> _appBarTitle = ["Home", "Events", "Map"];
 
   @override
   void initState() {
@@ -153,23 +154,33 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var colors = {
+      "background": 0xff181a1b,
+      "appbar": 0xff000000,
+      "appbarText": 0xffd4d4d4
+    };
+
     Size size = MediaQuery.of(context).size * 0.85;
     print(_cIndex);
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 200, 50, 100),
+      backgroundColor:
+          Color(colors["background"]), //.fromARGB(255, 200, 50, 100),
       appBar: _cIndex == 1
           ? null
           : AppBar(
               title: Text(
                 _appBarTitle[_cIndex],
-                style: TextStyle(
-                  color: Colors.black,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    color: Color(colors["appbarText"]),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               iconTheme: IconThemeData(
-                color: Colors.black,
+                color: Color(colors["appbarText"]),
               ),
-              backgroundColor: Color.fromARGB(255, 242, 205, 203),
+              backgroundColor: Color(colors["appbar"]),
             ),
       // appBar: SliverAppBar(
       //   title: Text('hello'),
@@ -212,15 +223,15 @@ class _HomeState extends State<HomePage> {
         onTap: (index) {
           _incrementTab(index);
         },
-        backgroundColor: Color.fromARGB(255, 242, 205, 203),
+        backgroundColor: Color(0xff000000), //.fromARGB(255, 242, 205, 203),
         selectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 79, 0, 36)
+          color: Color.fromARGB(255, 168, 0, 65),
         ),
         unselectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 168, 0, 65)
+          color: Color.fromARGB(255, 127, 127, 127),
         ),
-        selectedItemColor: Color.fromARGB(255, 79, 0, 36),
-        unselectedItemColor: Color.fromARGB(255, 168, 0, 65),
+        selectedItemColor: Color.fromARGB(255, 255, 0, 0),
+        unselectedItemColor: Color.fromARGB(255, 127, 127, 127),
       ),
       // bottomNavigationBar: FancyBottomNavigation(
       //   tabs: [
@@ -234,7 +245,6 @@ class _HomeState extends State<HomePage> {
       //     _incrementTab(index);
       //   }
       // )
-
     );
   }
 
