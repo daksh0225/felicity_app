@@ -148,6 +148,7 @@ class _ScheduleState extends State<SchedulePage> {
                                                 fontSize: 30,
                                                 color: Colors.white
                                             ),
+                                          ),
                                             Text(
                                               DateFormat("HH:mm:ss")
                                                   .format(snapshot.data['Date']
@@ -168,6 +169,7 @@ class _ScheduleState extends State<SchedulePage> {
                                             // Text(snapshot.data['Venue'])
                                           ],
                                         ),
+                                    ),
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -182,21 +184,18 @@ class _ScheduleState extends State<SchedulePage> {
                                       ],
                                     ),
                                   ),
+                          ),
+                        ),
                                 ],
                               ),
                               // margin:
                               //     const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
                               // ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
-                  ],
                 ),
                 ),
-                ),
-              );
+                );
             }
           });
     }

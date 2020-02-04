@@ -324,10 +324,10 @@ class _EventsState extends State<EventsPage> {
             }
             return Center(
               child: new Container(
-                decoration: BoxDecoration(color: Colors.purple  // image: DecorationImage(
-                    //     image: AssetImage('assets/QuizActivity.png'),
-                    //     fit: BoxFit.cover)
-                    ),
+                // decoration: BoxDecoration(color: Colors.purple  // image: DecorationImage(
+                //     //     image: AssetImage('assets/QuizActivity.png'),
+                //     //     fit: BoxFit.cover)
+                //     ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -346,12 +346,12 @@ class _EventsState extends State<EventsPage> {
           } else {
             return Center(
               child: new Container(
-                decoration:
-                    BoxDecoration(color: Color.fromARGB(255, 200, 50, 100)
-                        // image: DecorationImage(
-                        //     image: AssetImage('assets/QuizActivity.png'),
-                        //     fit: BoxFit.cover)
-                        ),
+                // decoration:
+                //     BoxDecoration(color: Color.fromARGB(255, 200, 50, 100)
+                //         // image: DecorationImage(
+                //         //     image: AssetImage('assets/QuizActivity.png'),
+                //         //     fit: BoxFit.cover)
+                //         ),
                 child: new PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
