@@ -126,7 +126,7 @@ class _HomeView extends State<HomeView> {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
-                color: Color(0xffff0000),
+                color: Color(0xffd4d4d4),
               ),
             ),
           ),
