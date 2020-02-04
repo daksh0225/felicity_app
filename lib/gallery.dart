@@ -62,7 +62,7 @@ class GalleryPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
               ),
-              expandedHeight: 150.0,
+              expandedHeight: 125.0,
               floating: false,
               pinned: true,
               leading: IconButton(
@@ -74,7 +74,8 @@ class GalleryPage extends StatelessWidget {
                   title: Text("Gallery",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20.0,
+                        fontFamily: 'Qanelas',
+                        fontSize: 25.0,
                       )),
                   // background: Image.network(
                   //   "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
@@ -90,57 +91,6 @@ class GalleryPage extends StatelessWidget {
         ),
       ),
     );
-    // return Scaffold(
-      
-    //   // appBar: PreferredSize(
-    //   //   preferredSize: Size(double.infinity, 150), // 44 is the height
-    //   //   child: AppBar(
-    //   //     // title: Text('Image Gallery',
-    //   //     //   // textAlign: TextAlign.end,
-    //   //     // ),
-    //   //     flexibleSpace: Text('hello',
-    //   //     textAlign: TextAlign.center,),
-    //   //   // bottom: Text('Image Gallery'),
-    //   //     leading: IconButton(
-    //   //       icon: Icon(EvaIcons.arrowIosBack),
-    //   //       onPressed: () => Navigator.pop(context),
-    //   //     ),
-    //   //     shape: RoundedRectangleBorder(
-    //   //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))
-    //   //     )
-    //   //   ),
-    //   // ),
-    //   body: CustomScrollView(
-    //     slivers: [
-    //       SliverAppBar(
-    //         // leading: IconButton(
-    //         //   icon: Icon(EvaIcons.arrowIosBack),
-    //         //   onPressed: () => Navigator.pop(context),
-    //         // ),
-    //         pinned: true,
-    //         expandedHeight: 200,
-    //         flexibleSpace: FlexibleSpaceBar(
-    //           titlePadding: EdgeInsets.zero,
-    //           centerTitle: true,
-    //           title: SizedBox(
-    //             height: 130,
-    //             child: Column(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: <Widget>[
-    //                 Text("Should be centered", textAlign: TextAlign.center),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-          // Container(
-          //     padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-          //     child: makeImagesGrid(),
-          //   ),
-    //       ],
-    //     ),
-    //   // body: Text('hello')
-    // );
   }
 }
 
