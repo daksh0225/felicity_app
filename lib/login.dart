@@ -45,13 +45,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/char minar 1.png'),
-            fit: BoxFit.fitHeight
-          )
-        ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage('assets/char minar 1.png'),
+        //     fit: BoxFit.fitHeight
+        //   )
+        // ),
         // color: Colors.white,
         child: Center(
           child: Column(
@@ -59,14 +60,8 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // FlutterLogo(size: 150),
-              Image(image: AssetImage("assets/felicity_logo.png"), height: 150.0,),
+              Image(image: AssetImage("assets/felicity_logo_white.png"), height: 150.0,),
               SizedBox(height: 50),
-              _signUpButton(),
-              SizedBox(height: 30),
-              Text(
-                'Already Registered?'
-              ),
-              SizedBox(height: 10),
               _signInButton(),
             ],
           ),
@@ -96,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.white),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -107,10 +102,10 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign In',
+                'Sign In with Google',
                 style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
+                  fontSize: 15,
+                  color: Colors.white,
                 ),
               ),
             )
@@ -119,46 +114,46 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  Widget _signUpButton() {
-    return OutlineButton(
-      splashColor: Colors.grey,
-      onPressed: () {
-        x = signUpWithGoogle().whenComplete(() {
-          // print(x);
-          if(x!=null){
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) {
-                  return HomePage();
-                },
-              ),
-            );
-          }
-        });
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 30.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Sign up with Google',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _signUpButton() {
+  //   return OutlineButton(
+  //     splashColor: Colors.grey,
+  //     onPressed: () {
+  //       x = signUpWithGoogle().whenComplete(() {
+  //         // print(x);
+  //         if(x!=null){
+  //           Navigator.of(context).pushReplacement(
+  //             MaterialPageRoute(
+  //               builder: (context) {
+  //                 return HomePage();
+  //               },
+  //             ),
+  //           );
+  //         }
+  //       });
+  //     },
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+  //     highlightElevation: 0,
+  //     borderSide: BorderSide(color: Colors.grey),
+  //     child: Padding(
+  //       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+  //       child: Row(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           Image(image: AssetImage("assets/google_logo.png"), height: 30.0),
+  //           Padding(
+  //             padding: const EdgeInsets.only(left: 10),
+  //             child: Text(
+  //               'Sign up with Google',
+  //               style: TextStyle(
+  //                 fontSize: 18,
+  //                 color: Colors.grey,
+  //               ),
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

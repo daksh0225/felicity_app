@@ -111,7 +111,7 @@ class _ScheduleState extends State<SchedulePage> {
                         Container(
                           // color: Colors.white,
                           decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.5),
+                            color: Colors.black.withOpacity(0.4),
                             borderRadius: BorderRadius.all(Radius.circular(20))
                           ),
                           child: Center(
@@ -276,7 +276,7 @@ class _ScheduleState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(colors["background"]),
+      backgroundColor: Color(colors["background"]),
       // appBar: AppBar(
       //   title: _appBarTitle,
       //   // pinned: true,
