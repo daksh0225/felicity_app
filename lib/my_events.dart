@@ -1,6 +1,7 @@
 import 'package:felicity_app/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:googleapis/plusdomains/v1.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -35,7 +36,7 @@ class _ScheduleState extends State<SchedulePage> {
   Widget _appBarTitle = Text(
     "Events",
     style: TextStyle(
-      fontFamily: 'Samarkan',
+      fontFamily: 'Qanelas',
       fontSize: 25,
       color: Colors.white,
     ),
@@ -69,20 +70,26 @@ class _ScheduleState extends State<SchedulePage> {
     builder(int index, DocumentReference document) {
       double value = 1.0;
       return FutureBuilder(
-        future: getDetails(document),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            //  return Center(
-            //    child: Text("Loading..."),
-            //  );
-            return Container();
-          } else {
-            return Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              child: Center(
-                child: Stack(
+          future: getDetails(document),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              //  return Center(
+              //    child: Text("Loading..."),
+              //  );
+              return Container();
+            } else {
+              // print(snapshot);
+              return Container(
+                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height*0.3,
+                  child:Stack(
                   children: <Widget>[
                     Container(
+                      alignment: Alignment.center,
+                      // height: MediaQuery.of(context).size.height * .3,
+                      // width: MediaQuery.of(context).size.width * .9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
@@ -91,10 +98,11 @@ class _ScheduleState extends State<SchedulePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         child: Image(
-                          image: NetworkImage(
-                            snapshot.data['Image Poster Link'],
-                          ),
-                        ),
+                          // height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width*0.9,
+                          image: NetworkImage(snapshot.data['Image Poster Link']),
+                          fit: BoxFit.fill,
+                        )
                       ),
                     ),
                     Flex(
@@ -106,79 +114,39 @@ class _ScheduleState extends State<SchedulePage> {
                         Container(
                           // color: Colors.white,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.6),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
+                            color: Colors.black.withOpacity(0.4),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
                           ),
                           child: Center(
                             child: new SizedBox(
                               // height: Curves.easeOut.transform(value) * 500,
                               height: MediaQuery.of(context).size.height * .3,
-                              width: MediaQuery.of(context).size.width * .9,
+                              width: MediaQuery.of(context).size.width*0.9 ,
                               // width: Curves.easeOut.transform(value) * 800,
                               // child: Card(
-                              child: Flex(
-                                direction: Axis.vertical,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Flex(
-                                      direction: Axis.vertical,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        // Image(
-                                        //   image: NetworkImage(
-                                        //       snapshot.data['Image Poster Link']),
-                                        // ),
-                                        Text(
-                                          snapshot.data['Name'],
-                                          style: TextStyle(
-                                              fontFamily: 'Samarkan',
-                                              fontSize: 30,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Flex(
-                                          direction: Axis.horizontal,
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              EvaIcons.pin,
-                                              color: Colors.red,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              DateFormat("dd/MM/yyyy")
-                                                  .format(snapshot.data['Date']
-                                                      .toDate())
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Icon(
-                                              Icons.schedule,
-                                              color: Colors.blue,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
+                                child: Flex(
+                                  direction: Axis.vertical,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Flex(
+                                        direction: Axis.vertical,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          // Image(
+                                          //   image: NetworkImage(
+                                          //       snapshot.data['Image Poster Link']),
+                                          // ),
+                                          Text(
+                                            snapshot.data['Name'],
+                                            style: TextStyle(
+                                                fontFamily: 'Qanelas',
+                                                fontSize: 30,
+                                                color: Colors.white
                                             ),
                                             Text(
                                               DateFormat("HH:mm:ss")
@@ -226,11 +194,11 @@ class _ScheduleState extends State<SchedulePage> {
                     ),
                   ],
                 ),
-              ),
-            );
-          }
-        },
-      );
+                ),
+                ),
+              );
+            }
+          });
     }
 
     return StreamBuilder(
@@ -298,7 +266,7 @@ class _ScheduleState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(colors["background"]),
+      backgroundColor: Color(colors["background"]),
       // appBar: AppBar(
       //   title: _appBarTitle,
       //   // pinned: true,
@@ -430,7 +398,7 @@ class _ScheduleState extends State<SchedulePage> {
         this._appBarTitle = Text(
           "Events",
           style: TextStyle(
-            fontFamily: 'Samarkan',
+            fontFamily: 'Qanelas',
             fontSize: 25,
             color: Colors.white,
           ),

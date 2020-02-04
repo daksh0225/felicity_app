@@ -106,6 +106,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(colors["background"]),
       body: GestureDetector(
         child: Center(
           child: Container(
@@ -176,6 +177,7 @@ class _ImageGridItemState extends State<ImageGridItem> {
           },
 
           child: Container(
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
             // padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),

@@ -28,6 +28,7 @@ import 'home_view.dart';
 // import 'package:bottom_personalized_dot_bar/bottom_personalized_dot_bar.dart';
 
 var colors = {
+  // "background": 0xff181a1b,
   "background": 0xff1e2020,
   "appbar": 0xff000000,
   "appbarText": 0xffd4d4d4,
@@ -165,9 +166,10 @@ class _HomeState extends State<HomePage> {
     Size size = MediaQuery.of(context).size * 0.85;
     print(_cIndex);
     return Scaffold(
-      // backgroundColor: Color(0xffEEF2FA),
       backgroundColor: Color(colors["background"]),
-      // backgroundColor: Color.fromARGB(255, 200, 50, 100),
+      // backgroundColor: Color(0xff1e2020),
+      // backgroundColor: Colors.white,
+      // backgroundColor: Color.fromARGB(255, 12, 13, 13),
       appBar: _cIndex == 1
           ? null
           : AppBar(
