@@ -285,13 +285,20 @@ class _ContactState extends State<ContactPage> {
                     fontFamily: 'Qanelas',
                     color: Color(colors['appbarText'])
                   ),),
-                  IconButton(
-                    icon: Icon(EvaIcons.closeCircleOutline),
-                    color: Colors.white,
-                    iconSize: 15,
-                    padding: EdgeInsets.all(1),
-                    onPressed: _launchInstagramURL,
-                  ),
+
+                  Container(
+                      width: 15,
+                      height: 10,
+                      child: new RawMaterialButton(
+                        shape: new CircleBorder(),
+                        elevation: 0.0,
+                        child: Icon(
+                          Icons.add_circle,
+                          color: Color(colors['appbarText']),
+                          size: 16,
+                         ),
+                      onPressed: _launchEasterURL
+                  ),),
                   Text('pers',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -438,6 +445,15 @@ class _ContactState extends State<ContactPage> {
 
   _launchYoutubeURL() async {
   const url = 'https://www.youtube.com/channel/UC_1vMv4Al_96QgYzkFjh99w?app=desktop';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+  }
+
+  _launchEasterURL() async {
+  const url = 'https://felicity.iiit.ac.in/app/easteregg';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
