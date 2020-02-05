@@ -131,7 +131,7 @@ class _ScheduleState extends State<SchedulePage> {
                                           Text(
                                             snapshot.data['Name'],
                                             style: TextStyle(
-                                                fontFamily: 'Samarkan',
+                                                fontFamily: 'Qanelas',
                                                 fontSize: 30,
                                                 color: Colors.white
                                             ),
@@ -185,12 +185,12 @@ class _ScheduleState extends State<SchedulePage> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          Text(snapshot.data['Description'],
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Colors.white,
-                                                  fontFamily: 'Sacramento')),
+                                          // Text(snapshot.data['Description'],
+                                          //     textAlign: TextAlign.center,
+                                          //     style: TextStyle(
+                                          //         fontSize: 25,
+                                          //         color: Colors.white,
+                                          //         fontFamily: 'Sacramento')),
                                         ],
                                       ),
                                     ),

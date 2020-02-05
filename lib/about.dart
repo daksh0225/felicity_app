@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'main.dart';
@@ -40,6 +41,10 @@ class _AboutState extends State<AboutPage> {
               fontFamily: 'Qanelas',
               fontSize: 25,
           ),
+        ),
+        leading: IconButton(
+          icon: Icon(EvaIcons.arrowIosBack),
+          onPressed: () => Navigator.pop(context),
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(colors['appbar']),

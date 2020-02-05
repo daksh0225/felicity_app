@@ -35,10 +35,10 @@ class _HomeView extends State<HomeView> {
 
   Widget upcoming(int day) {
     var date;
-
     builder(int index, DocumentSnapshot document) {
-      print(index);
-      print(document.data['Date']);
+      // print(index);
+      // print(document.data['Date'].toDate());
+      // print(DateTime.now());
       if (index == 0 || index == 1) {
       // print(document.data['date'].toDate().toString()+'hello');
       // if (document.data['date'] == date) {
@@ -192,7 +192,7 @@ class _HomeView extends State<HomeView> {
           StreamBuilder(
               stream: Firestore.instance
                   .collection('test')
-                  .orderBy('Date')
+                  .orderBy('Date').where('Date', isGreaterThan: DateTime.now())
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -204,7 +204,7 @@ class _HomeView extends State<HomeView> {
                   );
                 }
                 // print('hello');
-                print(snapshot.data.documents.length);
+                // print(snapshot.data.documents.length);
                 return Container(
                   height: 200,
                   margin: EdgeInsets.all(20),

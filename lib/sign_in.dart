@@ -38,10 +38,12 @@ Future<String> signInWithGoogle(BuildContext context) async {
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
-  Firestore.instance.collection('users').document(email).setData({
-      "Name": name,
-      "email": email,
-    });
+  if (Firestore.instance.collection('users').document(email) == null){
+    Firestore.instance.collection('users').document(email).setData({
+        "Name": name,
+        "email": email,
+      });
+  }
   assert(user.email != null);
   assert(user.displayName != null);
   assert(user.photoUrl != null);

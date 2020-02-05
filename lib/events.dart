@@ -7,6 +7,7 @@ import 'sign_in.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class EventsPageRoute extends CupertinoPageRoute {
@@ -106,10 +107,6 @@ class _EventsState extends State<EventsPage> {
 
   Widget test(int day) {
     builder(int index, DocumentSnapshot document) {
-      print(document['Date'].toDate().day);
-      // if(document['Date'].toDate().day == day){
-      //   print('hello');
-      print(document['POCs'][0]['Phone']);
       return new AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
@@ -135,7 +132,7 @@ class _EventsState extends State<EventsPage> {
                 Center(
                   child: new SizedBox(
                     // height: Curves.easeOut.transform(value) * 500,
-                    height: MediaQuery.of(context).size.height * .7,
+                    height: MediaQuery.of(context).size.height * .75,
                     // width: MediaQuery.of(context).size.width * .9,
                     width: Curves.easeOut.transform(value) * 1000,
                     child: Container(
@@ -213,11 +210,13 @@ class _EventsState extends State<EventsPage> {
                                   height: 10,
                                 ),
                                 Text(document['Description'],
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        color: Colors.black,
-                                        fontFamily: 'Sacramento')),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                    fontFamily: 'Qanelas'
+                                  )
+                                ),
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -227,6 +226,8 @@ class _EventsState extends State<EventsPage> {
                                   // shape: ShapeBorder(),
                                   child: Icon(EvaIcons.plus),
                                   onPressed: () {
+                                    FirebaseMessaging().subscribeToTopic(document['Name']);
+                                    FirebaseMessaging().requestNotificationPermissions();
                                     addEvent(document, day);
                                     Scaffold.of(context).showSnackBar(
                                       SnackBar(
@@ -245,8 +246,14 @@ class _EventsState extends State<EventsPage> {
                                   children: <Widget>[
                                     SizedBox(width: 20,),
                                     Text('POC: ',
+                                      style: TextStyle(
+                                        fontFamily: 'Qanelas'
+                                      ),
                                     ),
                                     Text(document['POCs'][0]['Name'],
+                                      // style: TextStyle(
+                                      //   fontFamily: 'Qanelas'
+                                      // ),
                                     ),
                                     SizedBox(width: 20,),
                                   ],
@@ -258,6 +265,9 @@ class _EventsState extends State<EventsPage> {
                                   children: <Widget>[
                                     SizedBox(width: 20,),
                                     Text('Ph: ',
+                                      style: TextStyle(
+                                        fontFamily: 'Qanelas'
+                                      ),
                                     ),
                                     // SizedBox(width: 20,),
                                     Text(document['POCs'][0]['Phone'].toString()),
@@ -271,7 +281,7 @@ class _EventsState extends State<EventsPage> {
                       margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.grey
+                        color: Colors.white54
                       ),
                     ),
                   ),

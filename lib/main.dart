@@ -35,6 +35,7 @@ var colors = {
   "bottomNavActive": 0xfffc0330,
   "bottomNavInActive": 0xff999999
 };
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 var x = null;
 // void main() => runApp(MyApp());
@@ -95,7 +96,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final List<Notification> notifications = [];
 
   int _cIndex = 0;
