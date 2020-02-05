@@ -31,8 +31,11 @@ var colors = {
   // "background": 0xff181a1b,
   "background": 0xff1e2020,
   "appbar": 0xff000000,
-  "appbarText": 0xffd4d4d4
+  "appbarText": 0xffd4d4d4,
+  "bottomNavActive": 0xfffc0330,
+  "bottomNavInActive": 0xff999999
 };
+
 var x = null;
 // void main() => runApp(MyApp());
 void main() {
@@ -225,15 +228,15 @@ class _HomeState extends State<HomePage> {
         onTap: (index) {
           _incrementTab(index);
         },
-        backgroundColor: Color(0xff000000), //.fromARGB(255, 242, 205, 203),
+        backgroundColor: Color(colors["appbar"]),
         selectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 168, 0, 65),
+          color: Color(colors["bottomNavActive"]),
         ),
         unselectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 127, 127, 127),
+          color: Color(colors["bottomNavInActive"]),
         ),
-        selectedItemColor: Color.fromARGB(255, 255, 0, 0),
-        unselectedItemColor: Color.fromARGB(255, 127, 127, 127),
+        selectedItemColor: Color(colors["bottomNavActive"]),
+        unselectedItemColor: Color(colors["bottomNavInActive"]),
       ),
       // bottomNavigationBar: FancyBottomNavigation(
       //   tabs: [
