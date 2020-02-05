@@ -1,14 +1,12 @@
 import 'package:felicity_app/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:googleapis/plusdomains/v1.dart';
 import 'main.dart';
 import 'drawer.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SchedulePageRoute extends CupertinoPageRoute {
   SchedulePageRoute()
@@ -36,7 +34,7 @@ class _ScheduleState extends State<SchedulePage> {
   Widget _appBarTitle = Text(
     "Events",
     style: TextStyle(
-      fontFamily: 'Qanelas',
+      fontFamily: 'Samarkan',
       fontSize: 25,
       color: Colors.white,
     ),
@@ -82,26 +80,16 @@ class _ScheduleState extends State<SchedulePage> {
               return Container(
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height*0.3,
-                  child:Stack(
+                child: Stack(
                   children: <Widget>[
                     Container(
-                      alignment: Alignment.center,
-                      // height: MediaQuery.of(context).size.height * .3,
-                      // width: MediaQuery.of(context).size.width * .9,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20))
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         child: Image(
-                          // height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width*0.9,
-                          image: NetworkImage(snapshot.data['Image Poster Link']),
-                          fit: BoxFit.fill,
+                          image: NetworkImage(snapshot.data['Image Poster Link'])
                         )
                       ),
                     ),
@@ -114,20 +102,19 @@ class _ScheduleState extends State<SchedulePage> {
                         Container(
                           // color: Colors.white,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.4),
+                            color: Colors.black.withOpacity(0.6),
                             borderRadius: BorderRadius.all(Radius.circular(20))
                           ),
                           child: Center(
                             child: new SizedBox(
                               // height: Curves.easeOut.transform(value) * 500,
                               height: MediaQuery.of(context).size.height * .3,
-                              width: MediaQuery.of(context).size.width*0.9 ,
+                              width: MediaQuery.of(context).size.width * .9,
                               // width: Curves.easeOut.transform(value) * 800,
                               // child: Card(
                                 child: Flex(
                                   direction: Axis.vertical,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: <Widget>[
                                     Container(
                                       padding: EdgeInsets.all(10.0),
@@ -144,58 +131,83 @@ class _ScheduleState extends State<SchedulePage> {
                                           Text(
                                             snapshot.data['Name'],
                                             style: TextStyle(
-                                                fontFamily: 'Qanelas',
+                                                fontFamily: 'Samarkan',
                                                 fontSize: 30,
                                                 color: Colors.white
                                             ),
                                           ),
-                                            Text(
-                                              DateFormat("HH:mm:ss")
-                                                  .format(snapshot.data['Date']
-                                                      .toDate())
-                                                  .toString(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Flex(
+                                            direction: Axis.horizontal,
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(EvaIcons.pin,
+                                              color: Colors.red),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(DateFormat("dd/MM/yyyy").format(snapshot.data['Date'].toDate()).toString(),
+                                                style: TextStyle(
+                                                  color: Colors.white
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 30,
+                                              ),
+                                              Icon(Icons.schedule,
+                                              color: Colors.blue,),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(DateFormat("HH:mm:ss").format(snapshot.data['Date'].toDate()).toString(),
+                                                style: TextStyle(
+                                                  color: Colors.white
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 30,
+                                              ),
+                                              // Icon(EvaIcons.pin,
+                                              // color: Colors.red,
+                                              // ),
+                                              // SizedBox(
+                                              //   width: 5,
+                                              // ),
+                                              // Text(snapshot.data['Venue'])
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(snapshot.data['Description'],
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            // Icon(EvaIcons.pin,
-                                            // color: Colors.red,
-                                            // ),
-                                            // SizedBox(
-                                            //   width: 5,
-                                            // ),
-                                            // Text(snapshot.data['Venue'])
-                                          ],
-                                        ),
+                                                  fontSize: 25,
+                                                  color: Colors.white,
+                                                  fontFamily: 'Sacramento')),
+                                        ],
+                                      ),
                                     ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          snapshot.data['Description'],
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              color: Colors.white,
-                                              fontFamily: 'Sacramento'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  ],
+                                ),
+                                // margin:
+                                //     const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+                              // ),
+                            ),
                           ),
                         ),
-                                ],
-                              ),
-                              // margin:
-                              //     const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-                              // ),
                       ],
                     ),
+                  ],
                 ),
                 ),
-                );
+              );
             }
           });
     }
@@ -211,12 +223,25 @@ class _ScheduleState extends State<SchedulePage> {
           // print(snapshot.data);
           if (snapshot.hasData) {
             regEvent = snapshot.data['reg_events'];
+            if (regEvent == null) {
+            return Center(
+              child: Text(
+                "Such empty much wow :((",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontFamily: "Qanelas",
+                  color: Colors.white
+                ),
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
           }
           if (!snapshot.hasData) {
             // return Text("Loading..");
             return Center(
               child: SpinKitCubeGrid(
-                color: Colors.black,
+                color: Colors.white,
                 size: 25.0,
               ),
             );
@@ -233,18 +258,6 @@ class _ScheduleState extends State<SchedulePage> {
           //       child: Text('Nothing here :('),
           //     );
           //   }
-          if (regEvent.length == 0) {
-            return Center(
-              child: Text(
-                "Such empty much wow",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontFamily: "Qanelas",
-                ),
-                textAlign: TextAlign.center,
-              ),
-            );
-          }
           return Center(
             child: new Container(
               child: new ListView.builder(
@@ -331,33 +344,30 @@ class _ScheduleState extends State<SchedulePage> {
             SliverAppBar(
               backgroundColor: Color(colors["appbar"]),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(20),
-                ),
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
               ),
               expandedHeight: 125.0,
               floating: false,
               pinned: true,
               leading: IconButton(
-                icon: Icon(
-                  EvaIcons.arrowIosBack,
+                icon: Icon(EvaIcons.arrowIosBack,
                   color: Color(colors["appbarText"]),
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
               flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text("My Events",
-                    style: TextStyle(
-                      color: Color(colors["appbarText"]),
-                      fontFamily: 'Qanelas',
-                      fontSize: 30.0,
-                    )),
-                // background: Image.network(
-                //   "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
-                //   fit: BoxFit.cover,
-                // )
-              ),
+                  centerTitle: true,
+                  title: Text("My Events",
+                      style: TextStyle(
+                        color: Color(colors["appbarText"]),
+                        fontFamily: 'Qanelas',
+                        fontSize: 30.0,
+                      )),
+                  // background: Image.network(
+                  //   "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                  //   fit: BoxFit.cover,
+                  // )
+                ),
             ),
           ];
         },
@@ -397,7 +407,7 @@ class _ScheduleState extends State<SchedulePage> {
         this._appBarTitle = Text(
           "Events",
           style: TextStyle(
-            fontFamily: 'Qanelas',
+            fontFamily: 'Samarkan',
             fontSize: 25,
             color: Colors.white,
           ),
@@ -407,3 +417,4 @@ class _ScheduleState extends State<SchedulePage> {
     });
   }
 }
+

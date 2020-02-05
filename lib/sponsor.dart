@@ -44,7 +44,7 @@ class SponsorPage extends StatelessWidget {
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
                 return Center(
-                  child: Text("Loading..."),
+                  // child: Text("Loading..."),
                 );
                 }
           else{
@@ -90,7 +90,7 @@ class SponsorPage extends StatelessWidget {
       builder: (context, snapshot){
         if(!snapshot.hasData){
           return Center(
-            child: SpinKitCubeGrid(color: Colors.black,
+            child: SpinKitCubeGrid(color: Colors.white,
             size: 25.0,),
           );
         }

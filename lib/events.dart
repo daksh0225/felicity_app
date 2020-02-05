@@ -297,7 +297,7 @@ class _EventsState extends State<EventsPage> {
             // return Text("Loading..");
             return Center(
               child: SpinKitCubeGrid(
-                color: Colors.black,
+                color: Colors.white,
                 size: 25.0,
               ),
             );
