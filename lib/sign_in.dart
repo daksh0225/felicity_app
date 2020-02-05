@@ -38,7 +38,13 @@ Future<String> signInWithGoogle(BuildContext context) async {
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
-  if (Firestore.instance.collection('users').document(email) == null){
+  // DocumentReference a = await Firestore.instance.collection('users').document(email);
+  // print(a.documentID);
+  // if (a.length==0){
+  // if (Firestore.instance.collection('users').document(email) == null){
+  final sn = await Firestore.instance.collection('users').document(email).get();
+  print(sn.exists);
+  if(sn == null || !sn.exists ){
     Firestore.instance.collection('users').document(email).setData({
         "Name": name,
         "email": email,
