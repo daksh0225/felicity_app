@@ -2,8 +2,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'main.dart';
-import 'drawer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'imageholder.dart';
@@ -38,7 +36,6 @@ class SponsorPage extends StatelessWidget {
       await doc.get().then((d){
         data = d.data;
       });
-      print(data);
       return data;
     }
     builder(int index, DocumentSnapshot doc){
@@ -59,11 +56,9 @@ class SponsorPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height*0.35,
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 decoration: BoxDecoration(
-              color: Color(colors['backgroundLite']),
-                  // color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))
+                color: Color(colors['backgroundLite']),
+                borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
-                // width: MediaQuery.of(context).size.width * 0.7,
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Column(
@@ -73,15 +68,13 @@ class SponsorPage extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         doc.data['Title'],
+                        // index.toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontFamily: 'Qanelas'
                         )
                         ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
                       SponsorItem(index+1)
                     ],
                   ),
@@ -104,13 +97,6 @@ class SponsorPage extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => builder(index, snapshot.data.documents[index]),
-          // Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.max,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // children: <Widget>[
-
-          // ],
         );
       },
     );
@@ -173,19 +159,20 @@ class _SponsorItemState extends State<SponsorItem> {
   StorageReference photosReference = FirebaseStorage.instance.ref().child("sponsors");
 
   getImage(){
-    if(!requestedSponsors.contains(widget._index)){
+    if(!sponsorImage.containsKey(widget._index)){
       int MAX_SIZE = 7*1024*1024;
       photosReference.child("image_${widget._index}.png").getData(MAX_SIZE).then((data){
-        this.setState((){
-          imageFile = data;
-        });
-        sponsorImage.putIfAbsent(widget._index, (){
-          return data;
-        });
+        if(mounted){
+          this.setState((){
+            imageFile = data;
+          });
+          sponsorImage.putIfAbsent(widget._index, (){
+            return data;
+          });
+        }
       }).catchError((error){
         debugPrint(error.toString());
       });
-      requestedSponsors.add(widget._index);
     }
   }
   Widget decideGridFileWidget(){
@@ -202,9 +189,11 @@ class _SponsorItemState extends State<SponsorItem> {
     if(!sponsorImage.containsKey(widget._index)){
       getImage();
     } else {
+      if(mounted){
       this.setState((){
         imageFile = sponsorImage[widget._index];
       });
+      }
     }
   }
   @override
