@@ -56,14 +56,14 @@ class DrawerWidget extends StatelessWidget {
                                 backgroundColor: Colors.transparent,
                               ),
                               decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 20.0,
-                                    spreadRadius: 5.0,
-                                    offset: Offset(0, 0),
-                                    color: Colors.white,
-                                  ),
-                                ],
+                                // boxShadow: [
+                              //     BoxShadow(
+                              //       blurRadius: 20.0,
+                              //       spreadRadius: 5.0,
+                              //       offset: Offset(0, 0),
+                              //       color: Colors.white,
+                              //     ),
+                              //   ],
                                 shape: BoxShape.circle,
                                 // borderRadius: BorderRadius.all(Radius.circular(20)),
                               ),

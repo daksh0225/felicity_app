@@ -32,10 +32,12 @@ class _HomeView extends State<HomeView> {
     // TODO: make this dynamic
     return Column(
       children:<Widget>[
+        SizedBox(height: MediaQuery.of(context).size.height*0.05),
         Image(
           image: AssetImage('assets/felicity_logo_white.png'),
           height: 100,
         ),
+        SizedBox(height: MediaQuery.of(context).size.height*0.05),
         // Text(
         //   'Embracing the Curry Culture',
         //   textAlign: TextAlign.center,

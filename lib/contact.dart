@@ -342,8 +342,10 @@ class _ContactState extends State<ContactPage> {
                           //   fontFamily: 'Qanelas'
                           // ),),
                           Text("Daksh Rawat\nYoogottam Khandelwal\nMayank Musaddi",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 12,
+                            fontFamily: 'Qanelas'
                             // fontWeight: FontWeight.bold,
                           ),),
                         ],
