@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.felicity_app"
+        applicationId "in.ac.iiit.felicity.app"
         minSdkVersion 16
         targetSdkVersion 28
         multiDexEnabled true
