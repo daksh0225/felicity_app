@@ -35,8 +35,7 @@ var colors = {
   "bottomNavActive": 0xfffc0330,
   "bottomNavInActive": 0xff999999
 };
-final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-
+FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 var x = null;
 // void main() => runApp(MyApp());
 void main() {
@@ -54,7 +53,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final appTitle = 'Drawer Demo';
+  final appTitle = 'Felicity 2020';
 
   @override
   Widget build(BuildContext context) {

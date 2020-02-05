@@ -30,7 +30,25 @@ class _HomeView extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     // TODO: make this dynamic
-    return upcoming(7);
+    return Column(
+      children:<Widget>[
+        Image(
+          image: AssetImage('assets/felicity_logo_white.png'),
+          height: 100,
+        ),
+        // Text(
+        //   'Embracing the Curry Culture',
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     color: Colors.yellow,
+        //     fontFamily: 'Samarkan',
+        //     fontSize: 35,
+        //   ),
+        //   softWrap: true,
+        // ),
+        upcoming(7),
+      ],
+    );
   }
 
   Widget upcoming(int day) {
@@ -39,7 +57,7 @@ class _HomeView extends State<HomeView> {
       // print(index);
       // print(document.data['Date'].toDate());
       // print(DateTime.now());
-      if (index == 0 || index == 1) {
+      if (index < 5) {
       // print(document.data['date'].toDate().toString()+'hello');
       // if (document.data['date'] == date) {
         // print('hello'+ document['name']);

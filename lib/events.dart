@@ -132,9 +132,9 @@ class _EventsState extends State<EventsPage> {
                 Center(
                   child: new SizedBox(
                     // height: Curves.easeOut.transform(value) * 500,
-                    height: MediaQuery.of(context).size.height * .75,
-                    // width: MediaQuery.of(context).size.width * .9,
-                    width: Curves.easeOut.transform(value) * 1000,
+                    // height: MediaQuery.of(context).size.height * .75,
+                    width: MediaQuery.of(context).size.width * .8,
+                    // width: Curves.easeOut.transform(value) * 1000,
                     child: Container(
                       // color: Colors.white,
                       child: Flex(
@@ -154,7 +154,7 @@ class _EventsState extends State<EventsPage> {
                                 child: Image(
                                     height: 150,
                                     width: MediaQuery.of(context).size.width,
-                                    image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/standup.jpg'),
+                                    image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/event_thumbnail.jpg'),
                                     fit: document['Name'] == 'asda' ? BoxFit.fill: BoxFit.fill
                                   ),
                                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -184,15 +184,51 @@ class _EventsState extends State<EventsPage> {
                                     // SizedBox(
                                     //   width: 30,
                                     // ),
-                                    Icon(Icons.schedule),
+                                    Icon(EvaIcons.clockOutline,
+                                    color: Colors.cyan,),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
-                                    Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
-                                    SizedBox(
-                                      width: 30,
+                                    Text(DateFormat("hh:mm").format(document['Date'].toDate()).toString(),
+                                      style: TextStyle(fontFamily: 'Qanelas'),
                                     ),
+                                    // SizedBox(
+                                    //   width: 30,
+                                    // ),
+                                    // Icon(
+                                    //   EvaIcons.pin,
+                                    //   color: Colors.red,
+                                    // ),
+                                    // SizedBox(
+                                    //   width: 5,
+                                    // ),
+                                    // Text(document['Venue'])
+                                  ],
+                                ),
+                                Flex(
+                                  direction: Axis.horizontal,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    // Icon(Icons.calendar_today),
+                                    // SizedBox(
+                                    //   width: 10,
+                                    // ),
+                                    // Text(DateFormat("dd-MM-yyyy").format(document['date'].toDate()).toString()),
+                                    // SizedBox(
+                                    //   width: 30,
+                                    // ),
+                                    // Icon(Icons.schedule),
+                                    // SizedBox(
+                                    //   width: 5,
+                                    // ),
+                                    // // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
+                                    // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
+                                    // SizedBox(
+                                    //   width: 30,
+                                    // ),
                                     Icon(
                                       EvaIcons.pin,
                                       color: Colors.red,
@@ -200,45 +236,14 @@ class _EventsState extends State<EventsPage> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text(document['Venue'])
+                                    Text(document['Venue'],
+                                      style: TextStyle(fontFamily: 'Qanelas'),
+                                    )
                                   ],
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(document['Description'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.white,
-                                    fontFamily: 'Qanelas'
-                                  )
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                FloatingActionButton(
-                                  backgroundColor: Colors.black,
-                                  heroTag: document['Name'],
-                                  // shape: ShapeBorder(),
-                                  child: Icon(EvaIcons.plus),
-                                  onPressed: () {
-                                    FirebaseMessaging().subscribeToTopic(document['Name']);
-                                    FirebaseMessaging().requestNotificationPermissions();
-                                    addEvent(document, day);
-                                    Scaffold.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            "You've registered for this event"),
-                                        duration: Duration(seconds: 2),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(height: 30,),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -251,9 +256,10 @@ class _EventsState extends State<EventsPage> {
                                       ),
                                     ),
                                     Text(document['POCs'][0]['Name'],
-                                      // style: TextStyle(
-                                      //   fontFamily: 'Qanelas'
-                                      // ),
+                                      style: TextStyle(
+                                        fontFamily: 'Qanelas',
+                                        color: Colors.blue[100]
+                                      ),
                                     ),
                                     SizedBox(width: 20,),
                                   ],
@@ -270,9 +276,47 @@ class _EventsState extends State<EventsPage> {
                                       ),
                                     ),
                                     // SizedBox(width: 20,),
-                                    Text(document['POCs'][0]['Phone'].toString()),
+                                    Text(document['POCs'][0]['Phone'].toString(),
+                                      style: TextStyle(
+                                        fontFamily : 'Qanelas',
+                                        color: Colors.blue[100]
+                                      ),
+                                    ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(document['Description'],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                    fontFamily: 'Qanelas'
+                                  )
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FloatingActionButton(
+                                  backgroundColor: Colors.black,
+                                  heroTag: document['Name'],
+                                  // shape: ShapeBorder(),
+                                  child: Icon(EvaIcons.plus),
+                                  onPressed: () {
+                                    FirebaseMessaging().subscribeToTopic(document['Name']);
+                                    // _firebaseMessaging.subscribeToTopic(document['Name']);
+                                    addEvent(document, day);
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "You've registered for this event"),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 10,),
                               ],
                             ),
                           ),
@@ -281,7 +325,7 @@ class _EventsState extends State<EventsPage> {
                       margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white54
+                        color: Colors.white38
                       ),
                     ),
                   ),
@@ -293,9 +337,16 @@ class _EventsState extends State<EventsPage> {
       );
       // }
     }
-
-    var date1 = DateTime.parse("2020-02-0" + day.toString() + " 23:59:59");
-    var date2 = DateTime.parse("2020-02-0" + (day).toString() + " 00:00:01");
+    var date1, date2;
+    if (day == 10)
+    {
+      date1 = DateTime.parse("2020-02-" + day.toString() + " 23:59:59");
+      date2 = DateTime.parse("2020-02-" + (day).toString() + " 00:00:01");
+    }
+    else{
+      date1 = DateTime.parse("2020-02-0" + day.toString() + " 23:59:59");
+      date2 = DateTime.parse("2020-02-0" + (day).toString() + " 00:00:01");
+    }
     return StreamBuilder(
         stream: Firestore.instance
             .collection('test')
@@ -323,12 +374,17 @@ class _EventsState extends State<EventsPage> {
             }
             if (templist.length == 0) {
               return Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/QuizActivity.png'),
-                        fit: BoxFit.cover)),
+                // decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //         image: AssetImage('assets/QuizActivity.png'),
+                //         fit: BoxFit.cover)),
                 child: Center(
-                  child: Text('Nothing here :('),
+                  child: Text('Nothing here :((',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Qanelas',
+                    fontSize: 25
+                  ),),
                 ),
               );
             }
@@ -385,7 +441,7 @@ class _EventsState extends State<EventsPage> {
   Widget build(BuildContext context) {
     // print(filteredNames[1]['name']);
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: CustomScrollView(slivers: [
         SliverAppBar(
             title: _appBarTitle,
@@ -421,6 +477,9 @@ class _EventsState extends State<EventsPage> {
                 Tab(
                     child: Text('Day 3',
                         style: TextStyle(color: Color(colors['appbarText'])))),
+                Tab(
+                    child: Text('All Days',
+                        style: TextStyle(color: Color(colors['appbarText'])))),
               ],
             )),
         SliverToBoxAdapter(
@@ -431,6 +490,7 @@ class _EventsState extends State<EventsPage> {
                 test(7),
                 test(8),
                 test(9),
+                test(10),
               ],
             ),
           ),
