@@ -200,7 +200,9 @@ class _EventsState extends State<EventsPage> {
                                     // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
                                     Text(
                                       DateFormat("HH:mm")
-                                          .format(document['Date'].toDate())
+                                          .format(document['Date']
+                                              .toDate()
+                                              .subtract(Duration(minutes: 330)))
                                           .toString(),
                                       style: TextStyle(fontFamily: 'Qanelas'),
                                     ),
