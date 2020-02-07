@@ -152,7 +152,7 @@ class _ScheduleState extends State<SchedulePage> {
                                               SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(DateFormat("dd/MM/yyyy").format(snapshot.data['Date'].toDate()).toString(),
+                                              Text(snapshot.data['Date'].toDate().hour < 5 ? DateFormat("dd/MM/yyyy").format(snapshot.data['Date'].toDate().subtract(Duration(days: 1))).toString() : DateFormat("dd/MM/yyyy").format(snapshot.data['Date'].toDate()).toString(),
                                                 style: TextStyle(
                                                   color: Colors.white
                                                 ),
@@ -165,7 +165,7 @@ class _ScheduleState extends State<SchedulePage> {
                                               SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(DateFormat("HH:mm:ss").format(snapshot.data['Date'].toDate()).toString(),
+                                              Text(DateFormat("HH:mm:ss").format(snapshot.data['Date'].toDate().subtract(Duration(minutes: 330))).toString(),
                                                 style: TextStyle(
                                                   color: Colors.white
                                                 ),

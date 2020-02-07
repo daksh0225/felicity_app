@@ -92,6 +92,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "727229792921-03nghkedlod4me681pq9ed2vibn2i9g1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ac.iiit.felicity.app",
+            "certificate_hash": "266a63fefb92a02635034684d269203dba31dc4d"
+          }
+        },
+        {
           "client_id": "727229792921-ookqv8q188r1cak92pak3j5006vs9sse.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

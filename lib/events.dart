@@ -199,6 +199,7 @@ class _EventsState extends State<EventsPage> {
                                     ),
                                     // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
                                     Text(
+                                      // document['Date'].toDate().day.toString(),
                                       DateFormat("HH:mm")
                                           .format(document['Date']
                                               .toDate()
@@ -358,17 +359,21 @@ class _EventsState extends State<EventsPage> {
 
     var date1, date2;
     if (day == 10) {
-      date1 = DateTime.parse("2020-02-" + day.toString() + " 23:59:59");
-      date2 = DateTime.parse("2020-02-" + (day).toString() + " 00:00:01");
-    } else {
-      date1 = DateTime.parse("2020-02-0" + day.toString() + " 23:59:59");
-      date2 = DateTime.parse("2020-02-0" + (day).toString() + " 00:00:01");
+      date1 = DateTime.parse("2020-02-" + day.toString() + " 05:31:59");
+      date2 = DateTime.parse("2020-02-" + (day+1).toString() + " 05:30:01");
+    } else if (day == 9){
+      date1 = DateTime.parse("2020-02-0" + day.toString() + " 05:31:59");
+      date2 = DateTime.parse("2020-02-0" + (day).toString() + " 23:59:59");
+    }
+    else {
+      date1 = DateTime.parse("2020-02-0" + day.toString() + " 05:31:59");
+      date2 = DateTime.parse("2020-02-0" + (day+1).toString() + " 05:30:01");
     }
     return StreamBuilder(
         stream: Firestore.instance
             .collection('test')
-            .where('Date', isLessThan: date1)
-            .where('Date', isGreaterThan: date2)
+            .where('Date', isLessThan: date2)
+            .where('Date', isGreaterThan: date1)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -421,8 +426,18 @@ class _EventsState extends State<EventsPage> {
                     controller: controller,
                     itemCount: templist.length,
                     itemBuilder: (context, index) {
-                      if (templist[index].data['Date'].toDate().day == day) {
-                        return builder(index, templist[index]);
+                      // print(templist[index].data['Date'].toDate().hour);
+                      if (templist[index].data['Date'].toDate().hour < 5 ){
+                        if (templist[index].data['Date'].toDate().subtract(Duration(days: 1)).day == day) {
+                          // print(templist[index].data['Date'].toDate().subtract(Duration(minutes: 330)).day);
+                          return builder(index, templist[index]);
+                        }
+                      }
+                      else{
+                        if (templist[index].data['Date'].toDate().subtract(Duration(minutes: 330)).day == day) {
+                          // print(templist[index].data['Date'].toDate().subtract(Duration(minutes: 330)).day);
+                          return builder(index, templist[index]);
+                        }
                       }
                     }),
               ),
@@ -445,7 +460,16 @@ class _EventsState extends State<EventsPage> {
                     controller: controller,
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (context, index) {
+                        print(snapshot.data.documents[index].data['Date'].toDate().subtract(Duration(days: 1)).day);
                       // if(snapshot.data.documents[index].data['Date'].toDate().day == day){
+                        if(snapshot.data.documents[index].data['Date'].toDate().hour < 5){
+                          print('hello');
+                          snapshot.data.documents[index].data['Date'].toDate().subtract(Duration(days: 1)).subtract(Duration(minutes: 330));
+                        print(snapshot.data.documents[index].data['Date'].toDate().subtract(Duration(days: 1)).hour);
+                        }
+                        else{
+                          snapshot.data.documents[index].data['Date'].toDate().subtract(Duration(minutes: 330));
+                        }
                       return builder(index, snapshot.data.documents[index]);
                       // }
                     }),

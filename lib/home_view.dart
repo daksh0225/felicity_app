@@ -150,7 +150,7 @@ class _HomeView extends State<HomeView> {
                     SizedBox(width: 5,),
                     Text(
                       DateFormat("HH:mm")
-                          .format(document.data['Date'].toDate())
+                          .format(document.data['Date'].toDate().subtract(Duration(minutes: 330)))
                           .toString(),
                       style: TextStyle(color: Colors.white),
                     ),                  
