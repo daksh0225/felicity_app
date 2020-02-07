@@ -151,13 +151,19 @@ class _EventsState extends State<EventsPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 ClipRRect(
-                                child: Image(
-                                    height: 150,
-                                    width: MediaQuery.of(context).size.width,
-                                    image: document['Name'] == 'asda' ? NetworkImage(document['Image Poster Link']) : AssetImage('assets/event_thumbnail.jpg'),
-                                    fit: document['Name'] == 'asda' ? BoxFit.fill: BoxFit.fill
-                                  ),
-                                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                  child: Image(
+                                      height: 150,
+                                      width: MediaQuery.of(context).size.width,
+                                      image: document['Name'] == 'asda'
+                                          ? NetworkImage(
+                                              document['Image Poster Link'])
+                                          : AssetImage(
+                                              'assets/event_thumbnail.jpg'),
+                                      fit: document['Name'] == 'asda'
+                                          ? BoxFit.fill
+                                          : BoxFit.fill),
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20)),
                                 ),
                                 SizedBox(
                                   height: 30,
@@ -184,13 +190,18 @@ class _EventsState extends State<EventsPage> {
                                     // SizedBox(
                                     //   width: 30,
                                     // ),
-                                    Icon(EvaIcons.clockOutline,
-                                    color: Colors.cyan,),
+                                    Icon(
+                                      EvaIcons.clockOutline,
+                                      color: Colors.cyan,
+                                    ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     // Text(DateFormat("hh:MM:ss").format(document['Date'].toDate()).toString()),
-                                    Text(DateFormat("hh:mm").format(document['Date'].toDate()).toString(),
+                                    Text(
+                                      DateFormat("HH:mm")
+                                          .format(document['Date'].toDate())
+                                          .toString(),
                                       style: TextStyle(fontFamily: 'Qanelas'),
                                     ),
                                     // SizedBox(
@@ -236,7 +247,8 @@ class _EventsState extends State<EventsPage> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text(document['Venue'],
+                                    Text(
+                                      document['Venue'],
                                       style: TextStyle(fontFamily: 'Qanelas'),
                                     )
                                   ],
@@ -249,19 +261,22 @@ class _EventsState extends State<EventsPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    SizedBox(width: 20,),
-                                    Text('POC: ',
-                                      style: TextStyle(
-                                        fontFamily: 'Qanelas'
-                                      ),
+                                    SizedBox(
+                                      width: 20,
                                     ),
-                                    Text(document['POCs'][0]['Name'],
-                                      style: TextStyle(
-                                        fontFamily: 'Qanelas',
-                                        color: Colors.blue[100]
-                                      ),
+                                    Text(
+                                      'POC: ',
+                                      style: TextStyle(fontFamily: 'Qanelas'),
                                     ),
-                                    SizedBox(width: 20,),
+                                    Text(
+                                      document['POCs'][0]['Name'],
+                                      style: TextStyle(
+                                          fontFamily: 'Qanelas',
+                                          color: Colors.blue[100]),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -269,18 +284,19 @@ class _EventsState extends State<EventsPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    SizedBox(width: 20,),
-                                    Text('Ph: ',
-                                      style: TextStyle(
-                                        fontFamily: 'Qanelas'
-                                      ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      'Ph: ',
+                                      style: TextStyle(fontFamily: 'Qanelas'),
                                     ),
                                     // SizedBox(width: 20,),
-                                    Text(document['POCs'][0]['Phone'].toString(),
+                                    Text(
+                                      document['POCs'][0]['Phone'].toString(),
                                       style: TextStyle(
-                                        fontFamily : 'Qanelas',
-                                        color: Colors.blue[100]
-                                      ),
+                                          fontFamily: 'Qanelas',
+                                          color: Colors.blue[100]),
                                     ),
                                   ],
                                 ),
@@ -288,13 +304,11 @@ class _EventsState extends State<EventsPage> {
                                   height: 10,
                                 ),
                                 Text(document['Description'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                    fontFamily: 'Qanelas'
-                                  )
-                                ),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                        fontFamily: 'Qanelas')),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -304,7 +318,8 @@ class _EventsState extends State<EventsPage> {
                                   // shape: ShapeBorder(),
                                   child: Icon(EvaIcons.plus),
                                   onPressed: () {
-                                    FirebaseMessaging().subscribeToTopic(document['Name']);
+                                    FirebaseMessaging()
+                                        .subscribeToTopic(document['Name']);
                                     // _firebaseMessaging.subscribeToTopic(document['Name']);
                                     addEvent(document, day);
                                     Scaffold.of(context).showSnackBar(
@@ -316,7 +331,9 @@ class _EventsState extends State<EventsPage> {
                                     );
                                   },
                                 ),
-                                SizedBox(height: 10,),
+                                SizedBox(
+                                  height: 10,
+                                ),
                               ],
                             ),
                           ),
@@ -324,9 +341,8 @@ class _EventsState extends State<EventsPage> {
                       ),
                       margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white38
-                      ),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Colors.white38),
                     ),
                   ),
                 ),
@@ -337,13 +353,12 @@ class _EventsState extends State<EventsPage> {
       );
       // }
     }
+
     var date1, date2;
-    if (day == 10)
-    {
+    if (day == 10) {
       date1 = DateTime.parse("2020-02-" + day.toString() + " 23:59:59");
       date2 = DateTime.parse("2020-02-" + (day).toString() + " 00:00:01");
-    }
-    else{
+    } else {
       date1 = DateTime.parse("2020-02-0" + day.toString() + " 23:59:59");
       date2 = DateTime.parse("2020-02-0" + (day).toString() + " 00:00:01");
     }
@@ -379,12 +394,13 @@ class _EventsState extends State<EventsPage> {
                 //         image: AssetImage('assets/QuizActivity.png'),
                 //         fit: BoxFit.cover)),
                 child: Center(
-                  child: Text('Nothing here :((',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Qanelas',
-                    fontSize: 25
-                  ),),
+                  child: Text(
+                    'Nothing here :((',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Qanelas',
+                        fontSize: 25),
+                  ),
                 ),
               );
             }
