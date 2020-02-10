@@ -1,7 +1,7 @@
 # Felicity'20
 
 Felicity 2020 native app.
-[App](s0.jpeg)
+![App](s0.jpeg)
 
 ## Getting Started
 
