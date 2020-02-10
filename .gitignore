@@ -78,3 +78,6 @@ felicity.keystore
 
 # flutter plugin deps
 .flutter-plugins-dependencies
+
+#api-key
+android/app/google-services.json
