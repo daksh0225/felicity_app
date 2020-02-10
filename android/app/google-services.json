@@ -1,0 +1,141 @@
+{
+  "project_info": {
+    "project_number": "727229792921",
+    "firebase_url": "https://android-1-ff119.firebaseio.com",
+    "project_id": "android-1-ff119",
+    "storage_bucket": "android-1-ff119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727229792921:android:5efae8fe491df580b36e08",
+        "android_client_info": {
+          "package_name": "com.example.felicity_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727229792921-pn4fvu8fps6tg2m19ehrlraq5v64nutj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "8730f77a0d9aecaf4bdcf0ee816e941a7aa65a6a"
+          }
+        },
+        {
+          "client_id": "727229792921-6olm31jvqcl72k22dpkd0rjgpvbeb1kq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "266a63fefb92a02635034684d269203dba31dc4d"
+          }
+        },
+        {
+          "client_id": "727229792921-2rermqss590ag6em4cksk8e0p1jr62tm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "c8677c45d26ebf9027f7a7120d2a45f6d091202b"
+          }
+        },
+        {
+          "client_id": "727229792921-fcvvhj4ei6doo0cthqc5ad8opbn6bhe7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "b0e1e1d2add4e64be0c1e131b3751a52e4713992"
+          }
+        },
+        {
+          "client_id": "727229792921-d5ujb9df5df3lrm58sig5hbq5nrmqbmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "6f8c249dc18a5b9a5024037450b116335f4dcbe1"
+          }
+        },
+        {
+          "client_id": "727229792921-j3c950r4vu2jpdm7rud65476dmu8c6ul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.felicity_app",
+            "certificate_hash": "1035097a72f250e15dd8e33e64af21d7d18db3e3"
+          }
+        },
+        {
+          "client_id": "727229792921-pq1b44f6g1fqg4k59qpq5jjl1lm44fjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAXMrUCROFj90awYiCAa0LpmAPWlLaX5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727229792921-pq1b44f6g1fqg4k59qpq5jjl1lm44fjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727229792921:android:2ae5eb1ebf3339f5b36e08",
+        "android_client_info": {
+          "package_name": "in.ac.iiit.felicity.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727229792921-03nghkedlod4me681pq9ed2vibn2i9g1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ac.iiit.felicity.app",
+            "certificate_hash": "266a63fefb92a02635034684d269203dba31dc4d"
+          }
+        },
+        {
+          "client_id": "727229792921-ookqv8q188r1cak92pak3j5006vs9sse.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ac.iiit.felicity.app",
+            "certificate_hash": "6f8c249dc18a5b9a5024037450b116335f4dcbe1"
+          }
+        },
+        {
+          "client_id": "727229792921-2fg9bopo6ihlnass0qcniv0sq6lfqn0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ac.iiit.felicity.app",
+            "certificate_hash": "8730f77a0d9aecaf4bdcf0ee816e941a7aa65a6a"
+          }
+        },
+        {
+          "client_id": "727229792921-pq1b44f6g1fqg4k59qpq5jjl1lm44fjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAXMrUCROFj90awYiCAa0LpmAPWlLaX5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727229792921-pq1b44f6g1fqg4k59qpq5jjl1lm44fjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
